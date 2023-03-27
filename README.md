@@ -1,4 +1,11 @@
+
 # **_WATTANAMASON_**
+
+## Group Members
+Jared
+Greg
+Faizal
+Suffian
 
 # **Project Background**
 
@@ -52,3 +59,5 @@
 # **Key Takeaways**
 
 # **Future Works**
+
+
