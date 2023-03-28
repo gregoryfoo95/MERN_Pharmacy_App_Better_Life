@@ -4,7 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "start": "node server.js",
+    "dev": "concurrently -c auto npm:dev:*",
+    "lint": "eslint --ext .jsx --ext .js  --ignore-path .gitignore .",
+    "dev:react": "vite",
+    "dev:express": "node --watch server.js",
     "build": "vite build",
     "preview": "vite preview"
   },
