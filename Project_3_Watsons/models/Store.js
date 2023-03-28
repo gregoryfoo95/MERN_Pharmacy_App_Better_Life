@@ -24,6 +24,12 @@ const storeSchema = new Schema({
         type: [Schema.Types.ObjectId],
         ref: "Medicine",
         required:true,
+    },
+
+    users: {
+        type: [Schema.Types.ObjectId],
+        ref: "User",
+        required: true,
     }
 
 })
