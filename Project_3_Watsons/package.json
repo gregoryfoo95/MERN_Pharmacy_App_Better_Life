@@ -2,7 +2,7 @@
   "name": "project-3-watsons",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "start": "node server.js",
     "dev": "concurrently -c auto npm:dev:*",
