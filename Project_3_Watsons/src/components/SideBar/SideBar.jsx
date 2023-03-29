@@ -7,7 +7,7 @@ const SideBar = () => {
     <aside className="sidebar">
       <ul className="sidebar-nav">
         <li className="nav-item">
-          <NavLink exact to="/dashboard" activeClassName="nav-link-active" className="nav-link">
+          <NavLink to="/dashboard" activeClassName="nav-link-active" className="nav-link">
             Dashboard
           </NavLink>
         </li>
