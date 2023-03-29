@@ -1,0 +1,31 @@
+.sidebar {
+    width: 200px;
+    height: 100%;
+    background-color: #333;
+    padding: 1rem;
+    position: fixed;
+  }
+  
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-item {
+    margin-bottom: 1rem;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem 1rem;
+  }
+  
+  .nav-link-active {
+    background-color: #444;
+    border-radius: 4px;
+  }
+  
