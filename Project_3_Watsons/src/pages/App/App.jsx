@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import InventoryPage from '../InventoryPage/InventoryPage';
 import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../components/SideBar/SideBar";
 
@@ -11,12 +12,15 @@ function App() {
       <NavBar />
       <SideBar />
       <h1>Everyday Drugs</h1>
-      <Routes>
-   
-      </Routes>
+      <Router>
+        <Switch>
+          <Route path="/inventory" component={InventoryPage} />
+        </Switch>
+      </Router>
     </main>
   );
 }
 
 export default App;
+
 
