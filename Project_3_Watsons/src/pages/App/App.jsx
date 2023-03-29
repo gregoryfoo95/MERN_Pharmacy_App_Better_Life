@@ -15,7 +15,7 @@ function App() {
         <SideBar />
         <h1>Everyday Drugs</h1>
         <Routes>
-          <Route path="/inventory" component={InventoryPage} />
+          <Route path="/inventory" element={<InventoryPage />} />
         </Routes>
       </main>
 
