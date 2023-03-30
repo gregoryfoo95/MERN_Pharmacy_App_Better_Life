@@ -7,17 +7,17 @@ const SideBar = () => {
     <aside className="sidebar">
       <ul className="sidebar-nav">
         <li className="nav-item">
-          <NavLink to="/dashboard" activeClassName="nav-link-active" className="nav-link">
+          <NavLink to="/dashboard" activeclassname="nav-link-active" className="nav-link">
             Dashboard
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/inventory" activeClassName="nav-link-active" className="nav-link">
-            Inventory
+          <NavLink to="/medicine" activeclassname="nav-link-active" className="nav-link">
+            Medicine
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/link" activeClassName="nav-link-active" className="nav-link">
+          <NavLink to="/link" activeclassname="nav-link-active" className="nav-link">
             Link
           </NavLink>
         </li>
