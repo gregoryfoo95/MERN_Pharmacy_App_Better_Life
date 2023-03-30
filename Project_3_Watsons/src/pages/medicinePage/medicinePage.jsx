@@ -27,13 +27,14 @@ const MedicinePage = () => {
 
   return (
     <div>
+      <MedicineCreateForm setMedicines={ setMedicines } BASE_URL={BASE_URL}/>
       <h2>Medicine List</h2>
       {medicines.length > 0 ? (
         <MedicineList medicines={ medicines } setMedicines={ setMedicines } BASE_URL={BASE_URL} />
       ) : (
         <p>No medicines found.</p>
       )}
-      <MedicineCreateForm setMedicines={ setMedicines } BASE_URL={BASE_URL}/>
+      
     </div>
   );
 };
