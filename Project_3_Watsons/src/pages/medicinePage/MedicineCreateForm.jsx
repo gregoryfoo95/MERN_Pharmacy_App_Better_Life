@@ -20,7 +20,7 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-        const response = await axios.post(`${BASE_URL}/medicine`, formValues);
+        const response = await axios.post(`${BASE_URL}`, formValues);
         console.log(response)
         setMedicines((prevMedicines) => [...prevMedicines, response.data]);
         setFormValues({

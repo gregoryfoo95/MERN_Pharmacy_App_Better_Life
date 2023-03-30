@@ -3,7 +3,7 @@ import axios from 'axios';
 import MedicineCreateForm from "./MedicineCreateForm";
 import MedicineList from "./MedicineList";
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://localhost:3000/api/medicine';
 
 const MedicinePage = () => {
   const [medicines, setMedicines] = useState([]);
@@ -13,7 +13,7 @@ const MedicinePage = () => {
   useEffect(() => {
     async function fetchMedicines() {
       try {
-        const response = await axios.get(`${BASE_URL}/medicine`);
+        const response = await axios.get(`${BASE_URL}`);
         setMedicines(response.data);
       } catch (err) {
         console.error(err);

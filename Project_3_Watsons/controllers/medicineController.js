@@ -66,7 +66,7 @@ const medicineController = {
   },
 
   data: async (req,res) => {
-      const limit = 5;
+      const limit = 20;
       const apiURL = `https://data.gov.sg/api/action/datastore_search?resource_id=43668192-c352-4420-9731-01043c67c471&limit=${limit}`
       try {
           const response = await fetch(apiURL);
@@ -79,7 +79,20 @@ const medicineController = {
               brand: record.manufacturer,
               strength: record.strength
           }));
-          
+          medicines.forEach((medicine) => {
+            if (medicine.strength.includes("&&")) {
+              const strengths = medicine.strength.split("&&");
+              strengths.forEach((strength) => {
+                medicines.push({
+                  name: medicine.product_name,
+                  type: medicine.dosage_form,
+                  routeOfAdmin: medicine.route_of_administration,
+                  brand: medicine.manufacturer,
+                  strength: strength
+                });
+              })
+            }
+          })
           await Medicine.deleteMany({})
           const createdMedicines = await Medicine.create(medicines);
           console.log(createdMedicines);

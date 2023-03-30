@@ -4,7 +4,7 @@ export default function MedicineDeleteButton({ setMedicines, medicine, BASE_URL 
     // Handle click event for deleting a medicine
     const handleDeleteClick = async (id) => {
         try {
-        await axios.delete(`${BASE_URL}/medicine/${id}`);
+        await axios.delete(`${BASE_URL}/${id}`);
         setMedicines((prevMedicines) => prevMedicines.filter((m) => m._id !== id));
         } catch (err) {
         console.error(err);
