@@ -3,7 +3,7 @@ const path = require("path");
 const logger = require("morgan");
 require("dotenv").config();
 require("./config/database");
-
+const getMedicineRouter = require("./routers/getMedicine");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,6 +15,8 @@ app.use(express.static(path.join(__dirname, "dist")));
 app.get("/api", (req, res) => {
   res.json({ msg: "Hi" });
 });
+
+app.use("/api/data", getMedicineRouter);
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
