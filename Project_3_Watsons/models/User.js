@@ -54,8 +54,11 @@ contact: {
 store: {
     type: Schema.Types.ObjectId,
     ref: "Store",
-}
+},
 
+available: {
+    type: Boolean,
+}
 });
 
 userSchema.pre("save", async function (next) {

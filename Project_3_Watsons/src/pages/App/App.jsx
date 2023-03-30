@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import MedicinePage from '../medicinePage/medicinePage';
+import MedicinePage from '../MedicinePage/MedicinePage';
 import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../components/SideBar/SideBar";
 
@@ -12,7 +12,7 @@ function App() {
 
   return (
     <main className="container">
-    { (user === "pharmacist") ?
+    { (userRole === "pharmacist") ?
       <>
         <NavBar />
         <SideBar />

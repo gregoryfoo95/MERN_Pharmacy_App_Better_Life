@@ -20,6 +20,11 @@ const storeSchema = new Schema({
         required: true,
     },
 
+    quantity: {
+        type: [Number],
+        required: true,
+    },
+
     medicines: {
         type: [Schema.Types.ObjectId],
         ref: "Medicine",

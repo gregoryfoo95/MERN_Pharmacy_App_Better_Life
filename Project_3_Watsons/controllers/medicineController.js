@@ -5,8 +5,7 @@ const medicineController = {
   // Create a new medicine
   create: async (req, res) => {
     try {
-      const medicine = new Medicine(req.body);
-      const savedMedicine = await medicine.save();
+      const savedMedicine = await Medicine.create(req.body);
       res.status(201).json(savedMedicine);
     } catch (err) {
       res.status(400).json({ message: err.message });
@@ -65,6 +64,43 @@ const medicineController = {
       res.status(500).json({ message: err.message });
     }
   },
-};
 
+  data: async (req,res) => {
+      const limit = 20;
+      const apiURL = `https://data.gov.sg/api/action/datastore_search?resource_id=43668192-c352-4420-9731-01043c67c471&limit=${limit}`
+      try {
+          const response = await fetch(apiURL);
+          const data = await response.json();
+          /* res.json(data); */
+          const medicines = data.result.records.map(record => ({
+              name: record.product_name,
+              type: record.dosage_form,
+              routeOfAdmin: record.route_of_administration,
+              brand: record.manufacturer,
+              strength: record.strength
+          }));
+          medicines.forEach((medicine) => {
+            if (medicine.strength.includes("&&")) {
+              const strengths = medicine.strength.split("&&");
+              strengths.forEach((strength) => {
+                medicines.push({
+                  name: medicine.product_name,
+                  type: medicine.dosage_form,
+                  routeOfAdmin: medicine.route_of_administration,
+                  brand: medicine.manufacturer,
+                  strength: strength
+                });
+              })
+            }
+          })
+          await Medicine.deleteMany({})
+          const createdMedicines = await Medicine.create(medicines);
+          console.log(createdMedicines);
+          res.status(200).json(createdMedicines);
+      } catch (error) {
+          console.log(error);
+          res.status(500).json({ error: "Server Error" });
+      }
+  },
+};
 module.exports = medicineController;
