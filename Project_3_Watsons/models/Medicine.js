@@ -19,6 +19,10 @@ const medicineSchema = new Schema({
         trim: true,
     },
 
+    routeOfAdmin: {
+        type: String,
+        required: true,
+    },
     strength: {
         type: String,
         required: true,
@@ -27,11 +31,13 @@ const medicineSchema = new Schema({
     price: {
       type: Number,
       required: true,
+      default: 0,
     },
 
     expiry_date: {
         type: Date,
         required: true,
+        default: Date.now(),
     }
 })
 module.exports = mongoose.model("Medicine", medicineSchema);
