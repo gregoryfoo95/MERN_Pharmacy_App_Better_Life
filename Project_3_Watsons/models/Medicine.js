@@ -19,8 +19,8 @@ const medicineSchema = new Schema({
         trim: true,
     },
 
-    quantity: {
-        type: Number,
+    strength: {
+        type: String,
         required: true,
     },
 
