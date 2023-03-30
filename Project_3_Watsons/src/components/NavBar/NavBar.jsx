@@ -7,17 +7,17 @@ const NavBar = () => {
     <nav className="navbar">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <NavLink to="/" activeClassName="nav-link-active" className="nav-link">
+          <NavLink to="/" activeclassname="nav-link-active" className="nav-link">
             Home
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/account" activeClassName="nav-link-active" className="nav-link">
+          <NavLink to="/account" activeclassname="nav-link-active" className="nav-link">
             Account
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/contact" activeClassName="nav-link-active" className="nav-link">
+          <NavLink to="/contact" activeclassname="nav-link-active" className="nav-link">
             Contact
           </NavLink>
         </li>
