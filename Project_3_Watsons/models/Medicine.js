@@ -21,8 +21,9 @@ const medicineSchema = new Schema({
 
     routeOfAdmin: {
         type: String,
-        required: true,
+        //required: true,
     },
+
     strength: {
         type: String,
         required: true,

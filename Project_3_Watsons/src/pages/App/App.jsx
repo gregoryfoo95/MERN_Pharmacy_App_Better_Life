@@ -1,23 +1,25 @@
 import { useState } from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import InventoryPage from '../InventoryPage/InventoryPage';
+import MedicinePage from '../MedicinePage/MedicinePage';
 import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../components/SideBar/SideBar";
-const user1 = "pharmacist";
+
+const userRole = "pharmacist";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(userRole);
 
   return (
     <main className="container">
-    { (user1 === "pharmacist") ?
+    { (userRole === "pharmacist") ?
       <>
         <NavBar />
         <SideBar />
         <h1>Everyday Drugs</h1>
         <Routes>
-          <Route path="/inventory" element={<InventoryPage />} />
+          <Route path="/medicine" element={<MedicinePage />} />
+          <Route element={<h1>404 - Page Not Found</h1>} />
         </Routes>
       </>
       : 
@@ -28,3 +30,4 @@ function App() {
 }
 
 export default App;
+
