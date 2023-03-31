@@ -4,41 +4,43 @@ const { Schema } = mongoose;
 const medicineSchema = new Schema({
     brand: {
         type: String,
-        required: true,
         trim: true,
+        unique:false,
     },
     name: {
         type: String,
         required: true,
         trim: true,
+        unique: false,
     },
 
     type: {
         type: String,
-        required: true,
         trim: true,
+        unique:false,
     },
 
     routeOfAdmin: {
         type: String,
         //required: true,
+        unique:false,
     },
 
     strength: {
         type: String,
-        required: true,
+        default: "0",
     },
 
     price: {
-      type: Number,
-      required: true,
-      default: 0,
+        type: Number,
+        default: 0,
+        unique:false,
     },
 
     expiry_date: {
         type: Date,
-        required: true,
         default: Date.now(),
+        unique:false,
     }
 })
 module.exports = mongoose.model("Medicine", medicineSchema);
