@@ -1,72 +1,65 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const { Schema } = mongoose;
+const bcrypt = require("bcryptjs");
 
-const SALT_ROUNDS = 10;
+const userSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Please add a name"],
+    },
+    email: {
+      type: String,
+      required: [true, "Please add a email"],
+      unique: true,
+      trim: true,
+      match: [
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        "Please enter a valid email",
+      ],
+    },
+    password: {
+      type: String,
+      required: [true, "Please add a password"],
+      minLength: [6, "Password must be at least 6 characters"],
+      //   maxLength: [23, "Password must not be more than 23 characters"],
+    },
+    role: { 
+      type: String,
+      trim: true,
+      required: true,
+    },
+    dateAdded: {
+      type: Date,
+      required: true,
+    },
+    contact: {
+      type: String,
+    },
+    store: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Store",
+    },
+    available: {
+      type: Boolean,
+    }
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const userSchema = new Schema({
-
-firstName: { 
-    type: String, 
-    required: true 
-},
-
-lastName: {
-    type: String,
-    required: true,
-},
-
-username: {
-    type: String,
-    required: true,
-},
-
-email: {
-type: String,
-unique: true,
-trim: true,
-lowercase: true,
-required: true,
-},
-
-password: {
-type: String,
-trim: true,
-minlength: 3,
-required: true,
-},
-
-role: { 
-type: String,
-trim: true,
-required: true,
-},
-
-dateAdded: {
-    type: Date,
-    required: true,
-},
-
-contact: {
-    type: String,
-},
-
-store: {
-    type: Schema.Types.ObjectId,
-    ref: "Store",
-},
-
-available: {
-    type: Boolean,
-}
-});
-
+// Encrypt password before saving to DB
 userSchema.pre("save", async function (next) {
-  // 'this' is the user doc
-  if (!this.isModified("password")) return next();
-  // update the password with the computed hash
-  this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
-  return next();
+  if (!this.isModified("password")) {
+    return next();
+  }
+
+  // Hash password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(this.password, salt);
+  this.password = hashedPassword;
+  next();
 });
 
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+module.exports = User;
