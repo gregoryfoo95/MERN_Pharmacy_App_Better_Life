@@ -1,4 +1,5 @@
 import MedicineDeleteButton from "./MedicineDeleteButton"
+import MedicineUpdateButton from "./MedicineUpdateButton";
 
 export default function MedicineList({medicines, setMedicines, BASE_URL}) {
     return (
@@ -11,7 +12,7 @@ export default function MedicineList({medicines, setMedicines, BASE_URL}) {
               <th>Strength</th>
               <th>Price</th>
               <th>Expiry Date</th>
-              <th>Actions</th>
+              <th colSpan="2">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -22,7 +23,8 @@ export default function MedicineList({medicines, setMedicines, BASE_URL}) {
                 <td>{medicine.type}</td>
                 <td>{medicine.strength}</td>
                 <td>{medicine.price}</td>
-                <td>{new Date(medicine.expiry_date).toLocaleDateString()}</td>
+                <td>{new Date(medicine.expiry_date).toJSON().slice(0,10)}</td>
+              <MedicineUpdateButton medicine={ medicine }/>
               <MedicineDeleteButton setMedicines={ setMedicines } medicine={ medicine } BASE_URL={BASE_URL}/>
               </tr>
             ))}
