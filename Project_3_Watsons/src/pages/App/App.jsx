@@ -16,7 +16,7 @@ function App() {
       <>
         <NavBar />
         <SideBar />
-        <h1>Everyday Drugs</h1>
+        <h1>Better Life</h1>
         <Routes>
           <Route path="/medicine" element={<MedicinePage />} />
           <Route element={<h1>404 - Page Not Found</h1>} />

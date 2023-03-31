@@ -2,8 +2,8 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const cors = require ("cors");
+const mongoose = require("mongoose");
 require("dotenv").config();
-require("./config/database");
 const medicineRoute = require("./routes/medicineRoute");
 
 const app = express();
@@ -24,3 +24,12 @@ app.listen(port, () => {
   console.log(`Express backend listening on port ${port}`);
 });
 
+
+
+mongoose.connect(process.env.DATABASE_URL);
+
+const db = mongoose.connection;
+
+db.on("connected", function () {
+  console.log(`Connected to ${db.name} at ${db.host}:${db.port}`);
+});
