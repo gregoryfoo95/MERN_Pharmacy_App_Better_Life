@@ -1,4 +1,4 @@
-const Medicine = require('../models/medicineModel');
+const Medicine = require('../models/Medicine');
 
 // Define controller methods for handling CRUD operations on Medicine model
 const medicineController = {
