@@ -11,7 +11,7 @@ router.post('/', medicineController.create);
 router.get('/', medicineController.getAll);
 
 // Read a medicine by ID
-router.get('/:id', medicineController.getById);
+router.get('/:id', medicineController.show);
 
 // Update a medicine by ID
 router.put('/:id', medicineController.updateById);

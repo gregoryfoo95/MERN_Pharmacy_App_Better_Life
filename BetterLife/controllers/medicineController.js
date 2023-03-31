@@ -22,8 +22,8 @@ const medicineController = {
     }
   },
 
-  // Read a medicine by ID
-  getById: async (req, res) => {
+  // Show a medicine by ID
+  show: async (req, res) => {
     try {
       const medicine = await Medicine.findById(req.params.id);
       if (!medicine) {
