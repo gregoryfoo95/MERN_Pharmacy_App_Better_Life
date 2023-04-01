@@ -10,7 +10,8 @@ import Forgot from '../Profile/Forgot';
 import Reset from '../Profile/Reset';
 import Profile from '../Profile/Profile';
 import EditProfile from '../Profile/EditProfile';
-import MedicineUpdateForm from "../MedicinePage/MedicineUpdateForm"
+import MedicineUpdateForm from "../MedicinePage/MedicineUpdateForm";
+import PharmaPage from "../Pharmapage/Pharmapage";
 const BASE_URL = 'http://localhost:3000/api/medicine';
 
 const userRole = "pharmacist";
@@ -25,6 +26,7 @@ function App() {
         <SideBar />
         <h1>Better Life</h1>
         <Routes>
+          <Route path="/" element = {<PharmaPage />} />
           <Route path="/medicine" element={<MedicinePage />} />
           <Route path="/medicine/:id/edit" element={<MedicineUpdateForm BASE_URL={BASE_URL}/>} />
           <Route path="/contact-us" element={<Contact />} />
