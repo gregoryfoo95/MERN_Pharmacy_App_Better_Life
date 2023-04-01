@@ -48,11 +48,13 @@ function MapComponent({ zoom = 17 }) {
     }).addTo(map);
 
     const markers = locations.map(location => {
-      console.log(location.Latitude, location.Longitude); // Add this line
+      // console.log(location.Latitude, location.Longitude);
       const marker = L.marker([location.Latitude, location.Longitude]);
       marker.bindPopup(`Latitude: ${location.Latitude}<br>Longitude: ${location.Longitude}`);
       return marker;
     });
+
+    const markerGroup = L.layerGroup(markers).addTo(map);
 
     return () => {
       map.remove();
