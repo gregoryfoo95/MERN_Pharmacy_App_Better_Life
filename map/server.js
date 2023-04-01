@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+
 const mapRoutes = require('./routes/mapRoutes');
 
 
@@ -13,7 +14,7 @@ mongoose.connect(process.env.DATABASE_URL,{})
 .catch((error) => console.error('Error connecting to MongoDB:', error));
 
 app.use(express.json());
-app.use('/api', mapRoutes);
+app.use('/api/map', mapRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
