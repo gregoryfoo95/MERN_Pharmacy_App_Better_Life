@@ -6,6 +6,7 @@ export default function PharmaPage() {
     <>
         <h1>Pharmacist's Homepage</h1>
         <DashboardCard />
+         &nbsp;
         <MedicineCard />
     </>
  )
