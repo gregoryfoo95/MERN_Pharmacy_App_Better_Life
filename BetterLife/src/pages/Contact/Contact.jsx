@@ -32,24 +32,28 @@ const Contact = () => {
       <div className="section">
         <form onSubmit={sendEmail}>
           <Card cardClass="card">
-            <label>Subject</label>
-            <input
-              type="text"
-              name="subject"
-              placeholder="Subject"
-              required
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-            />
-            <label>Message</label>
-            <textarea
-              cols="30"
-              rows="10"
-              name="message"
-              required
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            ></textarea>
+            <div>
+              <label>Subject</label>
+              <input
+                type="text"
+                name="subject"
+                placeholder="Subject"
+                required
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Message</label>
+              <textarea
+                name="message"
+                required
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                rows="10"
+                cols="30"
+              ></textarea>
+            </div>
             <button className="--btn --btn-primary">Send Message</button>
           </Card>
         </form>

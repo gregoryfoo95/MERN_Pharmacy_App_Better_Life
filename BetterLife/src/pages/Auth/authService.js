@@ -3,14 +3,14 @@ import { toast } from "react-toastify";
 
 export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-
 export const validateEmail = (email) => {
   return email.match(
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   );
 };
 
-// Register User
+// User related operations
+
 export const registerUser = async (userData) => {
   try {
     const response = await axios.post(
@@ -23,15 +23,10 @@ export const registerUser = async (userData) => {
     }
     return response.data;
   } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    toast.error(message);
+    showError(error);
   }
 };
 
-// Login User
 export const loginUser = async (userData) => {
   try {
     const response = await axios.post(
@@ -43,28 +38,18 @@ export const loginUser = async (userData) => {
     }
     return response.data;
   } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    toast.error(message);
+    showError(error);
   }
 };
 
-// Logout User
 export const logoutUser = async () => {
   try {
     await axios.get(`${BACKEND_URL}/api/users/logout`);
   } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    toast.error(message);
+    showError(error);
   }
 };
 
-// Forgot Password
 export const forgotPassword = async (userData) => {
   try {
     const response = await axios.post(
@@ -73,15 +58,10 @@ export const forgotPassword = async (userData) => {
     );
     toast.success(response.data.message);
   } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    toast.error(message);
+    showError(error);
   }
 };
 
-// Reset Password
 export const resetPassword = async (userData, resetToken) => {
   try {
     const response = await axios.put(
@@ -90,41 +70,28 @@ export const resetPassword = async (userData, resetToken) => {
     );
     return response.data;
   } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    toast.error(message);
+    showError(error);
   }
 };
 
-// Get Login Status
 export const getLoginStatus = async () => {
   try {
     const response = await axios.get(`${BACKEND_URL}/api/users/loggedin`);
     return response.data;
   } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    toast.error(message);
+    showError(error);
   }
 };
-// Get User Profile
+
 export const getUser = async () => {
   try {
     const response = await axios.get(`${BACKEND_URL}/api/users/getuser`);
     return response.data;
   } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    toast.error(message);
+    showError(error);
   }
 };
-// Update Profile
+
 export const updateUser = async (formData) => {
   try {
     const response = await axios.patch(
@@ -133,14 +100,10 @@ export const updateUser = async (formData) => {
     );
     return response.data;
   } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    toast.error(message);
+    showError(error);
   }
 };
-// Update Profile
+
 export const changePassword = async (formData) => {
   try {
     const response = await axios.patch(
@@ -149,10 +112,14 @@ export const changePassword = async (formData) => {
     );
     return response.data;
   } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString();
-    toast.error(message);
+    showError(error);
   }
+};
+
+const showError = (error) => {
+  const message =
+    (error.response && error.response.data && error.response.data.message) ||
+    error.message ||
+    error.toString();
+  toast.error(message);
 };
