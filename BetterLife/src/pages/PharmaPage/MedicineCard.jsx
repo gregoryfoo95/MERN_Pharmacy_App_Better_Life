@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
-export default function DashboardCard () {
+export default function MedicineCard () {
 
     return (
-        <Link to={`/dashboard`} style={{textDecoration: "none"}}>
-            <div
+        <Link to={`/medicine`} style={{textDecoration: "none"}}>
+            <div 
                 style={{
-                    backgroundColor: "#00A0A0",
+                    backgroundColor: "#E42313",
                     backgroundPosition: "center",
                     display: 'flex',
                     justifyContent: 'center',
@@ -17,7 +17,7 @@ export default function DashboardCard () {
                     fontSize: "40px",
                     fontFamily: 'Montserrat, sans-serif',
                 }}
-            >Dashboard</div>
+            >Medicine Inventory</div>
         </Link>
     )
 }
