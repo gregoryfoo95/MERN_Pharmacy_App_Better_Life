@@ -16,6 +16,7 @@ export default function DashboardCard () {
                     color: "#E5F5F5",
                     fontSize: "40px",
                     fontFamily: 'Montserrat, sans-serif',
+                    borderRadius: "15px",
                 }}
             >Dashboard</div>
         </Link>
