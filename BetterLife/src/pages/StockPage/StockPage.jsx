@@ -8,11 +8,15 @@ export default function StockPage() {
     const [stock, setStock] = useState({});
 
     const handleInputChange = (event, medicineId) => {
-        const { name, value } = event.target;
-        setStock((prevStock) => ({
-            ...prevStock,
-            [medicineId]: { ...prevStock[medicineId], [name]: value },
-        }));
+            const newQty = event.target.value === "" ? "" : parseInt(event.target.value);
+            setStock((prevStock) => {
+                const newStock = { ...prevStock };
+                newStock[medicineId] = {
+                ...prevStock[medicineId],
+                quantity: isNaN(newQty) || newQty < 0 ? 0 : newQty,
+                };
+                return newStock;
+            });
     };
 
     const handleUpdateStock = async (event, req, res) => {
