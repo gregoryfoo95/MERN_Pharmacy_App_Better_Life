@@ -2,35 +2,33 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 
-const storeSchema = new Schema({
-    name: {
+const locationSchema = new Schema({
+    storeName: {
         type: String,
         required: true,
         trim: true,
     },
 
-    postal: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-
-    address: {
+    storeAddress: {
         type: String,
         required: true,
     },
 
-    quantity: {
-        type: [Number],
+    dispensingHours: {
+        type: String,
         required: true,
     },
 
-    medicines: {
-        type: [Schema.Types.ObjectId],
-        ref: "Medicine",
+    latitude: {
+        type: String,
         required:true,
     },
 
+    longitude: {
+        type: String,
+        required:true,
+    },
+    
     users: {
         type: [Schema.Types.ObjectId],
         ref: "User",
@@ -38,4 +36,4 @@ const storeSchema = new Schema({
     }
 
 })
-module.exports = mongoose.model("Store", storeSchema);
+module.exports = mongoose.model("Location", locationSchema);
