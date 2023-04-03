@@ -13,7 +13,6 @@ const initialState = {
 
 const Register = () => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const { name, email, password, password2 } = formData;
 
@@ -43,21 +42,19 @@ const Register = () => {
       email,
       password,
     };
-    setIsLoading(true);
+
     try {
       const data = await registerUser(userData);
       localStorage.setItem("isLoggedIn", true);
       localStorage.setItem("name", data.name);
       navigate("/dashboard");
     } catch (error) {
-      setIsLoading(false);
       toast.error(error.message);
     }
   };
 
   return (
     <div className="container">
-      {isLoading && <div>Loading...</div>}
       <Card>
         <div className="form">
           <h2>Register</h2>

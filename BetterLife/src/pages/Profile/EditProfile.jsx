@@ -7,7 +7,6 @@ import ChangePassword from "../../components/ChangePassword/ChangePassword";
 
 const EditProfile = () => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
   const { email } = user;
 
@@ -32,7 +31,6 @@ const EditProfile = () => {
 
   const saveProfile = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     try {
       // Save Profile
       const formData = {
@@ -45,17 +43,14 @@ const EditProfile = () => {
       console.log(data);
       toast.success("User updated");
       navigate("/profile");
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
       toast.error(error.message);
     }
   };
 
   return (
     <div className="profile --my2">
-      {isLoading && <div>Loading...</div>}
       <Card cardClass={"card --flex-dir-column"}>
         <form className="--form-control --m" onSubmit={saveProfile}>
           <span className="profile-data">

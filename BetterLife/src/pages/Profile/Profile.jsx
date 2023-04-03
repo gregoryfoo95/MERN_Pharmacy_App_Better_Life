@@ -7,26 +7,22 @@ import { getUser } from "../Auth/authService";
 const Profile = () => {
 
   const [profile, setProfile] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     console.log("Getting use");
-    setIsLoading(true);
     async function getUserData() {
       const data = await getUser();
       console.log(data);
 
       setProfile(data);
-      setIsLoading(false);
     }
     getUserData();
   }, []);
 
   return (
     <div className="profile --my2">
-      {isLoading}
       <>
-      {!isLoading && profile === null ? (
+      {!profile ? (
           <p>Something went wrong, please reload the page...</p>
         ) : (
           <Card cardClass={"card --flex-dir-column"}>

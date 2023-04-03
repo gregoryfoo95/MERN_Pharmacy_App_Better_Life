@@ -11,7 +11,6 @@ const initialState = {
 
 const Login = () => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const { email, password } = formData;
 
@@ -35,22 +34,19 @@ const Login = () => {
       email,
       password,
     };
-    setIsLoading(true);
     try {
       const data = await loginUser(userData);
       console.log(data);
       localStorage.setItem("isLoggedIn", true);
       localStorage.setItem("name", data.name);
       navigate("/dashboard");
-      setIsLoading(false);
     } catch (error) {
-      setIsLoading(false);
+      console.log(error);
     }
   };
 
   return (
     <div className="container">
-      {isLoading && <Loader />}
       <Card>
         <div className="form">
           <h2>Login</h2>
@@ -97,3 +93,4 @@ const Login = () => {
 };
 
 export default Login;
+

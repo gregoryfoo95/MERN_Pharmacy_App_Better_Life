@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+export const BACKEND_URL = import.meta.env.REACT_APP_BACKEND_URL;
 
 export const validateEmail = (email) => {
   return email.match(
@@ -14,7 +14,7 @@ export const validateEmail = (email) => {
 export const registerUser = async (userData) => {
   try {
     const response = await axios.post(
-      `${BACKEND_URL}/api/users/register`,
+      `${BACKEND_URL}/api/register`,
       userData,
       { withCredentials: true }
     );
