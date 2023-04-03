@@ -23,19 +23,19 @@ const userSchema = new Schema({
       type: String,
       trim: true,
     },
-    dateAdded: {
+  dateAdded: {
       type: Date,
-    },
-    contact: {
+  },
+  contact: {
       type: String,
-    },
-    store: {
+  },
+  store: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Store",
-    },
-    available: {
+  },
+  available: {
       type: Boolean,
-    }
+  }
 },
 { 
     timestamps: true,
