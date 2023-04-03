@@ -17,6 +17,11 @@ const medicineSchema = new Schema({
         trim: true,
     },
 
+    country: {
+        type: String,
+        trim: true,
+    },
+
     routeOfAdmin: {
         type: String,
         //required: true,
