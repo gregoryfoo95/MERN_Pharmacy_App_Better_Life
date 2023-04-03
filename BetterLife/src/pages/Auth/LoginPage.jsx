@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 const BASE_URL = 'http://localhost:3000/api/user';
 
@@ -19,25 +20,12 @@ export default function LoginPage() {
   const handleLogin = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    console.log(data);
-
     try {
-      const response = await fetch(`${BASE_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) {
-        throw new Error("Network response was not OK");
-      }
-        const token = await response.json();
-        localStorage.setItem("token", token);
+      const response = await axios.post(`${BASE_URL}/login`, state);
+      const token = response.data;
+      localStorage.setItem("token", token);
     } catch (error) {
-      setError(error);
+      setError(error.message);
     }
   };
 

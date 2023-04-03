@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import axios from "axios";
 
-export default function RegisterPage() {
+export default function ContactForm() {
   const [state, setState] = useState({
     name: "",
     email: "",
-    password: "",
-    confirm: "",
+    subject: "",
+    message: "",
   });
-
-  const disable = state.password !== state.confirm;
 
   const handleChange = (e) => {
     setState({
@@ -21,11 +19,17 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/user", state);
-      const token = response.data;
-      localStorage.setItem("token", token);
+      await axios.post("/api/contact", state);
+      setState({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+      alert("Thank you for your message!");
     } catch (error) {
       console.log(error);
+      alert("Sorry, there was an error sending your message. Please try again later.");
     }
   };
 
@@ -49,28 +53,26 @@ export default function RegisterPage() {
             onChange={handleChange}
             required
           />
-          <label>Password</label>
+          <label>Subject</label>
           <input
-            type="password"
-            name="password"
-            value={state.password}
+            type="text"
+            name="subject"
+            value={state.subject}
             onChange={handleChange}
             required
           />
-          <label>Confirm</label>
-          <input
-            type="password"
-            name="confirm"
-            value={state.confirm}
+          <label>Message</label>
+          <textarea
+            name="message"
+            value={state.message}
             onChange={handleChange}
             required
           />
-          <button type="submit" disabled={disable}>
-            SIGN UP
+          <button type="submit">
+            SEND
           </button>
         </form>
       </div>
-      <p className="error-message">&nbsp;{state.error}</p>
     </div>
   );
 }

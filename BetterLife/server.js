@@ -9,8 +9,9 @@ const bodyParser = require("body-parser");
 
 //Routes
 const medicineRoute = require("./routes/medicineRoute");
-const user1Route = require("./routes/userRoute");
-const orderCartRoute = require("./routes/orderCartRoute")
+const userRoute = require("./routes/userRoute");
+const orderCartRoute = require("./routes/orderCartRoute");
+const contactRoute = require("./routes/contactRoute");
 const app = express();
 
 // Middlewares
@@ -21,8 +22,9 @@ app.use(cors());
 
 //Routes
 app.use("/api/medicine", medicineRoute);
-app.use('/api/user', user1Route);
+app.use('/api/user', userRoute);
 app.use("/api/orderCart", orderCartRoute);
+app.use("/api/contact", contactRoute);
 app.use("/uploads", express.static(path.join(__dirname, "dist", "uploads")));
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
