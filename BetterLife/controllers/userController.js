@@ -1,4 +1,4 @@
-const User = require("../models/user1Model");
+const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
@@ -11,7 +11,7 @@ const create = async (req, res) => {
   try {
     const user = await User.create(req.body);
     const payload = { user };
-    const token = jwt.sign(payload, process.env.JWT_SECRET,{ expiresIn: 60});
+    const token = jwt.sign(payload, process.env.JWT_SECRET,{ expiresIn: 3600});
     res.status(201).json(token);
   } catch (error) {
     res.status(500).json(error);
@@ -19,14 +19,16 @@ const create = async (req, res) => {
 };
 
 
-/* const login = async (req, res) => {
+const login = async (req, res) => {
     const { email, password } = req.body;
     if (password.length < 3) {
         return res.status(400).json({message: 'Password must be at least 3 characters'});
     }
 
     try {
-        const user = User.findOne({email});
+        const user = await User.findOne({email});
+        const payload = { user };
+
         if (user === null) {
             res.status(400).json({message: "User not found"});
             return;
@@ -38,7 +40,8 @@ const create = async (req, res) => {
             }
 
             if (result) {
-                res.status(200).json({ message: "testing" });
+                const token = jwt.sign(payload, process.env.JWT_SECRET,{ expiresIn: 3600});
+                res.status(201).json(token);
             } else {
                 res.status(401).json({message: "Invalid password"});
             }
@@ -48,8 +51,8 @@ const create = async (req, res) => {
     } catch(error) {
         res.status(500).json(error);
     }
-} */
+}
 module.exports = {
   create,
-/*   login, */
+  login,
 };

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import axios from "axios";
 
-const BASE_URL = 'http://localhost:3000/api/user';
 
 export default function RegisterPage() {
     const [state, setState] = useState({
@@ -33,8 +32,8 @@ export default function RegisterPage() {
         if (!response.ok) {
         throw new Error("Network Error");
         }
-        const data = await response.json();
-        localStorage.setItem("token",data);
+        const token = await response.json();
+        localStorage.setItem("token",token);
         } catch(error) {
             console.log(error);
         }
