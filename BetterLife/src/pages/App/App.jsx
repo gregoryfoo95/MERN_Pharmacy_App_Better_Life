@@ -10,6 +10,7 @@ import NewOrderPage from "../NewOrderPage/NewOrderPage";
 import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
 import AuthPage from "../Auth/Authpage";
 import { getUser } from "../../../utils/users-service";
+import ContactForm from '../Auth/ContactForm';
 const BASE_URL = '/api/medicine';
 //onst userRole = "pharmacist";
 
@@ -29,11 +30,12 @@ function App() {
           {/* To be moved to user later, not under pharmacist */}
           <Route path="/orders/new" element={<NewOrderPage />} />
           <Route path="/orders" element={<OrderHistoryPage />} />
+          <Route path="/contact" element={<ContactForm />} />
         </Routes>
+        <SideBar />
       </>
       : 
       <>
-        <SideBar />
         <h1>Better Life</h1>
         <Routes>
         <Route path="/" element = {<AuthPage />} />

@@ -8,7 +8,6 @@ export default function AuthPage() {
             <h1>Authentication Page</h1>
             <LoginPage />
             <RegisterPage />
-            <ContactForm />
         </main>
     )
 }
