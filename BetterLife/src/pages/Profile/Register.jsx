@@ -47,7 +47,7 @@ const Register = () => {
       const data = await registerUser(userData);
       localStorage.setItem("isLoggedIn", true);
       localStorage.setItem("name", data.name);
-      navigate("/dashboard");
+      navigate("/home");
     } catch (error) {
       toast.error(error.message);
     }
