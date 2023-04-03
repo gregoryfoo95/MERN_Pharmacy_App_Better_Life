@@ -9,10 +9,10 @@ const bodyParser = require("body-parser");
 
 //Routes
 const medicineRoute = require("./routes/medicineRoute");
-const user1Route = require("./routes/user1Route");
+const userRoute = require("./routes/userRoute");
 const contactRoute = require("./routes/contactRoute");
 const errorHandler = require("./middleWare/errorMiddleware");
-
+const mapRoutes = require("./routes/mapRoutes")
 
 const app = express();
 
@@ -42,8 +42,9 @@ app.use(cors());
 
 //Routes
 app.use("/api/medicine", medicineRoute);
-app.use('/api/user', user1Route);
+app.use("/api/users", userRoute);
 app.use("/api/contactus", contactRoute);
+app.use("/api/map", mapRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "dist", "uploads")));
 app.get("/*", function (req, res) {
