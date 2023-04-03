@@ -13,6 +13,10 @@ import EditProfile from '../Profile/EditProfile';
 import MedicineUpdateForm from "../MedicinePage/MedicineUpdateForm";
 import PharmaPage from "../Pharmapage/Pharmapage";
 const BASE_URL = 'http://localhost:3000/api/medicine';
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainMap from '../MapPages/MainMap';
+import MainSplit from '../UserMain/MainSplit';
+import Directions from '../MapPages/Directions';
 
 const userRole = "pharmacist";
 
@@ -41,7 +45,19 @@ function App() {
       </>
       : 
       <h1>Everyday Drugs </h1>
+      
     }
+    <div className="The Watson's Experience" style={{ width: '100vw', height: '100vh' }}>
+      
+
+        <Routes>
+          <Route path="/user" element={<MainSplit />} />
+          <Route path="/map" element={<MainMap />} />
+          <Route path="/map/:id" element={<Directions />} />
+
+        </Routes>
+
+    </div>
     </main>
   );
 }

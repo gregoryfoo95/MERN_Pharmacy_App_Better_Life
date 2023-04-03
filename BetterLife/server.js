@@ -12,7 +12,7 @@ const medicineRoute = require("./routes/medicineRoute");
 const userRoute = require("./routes/userRoute");
 const contactRoute = require("./routes/contactRoute");
 const errorHandler = require("./middleWare/errorMiddleware");
-
+const mapRoutes = require("./routes/mapRoutes")
 
 const app = express();
 
@@ -28,6 +28,13 @@ app.use(
   })
 );
 
+// Enable CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -37,6 +44,7 @@ app.use(cors());
 app.use("/api/medicine", medicineRoute);
 app.use("/api/users", userRoute);
 app.use("/api/contactus", contactRoute);
+app.use("/api/map", mapRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "dist", "uploads")));
 app.get("/*", function (req, res) {
