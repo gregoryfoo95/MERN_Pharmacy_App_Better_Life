@@ -31,7 +31,7 @@ const UserSideBar = () => {
         </li>
         <li className="nav-item">
           <NavLink
-            to="/orders"
+            to="/orders/new"
             activeclassname="nav-link-active"
             className="nav-link"
           >
