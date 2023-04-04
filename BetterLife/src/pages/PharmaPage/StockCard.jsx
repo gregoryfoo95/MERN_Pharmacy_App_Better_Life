@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-export default function DashboardCard () {
+export default function StockCard () {
 
     return (
-        <Link to={`/dashboard`} style={{textDecoration: "none"}}>
+        <Link to={`/stock`} style={{textDecoration: "none"}}>
             <div
                 style={{
                     backgroundColor: "#00A0A0",
@@ -18,7 +18,7 @@ export default function DashboardCard () {
                     fontFamily: 'Montserrat, sans-serif',
                     borderRadius: "15px",
                 }}
-            >Dashboard</div>
+            >Stock</div>
         </Link>
     )
 }

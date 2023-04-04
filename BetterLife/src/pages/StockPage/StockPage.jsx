@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from "axios";
+import StockSearchForm from "./StockSearchForm";
 const BASE_URL_STOCK = 'http://localhost:3000/api/stock';
 
 
@@ -35,6 +36,7 @@ export default function StockPage() {
         }
     }
 
+
     useEffect(function() {
         async function getAllStocks() {
             try {
@@ -54,6 +56,7 @@ export default function StockPage() {
                 <p>Loading...</p>
             ) : (
                 <ul>
+                    <StockSearchForm setMedicines = {setMedicines}/>
                     <button onClick={handleUpdateStock}>Update Stock</button>
                     <table >
                         <thead>
@@ -61,6 +64,7 @@ export default function StockPage() {
                             <th>Name</th>
                             <th>Brand</th>
                             <th>Country</th>
+                            <th>Type</th>
                             <th>Strength</th>
                             <th>Store Location</th>
                             <th>Price($)</th>
@@ -74,6 +78,7 @@ export default function StockPage() {
                                 <td>{medicine.medicine.name}</td>
                                 <td>{medicine.medicine.brand}</td>
                                 <td>{medicine.medicine.country}</td>
+                                <td>{medicine.medicine.type}</td>
                                 <td>{medicine.medicine.strength}</td>
                                 <td>{medicine.location.storeName}</td>
                                 <td>{medicine.medicine.price}</td>
