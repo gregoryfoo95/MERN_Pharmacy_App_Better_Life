@@ -45,6 +45,7 @@ function App() {
       : (user.role === "Consumer") ?
       <>
         <>
+        <NavBar user={user} setUser = {setUser}/>
         <UserSideBar />
         <h1>Better Life</h1>
         <Routes>
