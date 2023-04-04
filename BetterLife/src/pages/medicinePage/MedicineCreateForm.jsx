@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
     const [formValues, setFormValues] = useState({
-        brand: '',
         name: '',
+        brand: '',
         type: '',
         strength: '',
         country: '',
@@ -25,8 +25,8 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
         console.log(response)
         setMedicines((prevMedicines) => [...prevMedicines, response.data]);
         setFormValues({
-            brand: '',
             name: '',
+            brand: '',
             type: '',
             strength: '',
             country: '',
@@ -41,10 +41,6 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
         <>
         <h2>Add a New Medicine</h2>
             <div>
-                <label htmlFor="brand">Brand:</label>
-                <input type="text" id="brand" name="brand" value={formValues.brand} onChange={handleInputChange} />
-            </div>
-            <div>
                 <label htmlFor="name">Name:</label>
                 <input
                     type="text"
@@ -54,6 +50,11 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
                     onChange={handleInputChange}
                 />
             </div>
+            <div>
+                <label htmlFor="brand">Brand:</label>
+                <input type="text" id="brand" name="brand" value={formValues.brand} onChange={handleInputChange} />
+            </div>
+
             <div>
                 <label htmlFor="type">Type:</label>
                 <input type="text" id="type" name="type" value={formValues.type} onChange={handleInputChange} />

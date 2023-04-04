@@ -18,7 +18,6 @@ const medicineController = {
     for (const key in query) {
       query[key] = new RegExp(`.*${query[key]}.*`, "i");
     }
-    console.log(query);
     try {
       const medicines = await Medicine.find(query);
       res.status(200).json(medicines);

@@ -46,10 +46,6 @@ export default function MedicineUpdateForm({BASE_URL}) {
         <fieldset>
         <legend>Update Medicine</legend>
             <div>
-                <label htmlFor="brand">Brand:</label>
-                <input type="text" id="brand" name="brand" value={medicine.brand} onChange={handleInputChange} />
-            </div>
-            <div>
                 <label htmlFor="name">Name:</label>
                 <input
                     type="text"
@@ -59,6 +55,11 @@ export default function MedicineUpdateForm({BASE_URL}) {
                     onChange={handleInputChange}
                 />
             </div>
+            <div>
+                <label htmlFor="brand">Brand:</label>
+                <input type="text" id="brand" name="brand" value={medicine.brand} onChange={handleInputChange} />
+            </div>
+           
             <div>
                 <label htmlFor="type">Type:</label>
                 <input type="text" id="type" name="type" value={medicine.type} onChange={handleInputChange} />

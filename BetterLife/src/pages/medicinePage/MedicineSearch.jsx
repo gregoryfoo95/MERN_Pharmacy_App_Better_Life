@@ -2,10 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 import axios from "axios";
 
 export default function StockSearchForm({ setMedicines, BASE_URL }) {
+    const [medicineOptions, setMedicineOptions] = useState([]);
     const [searchQuery, setSearchQuery] = useState({
         brand: '',
         name: '',
-        type: '',
+        strength: '',
     })
 
     const handleInputChange = (event) => {
@@ -25,17 +26,18 @@ export default function StockSearchForm({ setMedicines, BASE_URL }) {
         }
     };
 
+     useEffect(() => {
+        const fetchMedicineOptions = async () => {
+        const response = await axios.get('/api/medicine', {
+            params: { name: searchQuery.name },
+        });
+        setMedicineOptions(response.data);
+        };
+        fetchMedicineOptions();
+        }, [searchQuery.name]); 
+
   return (
     <form onSubmit={handleSubmit}>
-    <label>
-        Brand:
-        <input
-          type="text"
-          name="brand"
-          value={searchQuery.brand}
-          onChange={handleInputChange}
-        />
-    </label>
     <label>
         Name:
         <input
@@ -45,15 +47,25 @@ export default function StockSearchForm({ setMedicines, BASE_URL }) {
           onChange={handleInputChange}
         />
     </label>
-
     <label>
-        Type:
-        <input
-          type="text"
-          name="type"
-          value={searchQuery.type}
-          onChange={handleInputChange}
-        />
+        Brand: 
+        <select name="brand" value={searchQuery.brand} onChange={handleInputChange} >
+            {[...new Set(medicineOptions.map(medicine => medicine.brand))].map((brand) => (
+                <option value={brand}>
+                {brand}
+                </option>
+            ))}
+        </select>
+    </label>
+    <label>
+        Strength:
+        <select name="strength" value={searchQuery.strength} onChange={handleInputChange} >
+            {[...new Set(medicineOptions.map(medicine => medicine.strength))].map((strength) => (
+                <option value={strength}>
+                {strength}
+                </option>
+            ))}
+        </select>
     </label>
     <button type="submit">Search</button>
     </form>

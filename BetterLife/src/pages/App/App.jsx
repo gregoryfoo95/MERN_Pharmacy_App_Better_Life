@@ -22,7 +22,7 @@ import ContactForm from '../Auth/ContactForm';
 
 function App() {
   const [user, setUser] = useState(getUser());
-  console.log(user);
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <main className="container">
@@ -57,12 +57,12 @@ function App() {
         </>
       </>
       : null 
-      
+
       :
       <>
         <h1>Better Life</h1>
         <Routes>
-          <Route path="/" element = {<AuthPage />} />
+          <Route path="/" element = {<AuthPage setUser={setUser}/>} />
         </Routes>
       </>
     }

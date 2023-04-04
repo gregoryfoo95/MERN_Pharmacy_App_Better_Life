@@ -41,7 +41,8 @@ const login = async (req, res) => {
 
             if (result) {
                 const token = jwt.sign(payload, process.env.JWT_SECRET,{ expiresIn: 3600});
-                res.status(201).json(token);
+                const role = user.role;
+                res.status(201).json({token, role});
             } else {
                 res.status(401).json({message: "Invalid password"});
             }

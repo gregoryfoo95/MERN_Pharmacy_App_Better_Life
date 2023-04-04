@@ -1,9 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+import { getUser } from "../../../utils/users-service";
 const BASE_URL = 'http://localhost:3000/api/user';
 
-export default function LoginPage() {
+export default function LoginPage({ setUser }) {
+    const navigate = useNavigate();
     const [error, setError] = useState("No error");
     const [state, setState] = useState({
         email: "",
@@ -22,9 +24,17 @@ export default function LoginPage() {
 
     try {
       const response = await axios.post(`${BASE_URL}/login`, state);
-      const token = response.data;
-      console.log(token);
+      const role = response.data.role;
+      const token = response.data.token;
       localStorage.setItem("token", token);
+      setUser(getUser());
+      if (role === "Pharmacist") {
+        navigate("/home");
+      } else if (role === "Consumer") {
+        navigate("/welcome");
+      } else {
+        navigate("/")
+      };
     } catch (error) {
       setError(error.message);
     }
