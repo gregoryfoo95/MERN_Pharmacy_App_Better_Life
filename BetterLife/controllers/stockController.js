@@ -5,7 +5,6 @@ const Stock = require("../models/stockModel");
 
 const stockController = {
 
-
     seedStockShell: async (req,res) => {
         try {
             const medicines = await Medicine.find({});
@@ -55,6 +54,29 @@ const stockController = {
       res.status(400).json({ message: "Unable to update stock for medicines." });
     }
   },
+
+    searchStock: async (req, res) => {
+    try {
+        const pattern = req.query.medicineName;
+        const Re = new RegExp(pattern.toUpperCase());
+        const stock = await Stock
+        .find()
+        .populate(
+            {
+                path: "medicine",
+                match: {name: Re},
+            }
+        )
+        .populate('location')
+        .exec();
+        console.log(stock);
+        res.status(200).json(stock);
+ 
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  },
+
 }
 
 module.exports = stockController;

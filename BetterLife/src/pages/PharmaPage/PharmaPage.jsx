@@ -1,4 +1,4 @@
-import DashboardCard from "./DashboardCard";
+import DashboardCard from "./StockCard";
 import MedicineCard from "./MedicineCard";
 
 export default function PharmaPage() {
