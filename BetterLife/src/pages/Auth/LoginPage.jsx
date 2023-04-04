@@ -23,6 +23,7 @@ export default function LoginPage() {
     try {
       const response = await axios.post(`${BASE_URL}/login`, state);
       const token = response.data;
+      console.log(token);
       localStorage.setItem("token", token);
     } catch (error) {
       setError(error.message);

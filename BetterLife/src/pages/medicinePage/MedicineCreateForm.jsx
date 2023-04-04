@@ -63,7 +63,7 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
                 <input type="text" id="strength" name="strength" value={formValues.strength} onChange={handleInputChange} />
             </div>
             <div>
-                <label htmlFor="country">Strength:</label>
+                <label htmlFor="country">Country:</label>
                 <input type="text" id="country" name="country" value={formValues.country} onChange={handleInputChange} />
             </div>
             <div>

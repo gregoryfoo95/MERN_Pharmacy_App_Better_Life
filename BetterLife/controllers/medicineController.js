@@ -14,8 +14,13 @@ const medicineController = {
 
   // Read all medicines
   getAll: async (req, res) => {
+    const query = req.query || {};
+    for (const key in query) {
+      query[key] = new RegExp(`.*${query[key]}.*`, "i");
+    }
+    console.log(query);
     try {
-      const medicines = await Medicine.find({});
+      const medicines = await Medicine.find(query);
       res.status(200).json(medicines);
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -77,20 +82,20 @@ const medicineController = {
               const uniqueStrengths = Array.from(new Set(formattedStrengths));
               return uniqueStrengths.map(strength => ({
                 name: record.product_name,
-                type: record.dosage_form,
+                type: record.dosage_form.split("&&")[0],
                 routeOfAdmin: record.route_of_administration,
-                brand: record.manufacturer,
+                brand: record.manufacturer.split("&&")[0],
                 strength: strength,
-                country: record.country_of_manufacturer,
+                country: record.country_of_manufacturer.split("&&")[0],
               }));
             } else {
               return {
                 name: record.product_name,
-                type: record.dosage_form,
+                type: record.dosage_form.split("&&")[0],
                 routeOfAdmin: record.route_of_administration,
-                brand: record.manufacturer,
+                brand: record.manufacturer.split("&&")[0],
                 strength: record.strength,
-                country: record.country_of_manufacturer,
+                country: record.country_of_manufacturer.split("&&")[0],
               };
             }
         });
