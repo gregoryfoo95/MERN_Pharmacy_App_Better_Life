@@ -31,11 +31,11 @@ const UserSideBar = () => {
         </li>
         <li className="nav-item">
           <NavLink
-            to="/favourite"
+            to="/orders"
             activeclassname="nav-link-active"
             className="nav-link"
           >
-            Favourite
+            Order
           </NavLink>
         </li>
       </ul>
