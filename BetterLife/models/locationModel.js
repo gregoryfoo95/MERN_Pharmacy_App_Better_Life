@@ -20,12 +20,12 @@ const locationSchema = new Schema({
     },
 
     latitude: {
-        type: String,
+        type: Number,
         required:true,
     },
 
     longitude: {
-        type: String,
+        type: Number,
         required:true,
     },
     
@@ -35,5 +35,8 @@ const locationSchema = new Schema({
         required: true,
     }
 
-})
+});
+
+locationSchema.index({ coordinates: '2dsphere' });
+
 module.exports = mongoose.model("Location", locationSchema);
