@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { resetPassword } from "../../../utils/email";
+import { resetPassword } from "../../../utils/middleWare/authService";
 
 const initialState = {
   password: "",

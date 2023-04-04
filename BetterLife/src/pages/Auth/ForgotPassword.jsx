@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { forgotPassword, validateEmail } from "../../../utils/email";
+import { forgotPassword, validateEmail } from "../../../utils/middleWare/authService";
 import { toast } from "react-toastify";
 
 const Forgot = () => {
