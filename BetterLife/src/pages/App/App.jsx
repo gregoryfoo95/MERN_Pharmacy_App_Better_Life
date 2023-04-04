@@ -37,9 +37,6 @@ function App() {
           <Route path="/medicine" element={<MedicinePage />} />
           <Route path="/stock" element={<StockPage />} />
           <Route path="/medicine/:id/edit" element={<MedicineUpdateForm BASE_URL={BASE_URL}/>} />
-          {/* To be moved to user later, not under pharmacist */}
-          <Route path="/orders/new" element={<NewOrderPage />} />
-          <Route path="/orders" element={<OrderHistoryPage />} />
         </Routes>
       </>
       : (user.role === "Consumer") ?
@@ -53,6 +50,8 @@ function App() {
           <Route path="/map" element={<MainMap />} />
           <Route path="/map/:id" element={<DirectionMap />} />
           <Route path="/contact-us" element={<ContactForm />} />
+          <Route path="/orders/new" element={<NewOrderPage />} />
+          <Route path="/orders" element={<OrderHistoryPage />} />
         </Routes>
         </>
       </>

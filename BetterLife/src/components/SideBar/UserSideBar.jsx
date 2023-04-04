@@ -31,20 +31,11 @@ const UserSideBar = () => {
         </li>
         <li className="nav-item">
           <NavLink
-            to="/profile"
+            to="/orders/new"
             activeclassname="nav-link-active"
             className="nav-link"
           >
-            Profile
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/reset"
-            activeclassname="nav-link-active"
-            className="nav-link"
-          >
-            Reset
+            Order
           </NavLink>
         </li>
       </ul>
