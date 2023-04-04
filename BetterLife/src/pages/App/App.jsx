@@ -12,10 +12,10 @@ import AuthPage from "../Auth/Authpage";
 import { getUser } from "../../../utils/users-service";
 const BASE_URL = '/api/medicine';
 //onst userRole = "pharmacist";
-import UserSideBar
+import UserSideBar from '../../components/SideBar/UserSideBar';
 import MainMap from '../MapPages/MainMap';
 import MainSplit from '../UserMain/MainSplit';
-import Directions from '../MapPages/Directions';
+import DirectionMap from '../MapPages/DirectionsMap';
 
 
 
@@ -50,7 +50,7 @@ function App() {
           <Route path="/" element = {<AuthPage />} />
           <Route path="/user" element={<MainSplit />} />
           <Route path="/map" element={<MainMap />} />
-          <Route path="/map/:id" element={<Directions />} />
+          <Route path="/map/:id" element={<DirectionMap />} />
 
         </Routes>
       </>

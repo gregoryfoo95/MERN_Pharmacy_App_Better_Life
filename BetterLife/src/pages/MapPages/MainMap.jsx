@@ -1,6 +1,7 @@
 import React from 'react';
 import MapComponent from './MapComponent';
 import MarkerDetails from './Path'
+import Directions from './Directions';
 
 function MainMap() {
   return (
