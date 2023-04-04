@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 export default function MedicineUpdateForm({BASE_URL}) {
     const { id } = useParams();
     const [medicine, setMedicine] = useState({});
-
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchMedicine = async () => {
             try {
@@ -21,7 +21,7 @@ export default function MedicineUpdateForm({BASE_URL}) {
 
     const handleInputChange = (e) => {
         const key = e.target.name;
-        const value = new Date(e.target.value).toJSON();
+        const value = e.target.value;
         setMedicine({...medicine, [key]:value})
     }
 
@@ -35,6 +35,7 @@ export default function MedicineUpdateForm({BASE_URL}) {
             });
             console.log(response);
             setMedicine(response.data);
+            navigate('/medicine');
         } catch (err) {
         console.error(err);
         }
@@ -67,7 +68,7 @@ export default function MedicineUpdateForm({BASE_URL}) {
                 <input type="text" id="strength" name="strength" value={medicine.strength} onChange={handleInputChange} />
             </div>
             <div>
-                <label htmlFor="country">Strength:</label>
+                <label htmlFor="country">Country:</label>
                 <input type="text" id="country" name="country" value={medicine.country} onChange={handleInputChange} />
             </div>
             <div>
