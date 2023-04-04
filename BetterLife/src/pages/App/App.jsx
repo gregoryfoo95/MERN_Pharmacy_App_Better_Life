@@ -18,7 +18,7 @@ function App() {
   const [user, setUser] = useState(getUser());
   return (
     <main className="container">
-    { user ?
+    { user.role = "Pharmacist" ?
       <>
         <NavBar user={user} setUser = {setUser}/>
         <SideBar />
@@ -33,15 +33,29 @@ function App() {
           <Route path="/orders" element={<OrderHistoryPage />} />
         </Routes>
       </>
-      : 
+      : user.role ="Consumer" ?
       <>
-        <SideBar />
+        <>
+        <UserSideBar />
         <h1>Better Life</h1>
         <Routes>
-        <Route path="/" element = {<AuthPage />} />
+          <Route path="/user" element={<MainSplit />} />
+          <Route path="/map" element={<MainMap />} />
+          <Route path="/map/:id" element={<DirectionMap />} />
+
         </Routes>
+        </>
       </>
-    }
+      : 
+        <>
+          <SideBar />
+          <h1>Better Life</h1>
+          <Routes>
+          <Route path="/" element = {<AuthPage />} />
+          </Routes>
+        </>
+      }
+
     </main>
   );
 }
