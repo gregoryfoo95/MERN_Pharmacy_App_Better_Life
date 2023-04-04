@@ -12,19 +12,22 @@ import AuthPage from "../Auth/Authpage";
 import StockPage from "../StockPage/StockPage";
 import { getUser } from "../../../utils/users-service";
 const BASE_URL = '/api/medicine';
-//onst userRole = "pharmacist";
 import UserSideBar from '../../components/SideBar/UserSideBar';
 import MainMap from '../MapPages/MainMap';
 import MainSplit from '../UserMain/MainSplit';
 import DirectionMap from '../MapPages/DirectionsMap';
+import ContactForm from "../Auth/ContactForm";
 
 
 
 function App() {
   const [user, setUser] = useState(getUser());
+  console.log(user);
+
   return (
     <main className="container">
     { user ?
+      (user.role === "Pharmacist") ?
       <>
         <NavBar user={user} setUser = {setUser}/>
         <SideBar />
@@ -37,23 +40,28 @@ function App() {
           {/* To be moved to user later, not under pharmacist */}
           <Route path="/orders/new" element={<NewOrderPage />} />
           <Route path="/orders" element={<OrderHistoryPage />} />
-          <Route path="/" element = {<AuthPage />} />
-          <Route path="/user" element={<MainSplit />} />
-          <Route path="/map" element={<MainMap />} />
-          <Route path="/map/:id" element={<Directions />} />
-
         </Routes>
       </>
-      : 
+      : (user.role === "Consumer") ?
       <>
+        <>
         <UserSideBar />
         <h1>Better Life</h1>
         <Routes>
-          <Route path="/" element = {<AuthPage />} />
           <Route path="/user" element={<MainSplit />} />
           <Route path="/map" element={<MainMap />} />
           <Route path="/map/:id" element={<DirectionMap />} />
-
+          <Route path="/contact-us" element={<ContactForm />} />
+        </Routes>
+        </>
+      </>
+      : null 
+      
+      :
+      <>
+        <h1>Better Life</h1>
+        <Routes>
+          <Route path="/" element = {<AuthPage />} />
         </Routes>
       </>
     }
