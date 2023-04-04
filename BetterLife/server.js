@@ -13,8 +13,8 @@ const medicineRoute = require("./routes/medicineRoute");
 const userRoute = require("./routes/userRoute");
 const orderCartRoute = require("./routes/orderCartRoute");
 const contactRoute = require("./routes/contactRoute");
-const mapRoutes = require("./routes/mapRoutes")
 
+const stockRoute = require("./routes/stockRoute");
 const app = express();
 
 // Middlewares
@@ -27,6 +27,7 @@ app.use(cors());
 app.use("/api/medicine", medicineRoute);
 app.use('/api/user', userRoute);
 app.use("/api/orderCart", orderCartRoute);
+app.use("/api/stock", stockRoute);
 app.use("/api/contact", contactRoute);
 app.use("/api/map", mapRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "dist", "uploads")));

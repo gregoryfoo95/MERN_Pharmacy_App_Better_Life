@@ -6,6 +6,7 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
         name: '',
         type: '',
         strength: '',
+        country: '',
         price: '',
         expiry_date: '',
     });
@@ -28,6 +29,7 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
             name: '',
             type: '',
             strength: '',
+            country: '',
             price: '',
             expiry_date: '',
         });
@@ -59,6 +61,10 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
             <div>
                 <label htmlFor="strength">Strength:</label>
                 <input type="text" id="strength" name="strength" value={formValues.strength} onChange={handleInputChange} />
+            </div>
+            <div>
+                <label htmlFor="country">Strength:</label>
+                <input type="text" id="country" name="country" value={formValues.country} onChange={handleInputChange} />
             </div>
             <div>
                 <label htmlFor="price">Price:</label>

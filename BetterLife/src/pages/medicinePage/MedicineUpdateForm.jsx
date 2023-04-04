@@ -22,7 +22,6 @@ export default function MedicineUpdateForm({BASE_URL}) {
     const handleInputChange = (e) => {
         const key = e.target.name;
         const value = new Date(e.target.value).toJSON();
-        console.log(value);
         setMedicine({...medicine, [key]:value})
     }
 
@@ -66,6 +65,10 @@ export default function MedicineUpdateForm({BASE_URL}) {
             <div>
                 <label htmlFor="strength">Strength:</label>
                 <input type="text" id="strength" name="strength" value={medicine.strength} onChange={handleInputChange} />
+            </div>
+            <div>
+                <label htmlFor="country">Strength:</label>
+                <input type="text" id="country" name="country" value={medicine.country} onChange={handleInputChange} />
             </div>
             <div>
                 <label htmlFor="price">Price:</label>

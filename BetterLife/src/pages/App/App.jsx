@@ -5,10 +5,11 @@ import MedicinePage from '../MedicinePage/MedicinePage';
 import SideBar from "../../components/SideBar/SideBar";
 import NavBar from "../../components/NavBar/NavBar";
 import MedicineUpdateForm from "../MedicinePage/MedicineUpdateForm";
-import PharmaPage from "../Pharmapage/Pharmapage";
+import PharmaPage from "../PharmaPage/PharmaPage";
 import NewOrderPage from "../NewOrderPage/NewOrderPage";
 import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
 import AuthPage from "../Auth/Authpage";
+import StockPage from "../StockPage/StockPage";
 import { getUser } from "../../../utils/users-service";
 const BASE_URL = '/api/medicine';
 //onst userRole = "pharmacist";
@@ -31,6 +32,7 @@ function App() {
         <Routes>
           <Route path="/home" element = {<PharmaPage />} />
           <Route path="/medicine" element={<MedicinePage />} />
+          <Route path="/stock" element={<StockPage />} />
           <Route path="/medicine/:id/edit" element={<MedicineUpdateForm BASE_URL={BASE_URL}/>} />
           {/* To be moved to user later, not under pharmacist */}
           <Route path="/orders/new" element={<NewOrderPage />} />

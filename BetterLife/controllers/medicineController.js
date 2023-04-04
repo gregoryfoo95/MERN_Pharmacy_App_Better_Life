@@ -66,7 +66,7 @@ const medicineController = {
   },
 
   data: async (req,res) => {
-      const limit = 100;
+      const limit = 5;
       const apiURL = `https://data.gov.sg/api/action/datastore_search?resource_id=43668192-c352-4420-9731-01043c67c471&limit=${limit}`
         try {
           const response = await fetch(apiURL);
@@ -82,6 +82,7 @@ const medicineController = {
                 routeOfAdmin: record.route_of_administration,
                 brand: record.manufacturer,
                 strength: strength,
+                country: record.country_of_manufacturer,
               }));
             } else {
               return {
@@ -90,6 +91,7 @@ const medicineController = {
                 routeOfAdmin: record.route_of_administration,
                 brand: record.manufacturer,
                 strength: record.strength,
+                country: record.country_of_manufacturer,
               };
             }
         });
