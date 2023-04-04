@@ -40,47 +40,11 @@ const SideBar = () => {
         </li>
         <li className="nav-item">
           <NavLink
-            to="/contact-us"
-            activeclassname="nav-link-active"
-            className="nav-link"
-          >
-            Contact Us
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
             to="/profile"
             activeclassname="nav-link-active"
             className="nav-link"
           >
             Profile
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/reset"
-            activeclassname="nav-link-active"
-            className="nav-link"
-          >
-            Reset
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/register"
-            activeclassname="nav-link-active"
-            className="nav-link"
-          >
-            Register
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/login"
-            activeclassname="nav-link-active"
-            className="nav-link"
-          >
-            Login
           </NavLink>
         </li>
       </ul>
