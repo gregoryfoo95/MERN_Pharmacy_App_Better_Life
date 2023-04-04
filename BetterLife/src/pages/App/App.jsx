@@ -12,6 +12,12 @@ import AuthPage from "../Auth/Authpage";
 import { getUser } from "../../../utils/users-service";
 const BASE_URL = '/api/medicine';
 //onst userRole = "pharmacist";
+import UserSideBar
+import MainMap from '../MapPages/MainMap';
+import MainSplit from '../UserMain/MainSplit';
+import Directions from '../MapPages/Directions';
+
+
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -29,14 +35,23 @@ function App() {
           {/* To be moved to user later, not under pharmacist */}
           <Route path="/orders/new" element={<NewOrderPage />} />
           <Route path="/orders" element={<OrderHistoryPage />} />
+          <Route path="/" element = {<AuthPage />} />
+          <Route path="/user" element={<MainSplit />} />
+          <Route path="/map" element={<MainMap />} />
+          <Route path="/map/:id" element={<Directions />} />
+
         </Routes>
       </>
       : 
       <>
-        <SideBar />
+        <UserSideBar />
         <h1>Better Life</h1>
         <Routes>
-        <Route path="/" element = {<AuthPage />} />
+          <Route path="/" element = {<AuthPage />} />
+          <Route path="/user" element={<MainSplit />} />
+          <Route path="/map" element={<MainMap />} />
+          <Route path="/map/:id" element={<Directions />} />
+
         </Routes>
       </>
     }
