@@ -47,7 +47,7 @@ function App() {
         <UserSideBar />
         <h1>Better Life</h1>
         <Routes>
-          <Route path="/user" element={<MainSplit />} />
+          <Route path="/welcome" element={<MainSplit />} />
           <Route path="/map" element={<MainMap />} />
           <Route path="/map/:id" element={<DirectionMap />} />
         </Routes>
