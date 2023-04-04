@@ -38,9 +38,38 @@ const login = async (req, res) => {
     const user = await User.findOne({email});
     const payload = { user };
 
+
+    try {
+        const user = await User.findOne({email});
+        const payload = { user };
+
+        if (user === null) {
+            res.status(400).json({message: "User not found"});
+            return;
+        }
+
+        bcrypt.compare(password, user.password, (error, result) => {
+            if (error) {
+                throw new Error(error);
+            }
+
+            if (result) {
+                const token = jwt.sign(payload, process.env.JWT_SECRET,{ expiresIn: 3600});
+                const role = user.role;
+                res.status(201).json({token, role});
+            } else {
+                res.status(401).json({message: "Invalid password"});
+            }
+        })
+        
+
+    } catch(error) {
+        res.status(500).json(error);
+
     if (user === null) {
       res.status(400).json({message: "User not found"});
       return;
+
     }
 
     bcrypt.compare(password, user.password, (error, result) => {

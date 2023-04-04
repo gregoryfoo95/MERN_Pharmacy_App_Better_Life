@@ -6,8 +6,8 @@ export default function MedicineList({medicines, setMedicines, BASE_URL}) {
         <table>
           <thead>
             <tr>
-              <th>Brand</th>
               <th>Name</th>
+              <th>Brand</th>
               <th>Type</th>
               <th>Strength</th>
               <th>Country</th>
@@ -19,8 +19,8 @@ export default function MedicineList({medicines, setMedicines, BASE_URL}) {
           <tbody>
             {medicines.map((medicine) => (
               <tr key={medicine._id}>
-                <td>{medicine.brand}</td>
                 <td>{medicine.name}</td>
+                <td>{medicine.brand}</td>
                 <td>{medicine.type}</td>
                 <td>{medicine.strength}</td>
                 <td>{medicine.country}</td>
