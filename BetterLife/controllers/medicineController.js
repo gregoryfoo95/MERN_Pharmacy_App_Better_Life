@@ -34,7 +34,6 @@ const medicineController = {
       res.status(500).json({ message: err.message });
     }
   },
-
   // Update a medicine by ID
   updateById: async (req, res) => {
     try {
