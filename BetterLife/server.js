@@ -13,8 +13,10 @@ const medicineRoute = require("./routes/medicineRoute");
 const userRoute = require("./routes/userRoute");
 const orderCartRoute = require("./routes/orderCartRoute");
 const contactRoute = require("./routes/contactRoute");
-const mapRoutes = require("./routes/mapRoutes")
+
 const stockRoute = require("./routes/stockRoute");
+const mapRoutes = require("./routes/mapRoutes")
+
 
 const app = express();
 
