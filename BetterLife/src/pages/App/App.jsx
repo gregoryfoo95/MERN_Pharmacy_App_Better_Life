@@ -16,7 +16,6 @@ import UserSideBar from '../../components/SideBar/UserSideBar';
 import MainMap from '../MapPages/MainMap';
 import MainSplit from '../UserMain/MainSplit';
 import DirectionMap from '../MapPages/DirectionsMap';
-import ContactForm from "../Auth/ContactForm";
 
 
 
@@ -51,7 +50,6 @@ function App() {
           <Route path="/user" element={<MainSplit />} />
           <Route path="/map" element={<MainMap />} />
           <Route path="/map/:id" element={<DirectionMap />} />
-          <Route path="/contact-us" element={<ContactForm />} />
         </Routes>
         </>
       </>

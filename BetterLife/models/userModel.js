@@ -22,6 +22,7 @@ const userSchema = new Schema({
   role: { 
       type: String,
       trim: true,
+      default: "Consumer"
     },
   dateAdded: {
       type: Date,
