@@ -7,6 +7,7 @@ const stockController = {
 
     seedStockShell: async (req,res) => {
         try {
+            await Stock.deleteMany({})
             const medicines = await Medicine.find({});
             const locations = await Location.find({});
             const allStocks = await Promise.all(
