@@ -15,8 +15,8 @@ const orderCartRoute = require("./routes/orderCartRoute");
 const contactRoute = require("./routes/contactRoute");
 
 const stockRoute = require("./routes/stockRoute");
-const mapRoutes = require("./routes/mapRoutes")
-
+const mapRoutes = require("./routes/mapRoutes");
+const medicineSearchRoute = require("./routes/medicineSearchRoute");
 
 const app = express();
 
@@ -34,6 +34,7 @@ app.use("/api/stock", stockRoute);
 app.use("/api/contact", contactRoute);
 app.use("/api/map", mapRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "dist", "uploads")));
+app.use('/api/stocks', medicineSearchRoute);
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });

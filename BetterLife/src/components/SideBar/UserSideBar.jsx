@@ -16,8 +16,15 @@ const UserSideBar = () => {
             to="/map"
             activeclassname="nav-link-active"
             className="nav-link"
-          >
             Map
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink
+            to="/medicinesearch"
+            activeclassname="nav-link-active"
+            className="nav-link"
+            Medicine
           </NavLink>
         </li>
         <li className="nav-item">
