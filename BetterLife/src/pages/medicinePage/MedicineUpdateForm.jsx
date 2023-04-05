@@ -27,14 +27,15 @@ export default function MedicineUpdateForm({BASE_URL}) {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
+        const token = localStorage.getItem("token");
         try {
             const response = await axios.put(`${BASE_URL}/${id}`, medicine, {
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                Authorization: `Bearer ${token}`,
             });
-            
-            if (response.ok) {
+            if (response.status === 200) {
                 setMedicine(response.data);
                 navigate('/medicine');
             }
@@ -74,6 +75,10 @@ export default function MedicineUpdateForm({BASE_URL}) {
             <div>
                 <label htmlFor="country">Country:</label>
                 <input type="text" id="country" name="country" value={medicine.country} onChange={handleInputChange} />
+            </div>
+            <div>
+                <label htmlFor="routeOfAdmin">Route of Administration:</label>
+                <input type="text" id="routeOfAdmin" name="routeOfAdmin" value={medicine.routeOfAdmin} onChange={handleInputChange} />
             </div>
             <div>
                 <label htmlFor="price">Price:</label>

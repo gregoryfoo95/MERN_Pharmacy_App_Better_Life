@@ -82,7 +82,7 @@ const medicineController = {
               return uniqueStrengths.map(strength => ({
                 name: record.product_name,
                 type: record.dosage_form.split("&&")[0],
-                routeOfAdmin: record.route_of_administration,
+                routeOfAdmin: record.route_of_administration.split("&&")[0],
                 brand: record.manufacturer.split("&&")[0],
                 strength: strength,
                 country: record.country_of_manufacturer.split("&&")[0],
@@ -91,7 +91,7 @@ const medicineController = {
               return {
                 name: record.product_name,
                 type: record.dosage_form.split("&&")[0],
-                routeOfAdmin: record.route_of_administration,
+                routeOfAdmin: record.route_of_administration.split("&&")[0],
                 brand: record.manufacturer.split("&&")[0],
                 strength: record.strength,
                 country: record.country_of_manufacturer.split("&&")[0],
