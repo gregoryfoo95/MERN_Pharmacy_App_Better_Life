@@ -16,7 +16,6 @@ const UserSideBar = () => {
             to="/map"
             activeclassname="nav-link-active"
             className="nav-link"
-          >
             Map
           </NavLink>
         </li>
@@ -25,7 +24,6 @@ const UserSideBar = () => {
             to="/medicinesearch"
             activeclassname="nav-link-active"
             className="nav-link"
-          >
             Medicine
           </NavLink>
         </li>
@@ -40,38 +38,11 @@ const UserSideBar = () => {
         </li>
         <li className="nav-item">
           <NavLink
-            to="/profile"
+            to="/orders/new"
             activeclassname="nav-link-active"
             className="nav-link"
           >
-            Profile
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/reset"
-            activeclassname="nav-link-active"
-            className="nav-link"
-          >
-            Reset
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/register"
-            activeclassname="nav-link-active"
-            className="nav-link"
-          >
-            Register
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/login"
-            activeclassname="nav-link-active"
-            className="nav-link"
-          >
-            Login
+            Order
           </NavLink>
         </li>
       </ul>

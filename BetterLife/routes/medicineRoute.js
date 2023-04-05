@@ -19,6 +19,4 @@ router.put('/:id', medicineController.updateById);
 // Delete a medicine by ID
 router.delete('/:id', medicineController.deleteById);
 
-
-
 module.exports = router;

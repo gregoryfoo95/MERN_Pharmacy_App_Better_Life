@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import MedicineCreateForm from "./MedicineCreateForm";
 import MedicineList from "./MedicineList";
-
+import MedicineSearch from "./MedicineSearch";
 const BASE_URL = 'http://localhost:3000/api/medicine';
 
 const MedicinePage = () => {
@@ -28,6 +28,7 @@ const MedicinePage = () => {
   return (
     <div>
       <MedicineCreateForm setMedicines={ setMedicines } BASE_URL={BASE_URL}/>
+      <MedicineSearch setMedicines={ setMedicines } BASE_URL={BASE_URL}/>
       <h2>Medicine List</h2>
       {medicines.length > 0 ? (
         <MedicineList medicines={ medicines } setMedicines={ setMedicines } BASE_URL={BASE_URL} />

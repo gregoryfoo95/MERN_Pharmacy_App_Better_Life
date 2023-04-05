@@ -17,12 +17,14 @@ import MainMap from '../MapPages/MainMap';
 import MainSplit from '../UserMain/MainSplit';
 import DirectionMap from '../MapPages/DirectionsMap';
 import MedicineSearch from '../MedicineSearch/MedicineSearch';
+import ContactForm from '../Auth/ContactForm';
+
 
 
 
 function App() {
   const [user, setUser] = useState(getUser());
-  console.log(user);
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <main className="container">
@@ -37,14 +39,12 @@ function App() {
           <Route path="/medicine" element={<MedicinePage />} />
           <Route path="/stock" element={<StockPage />} />
           <Route path="/medicine/:id/edit" element={<MedicineUpdateForm BASE_URL={BASE_URL}/>} />
-          {/* To be moved to user later, not under pharmacist */}
-          <Route path="/orders/new" element={<NewOrderPage />} />
-          <Route path="/orders" element={<OrderHistoryPage />} />
         </Routes>
       </>
       : (user.role === "Consumer") ?
       <>
         <>
+        <NavBar user={user} setUser = {setUser}/>
         <UserSideBar />
         <h1>Better Life</h1>
         <Routes>
@@ -52,16 +52,20 @@ function App() {
           <Route path="/map" element={<MainMap />} />
           <Route path="/map/:id" element={<DirectionMap />} />
           <Route path="/medicinesearch" element={<MedicineSearch />} />
+          <Route path="/contact-us" element={<ContactForm />} />
+          <Route path="/orders/new" element={<NewOrderPage />} />
+          <Route path="/orders" element={<OrderHistoryPage />} />
+
         </Routes>
         </>
       </>
       : null 
-      
+
       :
       <>
         <h1>Better Life</h1>
         <Routes>
-          <Route path="/" element = {<AuthPage />} />
+          <Route path="/" element = {<AuthPage setUser={setUser}/>} />
         </Routes>
       </>
     }

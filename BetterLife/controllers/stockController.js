@@ -7,6 +7,7 @@ const stockController = {
 
     seedStockShell: async (req,res) => {
         try {
+            await Stock.deleteMany({})
             const medicines = await Medicine.find({});
             const locations = await Location.find({});
             const allStocks = await Promise.all(
@@ -16,6 +17,7 @@ const stockController = {
                             return Stock.create({
                                 location: location._id,
                                 medicine: medicine._id,
+                                quantity: Math.floor(Math.random() * 11),
                             });
                         })
                     );
@@ -29,7 +31,11 @@ const stockController = {
     
     getAllStock: async (req, res) => {
         try {
-            const allStocks = await Stock.find({})
+            const query = req.query || {};
+            for (const key in query) {
+                query[key] = new RegExp(`.*${query[key]}.*`, "i");
+            }
+            const allStocks = await Stock.find(query)
                 .populate("location")
                 .populate("medicine")
                 .exec();

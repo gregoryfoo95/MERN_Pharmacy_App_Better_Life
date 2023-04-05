@@ -1,80 +1,112 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+
 export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
-    const [formValues, setFormValues] = useState({
-        brand: '',
-        name: '',
-        type: '',
-        strength: '',
-        country: '',
-        price: '',
-        expiry_date: '',
-    });
+  const initialValues = {
+    name: "",
+    brand: "",
+    type: "",
+    strength: "",
+    country: "",
+    routeOfAdmin: "",
+    price: "",
+    expiry_date: "",
+  };
 
-    // Handle form input change
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
-    };
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("Name is required"),
+    brand: Yup.string().required("Brand is required"),
+    type: Yup.string().required("Type is required"),
+    strength: Yup.string().required("Strength is required"),
+    country: Yup.string().required("Country is required"),
+    routeOfAdmin: Yup.string().required("Route of Administration is required"),
+    price: Yup.number()
+      .typeError("Price must be a number")
+      .positive("Price must be a positive number")
+      .required("Price is required"),
+    expiry_date: Yup.date().required("Expiry Date is required"),
+  });
 
-    // Handle form submission for creating a new medicine
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-        try {
-        const response = await axios.post(`${BASE_URL}`, formValues);
-        console.log(response)
-        setMedicines((prevMedicines) => [...prevMedicines, response.data]);
-        setFormValues({
-            brand: '',
-            name: '',
-            type: '',
-            strength: '',
-            country: '',
-            price: '',
-            expiry_date: '',
-        });
-        } catch (err) {
-        console.error(err);
-        }
-    };
-    return (
-        <>
-        <h2>Add a New Medicine</h2>
+  const handleSubmit = async (values, { resetForm }) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.post(`${BASE_URL}`, values, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        Authorization: `Bearer ${token}`,
+      });
+      setMedicines((prevMedicines) => [...prevMedicines, response.data]);
+      resetForm();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return (
+    <>
+      <h2>Add a New Medicine</h2>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting, isValidating, isValid }) => (
+          <Form>
             <div>
-                <label htmlFor="brand">Brand:</label>
-                <input type="text" id="brand" name="brand" value={formValues.brand} onChange={handleInputChange} />
+              <label htmlFor="name">Name:</label>
+              <Field type="text" id="name" name="name" />
+              <ErrorMessage name="name" />
             </div>
             <div>
-                <label htmlFor="name">Name:</label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formValues.name}
-                    onChange={handleInputChange}
-                />
+              <label htmlFor="brand">Brand:</label>
+              <Field type="text" id="brand" name="brand" />
+              <ErrorMessage name="brand" />
+            </div>
+
+            <div>
+              <label htmlFor="type">Type:</label>
+              <Field type="text" id="type" name="type" />
+              <ErrorMessage name="type" />
             </div>
             <div>
-                <label htmlFor="type">Type:</label>
-                <input type="text" id="type" name="type" value={formValues.type} onChange={handleInputChange} />
+              <label htmlFor="strength">Strength:</label>
+              <Field type="text" id="strength" name="strength" />
+              <ErrorMessage name="strength" />
             </div>
             <div>
-                <label htmlFor="strength">Strength:</label>
-                <input type="text" id="strength" name="strength" value={formValues.strength} onChange={handleInputChange} />
+              <label htmlFor="country">Country:</label>
+              <Field type="text" id="country" name="country" />
+              <ErrorMessage name="country" />
             </div>
             <div>
-                <label htmlFor="country">Strength:</label>
-                <input type="text" id="country" name="country" value={formValues.country} onChange={handleInputChange} />
+              <label htmlFor="routeOfAdmin">Route of Administration:</label>
+              <Field type="text" id="routeOfAdmin" name="routeOfAdmin" />
+              <ErrorMessage name="routeOfAdmin" />
             </div>
             <div>
-                <label htmlFor="price">Price:</label>
-                <input type="number" id="price" name="price" value={formValues.price} onChange={handleInputChange} />
+              <label htmlFor="price">Price ($):</label>
+              <Field
+                type="number"
+                id="price"
+                name="price"
+                placeholder="No negative amount please"
+                step="0.01"
+                min="0"
+                title="Price must be a positive number"
+              />
+              <ErrorMessage name="price" />
             </div>
             <div>
-                <label htmlFor="expiry_date">Expiry Date:</label>
-                <input type="date" id="expiry_date" name="expiry_date" value={formValues.expiry_date} onChange={handleInputChange} />
+              <label htmlFor="expiry_date">Expiry Date:</label>
+              <Field type="date" id="expiry_date" name="expiry_date" />
+              <ErrorMessage name="expiry_date" />
             </div>
-            <button onClick={handleFormSubmit} type="submit">Add Medicine</button>
+            <button type="submit" onSubmit={handleSubmit} disabled={isSubmitting || isValidating || !isValid}>Add Medicine</button>
+            </Form>
+        )}
+        </Formik>
         </>
-    )
-}
+  )}

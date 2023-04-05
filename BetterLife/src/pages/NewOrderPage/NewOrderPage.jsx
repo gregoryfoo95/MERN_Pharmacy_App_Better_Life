@@ -1,64 +1,66 @@
 import { useState, useEffect, useRef } from 'react';
-import { medicinesAPI } from "../../../utils/medicines-api";
 import OrderDetails from "./OrderDetails";
-//import Order from "../../../models/orderModel";
 import axios from "axios";
-const BASE_URL_MED = 'http://localhost:3000/api/medicine';
+const BASE_URL_STOCK = 'http://localhost:3000/api/stock';
 
 export default function NewOrderPage() {
-    const [cart, setCart] = useState({ lineItems: []});
-    const [medicines, setMedicines] = useState([]);
-
-    useEffect(function() {
-        async function getMedicines() {
-            try {
-                const response = await axios.get(`${BASE_URL_MED}`);
-                console.log(response);
-                setMedicines(response.data);
-            } catch (error) {
-                console.log(error.message);
-            }
-        }
-       /*  async function getCart() {
-            try {
-                // Call the static method 'getCart' on the Order model to get the user's cart
-                const cart = await Order.getCart(userId);
-                setCart(cart);
-            } catch (error) {
-                console.log(error.message);
-            }
-        } */
-        getMedicines();
-        /* getCart(); */
-    }, []);
-
-    
-
-    async function handleAddToCart(medicine) {
-    
+    const [cart, setCart] = useState({ lineItems: [], totalPrice: 0 });
+    const [stocks, setStocks] = useState([]);
+  
+    useEffect(function () {
+      async function getAllStock() {
         try {
-            const existingItemIndex = cart.lineItems.findIndex(item => item.medicine._id === medicine._id);
-            if (existingItemIndex !== -1) {
-                cart.lineItems[existingItemIndex].qty += 1;
-                cart.lineItems[existingItemIndex].extPrice = cart.lineItems[existingItemIndex].qty * cart.lineItems[existingItemIndex].medicine.price;
-            } else {
-                const newLineItem = {
-                    medicine: medicine,
-                    qty: 1,
-                    extPrice: medicine.price
-                    };
-                cart.lineItems.push(newLineItem);
-            }
-            setCart({...cart});
-        } catch (err) {
-            console.log(err.message);
-            }
+          const response = await axios.get(`${BASE_URL_STOCK}`);
+          console.log(response);
+          setStocks(response.data);
+        } catch (error) {
+          console.log(error.message);
         }
+      }
+      getAllStock();
+    }, []);
+  
+    useEffect(() => {
+      const totalPrice = cart.lineItems.reduce(
+        (total, item) => total + item.extPrice,
+        0
+      );
+      setCart((prevCart) => ({ ...prevCart, totalPrice: totalPrice }));
+    }, [cart.lineItems]);
+    
+
+    async function handleAddToCart(stock) {
+        try {
+          const medicine = stock.medicine;
+          const existingItemIndex = cart.lineItems.findIndex(item => item.medicine._id === medicine._id);
+          let newCart = { ...cart };
+      
+          if (existingItemIndex !== -1) {
+            const updatedLineItem = {
+              ...newCart.lineItems[existingItemIndex],
+              qty: newCart.lineItems[existingItemIndex].qty + 1,
+              extPrice: (newCart.lineItems[existingItemIndex].qty + 1) * newCart.lineItems[existingItemIndex].medicine.price,
+            };
+            newCart.lineItems[existingItemIndex] = updatedLineItem;
+          } else {
+            const newLineItem = {
+              medicine: medicine,
+              qty: 1,
+              extPrice: medicine.price * 1, // multiply the medicine's price by its quantity (which is 1 in this case)
+            };
+            newCart.lineItems.push(newLineItem);
+          }
+          setCart(newCart);
+        } catch (err) {
+          console.log(err.message);
+        }
+      }
+      
 
     return (
         <div>
             <h1>NewOrderPage</h1>
-            {medicines.length === 0 ? (
+            {stocks.length === 0 ? (
                 <p>Loading...</p>
             ) : (
                 <ul>
@@ -72,12 +74,12 @@ export default function NewOrderPage() {
                             </tr>
                         </thead>
                         <tbody>
-                            {medicines.map((medicine) => (
-                            <tr key={medicine._id}>
-                                <td>{medicine.name}</td>
-                                <td>{medicine.brand}</td>
-                                <td>{medicine.price}</td>
-                                <td><button onClick={()=> handleAddToCart(medicine)}>Add to cart</button></td>
+                            {stocks.map((stock) => (
+                            <tr key={stock._id}>
+                                <td>{stock.medicine.name}</td>
+                                <td>{stock.medicine.brand}</td>
+                                <td>{stock.medicine.price}</td>
+                                <td><button onClick={()=> handleAddToCart(stock)}>Add to cart</button></td>
                             </tr>
                             ))}
                         </tbody>
@@ -86,6 +88,7 @@ export default function NewOrderPage() {
                 </ul>
             )}
             <OrderDetails cart={cart}/>
+            
         </div>
     );
 }

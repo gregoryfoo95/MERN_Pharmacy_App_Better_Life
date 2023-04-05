@@ -19,7 +19,7 @@ export default function StockSearchForm({ setMedicines }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.get(`${BASE_URL_STOCK}/search`, {
+            const response = await axios.get(`${BASE_URL_STOCK}`, {
                 params: searchQuery,
             });
             setMedicines(response.data);
