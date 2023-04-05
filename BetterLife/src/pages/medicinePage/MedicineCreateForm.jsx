@@ -10,6 +10,7 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
     type: "",
     strength: "",
     country: "",
+    routeOfAdmin: "",
     price: "",
     expiry_date: "",
   };
@@ -20,6 +21,7 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
     type: Yup.string().required("Type is required"),
     strength: Yup.string().required("Strength is required"),
     country: Yup.string().required("Country is required"),
+    routeOfAdmin: Yup.string().required("Route of Administration is required"),
     price: Yup.number()
       .typeError("Price must be a number")
       .positive("Price must be a positive number")
@@ -78,6 +80,11 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
               <label htmlFor="country">Country:</label>
               <Field type="text" id="country" name="country" />
               <ErrorMessage name="country" />
+            </div>
+            <div>
+              <label htmlFor="routeOfAdmin">Route of Administration:</label>
+              <Field type="text" id="routeOfAdmin" name="routeOfAdmin" />
+              <ErrorMessage name="routeOfAdmin" />
             </div>
             <div>
               <label htmlFor="price">Price ($):</label>
