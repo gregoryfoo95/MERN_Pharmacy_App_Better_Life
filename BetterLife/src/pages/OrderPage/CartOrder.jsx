@@ -1,5 +1,29 @@
 export default function OrderDetails({ cart }) {
-    return (
+  const handleCheckout = () => {
+    // Send cart data to server
+    fetch("/checkout", {
+      method: "POST",
+      body: JSON.stringify(cart),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Update order status
+      console.log(data.status);
+  
+      // Redirect to confirmation page
+      history.push("/confirmation");
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  };
+  
+
+  return (
+    <>
       <div>
         <h1>Cart</h1>
         {cart.lineItems.length === 0 ? (
@@ -40,6 +64,9 @@ export default function OrderDetails({ cart }) {
           </table>
         )}
       </div>
-    );
-  }
-  
+      {cart.lineItems.length > 0 && (
+        <button onClick={handleCheckout}>Checkout</button>
+      )}
+    </>
+  );
+}  
