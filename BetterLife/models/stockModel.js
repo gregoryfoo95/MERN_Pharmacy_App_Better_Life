@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-
+const Joi = require("joi");
 const stockSchema = new Schema({
     location: {
         type: Schema.Types.ObjectId,
