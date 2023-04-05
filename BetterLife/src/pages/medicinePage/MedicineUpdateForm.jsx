@@ -33,9 +33,12 @@ export default function MedicineUpdateForm({BASE_URL}) {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response);
-            setMedicine(response.data);
-            navigate('/medicine');
+            
+            if (response.ok) {
+                setMedicine(response.data);
+                navigate('/medicine');
+            }
+            
         } catch (err) {
         console.error(err);
         }
