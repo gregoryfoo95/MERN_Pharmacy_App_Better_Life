@@ -4,6 +4,9 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
 import axios from 'axios';
+import greenMarkerUrl from '../../../images/MarkersImg/PharmacistAvailable.png';
+import redMarkerUrl from '../../../images/MarkersImg/PharmacistNotAvailable.png';
+import here from '../../../images/MarkersImg/here.png';
 
 function MapComponent({ zoom = 17 }) {
   const mapRef = useRef();
@@ -52,7 +55,7 @@ function MapComponent({ zoom = 17 }) {
 
     const currentLocationMarker = L.marker(currentPosition, {
       icon: L.icon({
-        iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-red.png',
+        iconUrl: here,
         iconSize: [38, 95],
         iconAnchor: [22, 94],
         popupAnchor: [-3, -76],
@@ -60,8 +63,16 @@ function MapComponent({ zoom = 17 }) {
     }).addTo(map);
 
     const markers = locations.map(location => {
-      const marker = L.marker([location.Latitude, location.Longitude]);
-
+      const markerIconUrl = location.Pharmacist ? greenMarkerUrl : redMarkerUrl;
+    
+    const marker = L.marker([location.Latitude, location.Longitude], {
+      icon: L.icon({
+        iconUrl: markerIconUrl,
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [0, -34]
+      })
+    });
 
       marker.bindPopup(
         `Store Name: ${location.storeName}`
