@@ -6,7 +6,7 @@ import 'leaflet-routing-machine';
 import axios from 'axios';
 import greenMarkerUrl from '../../../images/MarkersImg/PharmacistAvailable.png';
 import redMarkerUrl from '../../../images/MarkersImg/PharmacistNotAvailable.png';
-
+import here from '../../../images/MarkersImg/here.png';
 
 function MapComponent({ zoom = 17 }) {
   const mapRef = useRef();
@@ -55,7 +55,7 @@ function MapComponent({ zoom = 17 }) {
 
     const currentLocationMarker = L.marker(currentPosition, {
       icon: L.icon({
-        iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-red.png',
+        iconUrl: here,
         iconSize: [38, 95],
         iconAnchor: [22, 94],
         popupAnchor: [-3, -76],

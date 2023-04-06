@@ -1,5 +1,4 @@
 import React from 'react';
-import MedicineMapComponent from './MedicineMapComponent';
 import MedicineSearch from './MedicineSearch';
 
 function MedicineMap() {
