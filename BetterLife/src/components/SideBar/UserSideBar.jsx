@@ -40,7 +40,7 @@ const UserSideBar = () => {
         </li>
         <li className="nav-item">
           <NavLink
-            to="/orders/new"
+            to="/order"
             activeclassname="nav-link-active"
             className="nav-link"
           >
