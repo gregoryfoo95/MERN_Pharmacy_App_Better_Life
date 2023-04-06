@@ -17,7 +17,7 @@ import MainSplit from '../UserMain/MainSplit';
 import DirectionMap from '../MapPages/DirectionsMap';
 import MedicineSearch from '../MedicineSearch/MedicineSearch';
 import ContactForm from '../Auth/ContactForm';
-
+import MedicineMap from '../MedicineSearch/MainMedicineSearch';
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -51,6 +51,10 @@ function App() {
           <Route path="/medicinesearch" element={<MedicineSearch />} />
           <Route path="/contact-us" element={<ContactForm />} />
           <Route path="/order" element={<OrderCart />} />
+          <Route path="/medicinemap" element={<MedicineMap />} />
+          
+
+
         </Routes>
         </>
       </>

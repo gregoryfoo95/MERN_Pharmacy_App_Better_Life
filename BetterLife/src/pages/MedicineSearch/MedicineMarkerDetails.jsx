@@ -29,6 +29,7 @@ function MarkerDetails({ currentPosition, location}) {
           locations={[currentPosition, selectedLocation]}
           zoom={15}
         />
+        
       )}
     </div>
   );

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function SplitMedicine () {
 
     return (
-        <Link to={`/medicine`} style={{textDecoration: "none"}}>
+        <Link to={`/medicinesearch`} style={{textDecoration: "none"}}>
             <div
                 style={{
                     backgroundColor: "#4E806B",
