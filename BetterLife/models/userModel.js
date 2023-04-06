@@ -35,7 +35,8 @@ const userSchema = new Schema({
       ref: "Store",
   },
   available: {
-      type: Boolean,
+      type: "Boolean",
+      default: true,
   }
 },
 { 

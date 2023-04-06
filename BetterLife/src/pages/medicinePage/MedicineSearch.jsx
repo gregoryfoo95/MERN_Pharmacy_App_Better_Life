@@ -52,6 +52,7 @@ export default function StockSearchForm({ setMedicines, BASE_URL }) {
     <label>
         Brand: 
         <select name="brand" value={searchQuery.brand} onChange={handleInputChange} >
+            <option value="">Any</option>
             {[...new Set(medicineOptions.map(medicine => medicine.brand))].map((brand) => (
                 <option value={brand}>
                 {brand}
@@ -62,6 +63,7 @@ export default function StockSearchForm({ setMedicines, BASE_URL }) {
     <label>
         Strength:
         <select name="strength" value={searchQuery.strength} onChange={handleInputChange} >
+            <option value="">Any</option>
             {[...new Set(medicineOptions.map(medicine => medicine.strength))].map((strength) => (
                 <option value={strength}>
                 {strength}

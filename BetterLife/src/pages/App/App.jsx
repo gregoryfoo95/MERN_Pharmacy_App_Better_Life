@@ -21,7 +21,6 @@ import ContactForm from '../Auth/ContactForm';
 
 function App() {
   const [user, setUser] = useState(getUser());
-  //const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <main className="container">
