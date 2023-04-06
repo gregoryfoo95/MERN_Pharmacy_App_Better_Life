@@ -18,7 +18,7 @@ export default function StockCard () {
                     fontFamily: 'Montserrat, sans-serif',
                     borderRadius: "15px",
                 }}
-            >Stock Inventory Management</div>
+            >Stock</div>
         </Link>
     )
 }

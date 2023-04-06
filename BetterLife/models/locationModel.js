@@ -35,11 +35,7 @@ const locationSchema = new Schema({
         required: true,
     }
 
-},
-{
-    timestamps: true,
-},
-);
+});
 
 locationSchema.index({ coordinates: '2dsphere' });
 
