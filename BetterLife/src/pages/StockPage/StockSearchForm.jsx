@@ -20,7 +20,7 @@ export default function StockSearchForm({ setMedicines }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.get(`${BASE_URL_STOCK}/search`, {
+            const response = await axios.get(`${BASE_URL_STOCK}`, {
                 params: searchQuery,
             });
             console.log(response.data);
@@ -32,7 +32,7 @@ export default function StockSearchForm({ setMedicines }) {
 
     useEffect(() => {
       const fetchStockOptions = async () => {
-      const response = await axios.get(`${BASE_URL_STOCK}/search`, {
+      const response = await axios.get(`${BASE_URL_STOCK}`, {
           params: { medicineName: searchQuery.medicineName },
       });
       setStockOptions(response.data);
@@ -41,6 +41,8 @@ export default function StockSearchForm({ setMedicines }) {
     }, [searchQuery.medicineName]);
 
   return (
+    <fieldset>
+    <legend>Search Bar for Stock Inventory</legend>
     <form onSubmit={handleSubmit}>
       <label>
         Medicine Name:
@@ -98,5 +100,6 @@ export default function StockSearchForm({ setMedicines }) {
       </label>
       <button type="submit">Search</button>
     </form>
+    </fieldset>
   );
 }

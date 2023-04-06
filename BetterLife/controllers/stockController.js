@@ -33,13 +33,33 @@ const stockController = {
         try {
             const query = req.query || {};
             for (const key in query) {
-                query[key] = new RegExp(`.*${query[key]}.*`, "i");
+                if (query[key]) {
+                    query[key] = new RegExp(query[key], "i");
+                }
             }
-            const allStocks = await Stock.find(query)
+            const allStocks = await Stock.find()
                 .populate("location")
                 .populate("medicine")
                 .exec();
-            res.status(201).json(allStocks);
+
+            const filteredStocks = allStocks.filter((stock) => {
+            let match = true;
+            if (query["storeName"] && !stock.location.storeName.match(query["storeName"])) {
+                match = false;
+            }
+            if (query["medicineName"] && !stock.medicine.name.match(query["medicineName"])) {
+                match = false;
+            }
+            if (query["medicineBrand"] && !stock.medicine.brand.match(query["medicineBrand"])) {
+                match = false;
+            }
+            if (query["medicineStrength"] && !stock.medicine.strength.match(query["medicineStrength"])) {
+                match = false;
+            }
+            return match;
+            });
+            
+            res.status(201).json(filteredStocks);
         } catch (err) {
             res.status(400).json({message: "Unable to acquire all stocks."})
         }
@@ -61,43 +81,6 @@ const stockController = {
     }
   },
 
-    searchStock: async (req, res) => {
-        try {
-            const query = req.query || {};
-            const regexQuery = {};
-            if (query["storeName"]) regexQuery["location.storeName"] = new RegExp(query["storeName"], "i");
-            if (query["medicineName"]) regexQuery["medicine.name"] = new RegExp(query["medicineName"], "i");
-            if (query["medicineBrand"]) regexQuery["medicine.brand"] = new RegExp(query["medicineBrand"], "i");
-            if (query["medicineStrength"]) regexQuery["medicine.strength"] = new RegExp(query["medicineStrength"], "i");
-
-            const allStocks = await Stock.find()
-            .populate("location")
-            .populate("medicine")
-            .exec();
-
-            const filteredStocks = allStocks.filter((stock) => {
-                let match = true;
-                if (query["storeName"] && !stock.location.storeName.match(regexQuery["location.storeName"])) {
-                    match = false;
-                }
-                if (query["medicineName"] && !stock.medicine.name.match(regexQuery["medicine.name"])) {
-                    match = false;
-                }
-                if (query["medicineBrand"] && !stock.medicine.brand.match(regexQuery["medicine.brand"])) {
-                    match = false;
-                }
-                if (query["medicineStrength"] && !stock.medicine.strength.match(regexQuery["medicine.strength"])) {
-                    match = false;
-                }
-                return match;
-                });
-
-            res.send(filteredStocks);
-
-        } catch (err) {
-            res.status(500).json({ message: err.message });
-        }
-    },
 
 }
 
