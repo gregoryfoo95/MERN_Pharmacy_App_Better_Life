@@ -1,9 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarComponent from '../../components/Cart/OrderBar';
 import { Container } from 'react-bootstrap';
-import Cancel from './Cancel';
 import Store from './Store';
-import Success from './Success';
 import CartProvider from './CartContext';
 
 function OrderCart() {
@@ -13,12 +11,6 @@ function OrderCart() {
   switch (path) {
     case '/order':
       content = <Store />;
-      break;
-    case '/order/success':
-      content = <Success />;
-      break;
-    case '/order/cancel':
-      content = <Cancel />;
       break;
     default:
       content = <Store />;
