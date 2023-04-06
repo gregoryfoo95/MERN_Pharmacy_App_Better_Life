@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import MapComponent from './MapComponent';
+import MapComponent from './MedicineMapComponent';
 import MarkerDetails from './MedicineMarkerDetails';
 
 function sortLocations(locations, currentPosition) {

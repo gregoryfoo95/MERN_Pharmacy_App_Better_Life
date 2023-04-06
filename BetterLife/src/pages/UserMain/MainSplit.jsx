@@ -7,8 +7,8 @@ import SplitMedicine from "./SplitMedicine";
 export default function MainSplit () {
  return (
     <>
-        <h1>User's Homepage</h1>
-        <SplitMap/>
+        <h1></h1>
+        <SplitMap/> 
          <p></p>
         <SplitMedicine />
         <p></p>

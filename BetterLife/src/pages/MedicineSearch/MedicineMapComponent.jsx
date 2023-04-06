@@ -4,11 +4,10 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
 import axios from 'axios';
-import greenMarkerUrl from '../../../images/MarkersImg/PharmacistAvailable.png';
-import redMarkerUrl from '../../../images/MarkersImg/PharmacistNotAvailable.png';
 
 
-function MapComponent({ zoom = 17 }) {
+function MedicineMapComponent({ filteredMedicines, zoom = 17 }) {
+  console.log(filteredMedicines);
   const mapRef = useRef();
   const [currentPosition, setCurrentPosition] = useState(null);
   const [locations, setLocations] = useState([]);
@@ -33,14 +32,25 @@ function MapComponent({ zoom = 17 }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/map');
-        setLocations(response.data.data);
+        const responses = await Promise.all(
+          filteredMedicines.map((medicine) =>
+            axios.get('/api/stocks/', { params: { medicineId: medicine._id } })
+          )
+        );
+
+        console.log('MedicineMapComponent API responses:', responses);
+
+        const allLocations = responses.flatMap((response) => response.data.data);
+        console.log('allLocations', allLocations);
+        setLocations(allLocations);
+      
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, []);
+  }, [filteredMedicines]);
+
   
 
   useEffect(() => {
@@ -63,31 +73,23 @@ function MapComponent({ zoom = 17 }) {
     }).addTo(map);
 
     const markers = locations.map(location => {
-      const markerIconUrl = location.Pharmacist ? greenMarkerUrl : redMarkerUrl;
+      const marker = L.marker([location.Latitude, location.Longitude]);
     
-    const marker = L.marker([location.Latitude, location.Longitude], {
-      icon: L.icon({
-        iconUrl: markerIconUrl,
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [0, -34]
-      })
-    });
-
       marker.bindPopup(
-        `Store Name: ${location.storeName}`
+        `Store Name: ${location.storeName}<br/>Medicine: ${location.medicine.name}`
       );
       return marker;
     });
+
 
     const markerGroup = L.layerGroup(markers).addTo(map);
 
     return () => {
       map.remove();
     };
-  }, [currentPosition, zoom, locations]);
+  }, [currentPosition, zoom, filteredMedicines]);
 
   return <div id="map" ref={mapRef} style={{ width: '100%', height: '50%' }} />;
 }
 
-export default MapComponent;
+export default MedicineMapComponent;

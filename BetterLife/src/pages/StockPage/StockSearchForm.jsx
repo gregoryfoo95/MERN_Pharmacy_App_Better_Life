@@ -4,7 +4,6 @@ const BASE_URL_STOCK = 'http://localhost:3000/api/stock';
 
 
 export default function StockSearchForm({ setMedicines }) {
-    const [stockOptions, setStockOptions] = useState([]);
     const [searchQuery, setSearchQuery] = useState({
         medicineName: '',
         medicineBrand: '',
@@ -23,26 +22,13 @@ export default function StockSearchForm({ setMedicines }) {
             const response = await axios.get(`${BASE_URL_STOCK}`, {
                 params: searchQuery,
             });
-            console.log(response.data);
             setMedicines(response.data);
         } catch (error) {
             console.log(error.message);
         }
     };
 
-    useEffect(() => {
-      const fetchStockOptions = async () => {
-      const response = await axios.get(`${BASE_URL_STOCK}`, {
-          params: { medicineName: searchQuery.medicineName },
-      });
-      setStockOptions(response.data);
-      };
-      fetchStockOptions();
-    }, [searchQuery.medicineName]);
-
   return (
-    <fieldset>
-    <legend>Search Bar for Stock Inventory</legend>
     <form onSubmit={handleSubmit}>
       <label>
         Medicine Name:
@@ -70,7 +56,7 @@ export default function StockSearchForm({ setMedicines }) {
         </select>
       </label>
       <label>
-        Strength:
+        Type:
         <select
           type="text"
           name="medicineStrength"
@@ -89,8 +75,8 @@ export default function StockSearchForm({ setMedicines }) {
         Store Location:
         <select
           type="text"
-          name="storeName"
-          value={searchQuery.storeName}
+          name="medicineStrength"
+          value={searchQuery.medicineStrength}
           onChange={handleInputChange}
         >
           <option value="">Any</option>
@@ -100,9 +86,8 @@ export default function StockSearchForm({ setMedicines }) {
             </option>
           ))}
         </select>
-      </label>
+       </label>
       <button type="submit">Search</button>
     </form>
-    </fieldset>
   );
 }

@@ -18,7 +18,7 @@ export default function MedicineCard () {
                     fontFamily: 'Montserrat, sans-serif',
                     borderRadius: "15px",
                 }}
-            >Medicine Database</div>
+            >Medicine Inventory</div>
         </Link>
     )
 }

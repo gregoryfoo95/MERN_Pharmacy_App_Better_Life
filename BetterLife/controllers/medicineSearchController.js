@@ -37,7 +37,24 @@ const createStocks = async (req, res) => {
   }
 }
 
+
+// const getMedicine = async (req, res) => {
+//   try {
+//     const { medicineId } = req.params;
+
+//     const query = medicineId ? { medicine: medicineId } : {};
+
+//     const stocks = await Stock.find(query).populate('medicine').populate('location');
+
+//     res.json(stocks);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// }
+
+
 module.exports = {
   getStocks,
   createStocks,
+  // getMedicine,
 }
