@@ -34,7 +34,7 @@ export default function StockSearchForm({ setMedicines, BASE_URL }) {
         setMedicineOptions(response.data);
         };
         fetchMedicineOptions();
-        }, [searchQuery.name]); 
+    }, [searchQuery.name]); 
 
   return (
     <form onSubmit={handleSubmit}>

@@ -62,27 +62,44 @@ const stockController = {
   },
 
     searchStock: async (req, res) => {
-    try {
-        const pattern = req.query.medicineName;
-        const Re = new RegExp(pattern.toUpperCase());
-        const stock = await Stock
-        .find()
-        .populate(
-            {
-                path: "medicine",
-                match: {name: Re},
-            }
-        )
-        .populate('location')
-        .exec();
-        console.log(stock);
-        res.status(200).json(stock);
- 
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  },
+        try {
+            const query = req.query || {};
+            const regexQuery = {};
+            if (query["storeName"]) regexQuery["location.storeName"] = new RegExp(query["storeName"], "i");
+            if (query["medicineName"]) regexQuery["medicine.name"] = new RegExp(query["medicineName"], "i");
+            if (query["medicineBrand"]) regexQuery["medicine.brand"] = new RegExp(query["medicineBrand"], "i");
+            if (query["medicineStrength"]) regexQuery["medicine.strength"] = new RegExp(query["medicineStrength"], "i");
+
+            const allStocks = await Stock.find()
+            .populate("location")
+            .populate("medicine")
+            .exec();
+
+            const filteredStocks = allStocks.filter((stock) => {
+                let match = true;
+                if (query["storeName"] && !stock.location.storeName.match(regexQuery["location.storeName"])) {
+                    match = false;
+                }
+                if (query["medicineName"] && !stock.medicine.name.match(regexQuery["medicine.name"])) {
+                    match = false;
+                }
+                if (query["medicineBrand"] && !stock.medicine.brand.match(regexQuery["medicine.brand"])) {
+                    match = false;
+                }
+                if (query["medicineStrength"] && !stock.medicine.strength.match(regexQuery["medicine.strength"])) {
+                    match = false;
+                }
+                return match;
+                });
+
+            res.send(filteredStocks);
+
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    },
 
 }
 
 module.exports = stockController;
+
