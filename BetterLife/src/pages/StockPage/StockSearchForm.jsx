@@ -41,31 +41,52 @@ export default function StockSearchForm({ setMedicines }) {
       </label>
       <label>
         Brand:
-        <input
+        <select
           type="text"
           name="medicineBrand"
           value={searchQuery.medicineBrand}
           onChange={handleInputChange}
-        />
+        >
+          <option value="">Any</option>
+          {[... new Set(stockOptions.map(stock => stock.medicine.brand))].map((brand) => (
+            <option value={brand}>
+              {brand}
+            </option>
+          ))}
+        </select>
       </label>
       <label>
         Type:
-        <input
+        <select
           type="text"
           name="medicineStrength"
           value={searchQuery.medicineStrength}
           onChange={handleInputChange}
-        />
+        >
+          <option value="">Any</option>
+          {[... new Set(stockOptions.map(stock => stock.medicine.strength))].map((strength) => (
+            <option value={strength}>
+              {strength}
+            </option>
+          ))}
+        </select>
       </label>
       <label>
         Store Location:
-        <input
+        <select
           type="text"
-          name="storeName"
-          value={searchQuery.storeName}
+          name="medicineStrength"
+          value={searchQuery.medicineStrength}
           onChange={handleInputChange}
-        />
-      </label>
+        >
+          <option value="">Any</option>
+          {[... new Set(stockOptions.map(stock => stock.location.storeName))].map((storeName) => (
+            <option value={storeName}>
+              {storeName}
+            </option>
+          ))}
+        </select>
+       </label>
       <button type="submit">Search</button>
     </form>
   );

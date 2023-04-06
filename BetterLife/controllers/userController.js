@@ -11,6 +11,26 @@ const sendEmail = require("../utils/sendEmail");
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 }; */
 
+const updateUserById = async (req,res) => {
+  try {
+    const user_id = req.params.id;
+    const userInDb = await User.findByIdAndUpdate(user_id, req.body, {new:true});
+    res.status(201).json(userInDb);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
+const getUserById = async (req, res) => {
+  try {
+    const user_id = req.params.id;
+    const userInDb = await User.findById(user_id);
+    res.status(201).json(userInDb);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
 const create = async (req, res) => {
   const { password } = req.body;
   if (password.length < 3) {
@@ -188,4 +208,6 @@ module.exports = {
   resetPassword,
   changePassword,
   forgotPassword,
+  updateUserById,
+  getUserById
 };
