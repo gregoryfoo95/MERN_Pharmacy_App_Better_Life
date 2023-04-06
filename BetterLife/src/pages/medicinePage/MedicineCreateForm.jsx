@@ -47,7 +47,8 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
 
   return (
     <>
-      <h2>Add a New Medicine</h2>
+      <fieldset>
+      <legend>Add Medicine to Medicine Database</legend>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -108,5 +109,6 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
             </Form>
         )}
         </Formik>
+        </fieldset>
         </>
   )}

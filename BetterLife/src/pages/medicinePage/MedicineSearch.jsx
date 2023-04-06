@@ -37,6 +37,8 @@ export default function StockSearchForm({ setMedicines, BASE_URL }) {
     }, [searchQuery.name]); 
 
   return (
+    <fieldset>
+    <legend>Search Bar for Medicine Database</legend>
     <form onSubmit={handleSubmit}>
     <label>
         Name:
@@ -69,5 +71,6 @@ export default function StockSearchForm({ setMedicines, BASE_URL }) {
     </label>
     <button type="submit">Search</button>
     </form>
+    </fieldset>
   );
 }
