@@ -33,13 +33,33 @@ const stockController = {
         try {
             const query = req.query || {};
             for (const key in query) {
-                query[key] = new RegExp(`.*${query[key]}.*`, "i");
+                if (query[key]) {
+                    query[key] = new RegExp(query[key], "i");
+                }
             }
-            const allStocks = await Stock.find(query)
+            const allStocks = await Stock.find()
                 .populate("location")
                 .populate("medicine")
                 .exec();
-            res.status(201).json(allStocks);
+
+            const filteredStocks = allStocks.filter((stock) => {
+            let match = true;
+            if (query["storeName"] && !stock.location.storeName.match(query["storeName"])) {
+                match = false;
+            }
+            if (query["medicineName"] && !stock.medicine.name.match(query["medicineName"])) {
+                match = false;
+            }
+            if (query["medicineBrand"] && !stock.medicine.brand.match(query["medicineBrand"])) {
+                match = false;
+            }
+            if (query["medicineStrength"] && !stock.medicine.strength.match(query["medicineStrength"])) {
+                match = false;
+            }
+            return match;
+            });
+            
+            res.status(201).json(filteredStocks);
         } catch (err) {
             res.status(400).json({message: "Unable to acquire all stocks."})
         }
@@ -61,28 +81,8 @@ const stockController = {
     }
   },
 
-    searchStock: async (req, res) => {
-    try {
-        const pattern = req.query.medicineName;
-        const Re = new RegExp(pattern.toUpperCase());
-        const stock = await Stock
-        .find()
-        .populate(
-            {
-                path: "medicine",
-                match: {name: Re},
-            }
-        )
-        .populate('location')
-        .exec();
-        console.log(stock);
-        res.status(200).json(stock);
- 
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  },
 
 }
 
 module.exports = stockController;
+

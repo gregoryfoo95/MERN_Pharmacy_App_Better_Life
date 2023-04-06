@@ -6,8 +6,7 @@ import SideBar from "../../components/SideBar/SideBar";
 import NavBar from "../../components/NavBar/NavBar";
 import MedicineUpdateForm from "../MedicinePage/MedicineUpdateForm";
 import PharmaPage from "../PharmaPage/PharmaPage";
-import NewOrderPage from "../NewOrderPage/NewOrderPage";
-import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
+import OrderCart from "../OrderPage/OrderCart";
 import AuthPage from "../Auth/Authpage";
 import StockPage from "../StockPage/StockPage";
 import { getUser } from "../../../utils/users-service";
@@ -19,8 +18,6 @@ import DirectionMap from '../MapPages/DirectionsMap';
 import MedicineSearch from '../MedicineSearch/MedicineSearch';
 import ContactForm from '../Auth/ContactForm';
 import MedicineMap from '../MedicineSearch/MainMedicineSearch';
-
-
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -53,11 +50,7 @@ function App() {
           <Route path="/map/:id" element={<DirectionMap />} />
           <Route path="/medicinesearch" element={<MedicineSearch />} />
           <Route path="/contact-us" element={<ContactForm />} />
-          <Route path="/orders/new" element={<NewOrderPage />} />
-          <Route path="/orders" element={<OrderHistoryPage />} />
-          <Route path="/medicinemap" element={<MedicineMap />} />
-          
-
+          <Route path="/order" element={<OrderCart />} />
         </Routes>
         </>
       </>
