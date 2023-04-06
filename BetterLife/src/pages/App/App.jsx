@@ -18,7 +18,7 @@ import MainSplit from '../UserMain/MainSplit';
 import DirectionMap from '../MapPages/DirectionsMap';
 import MedicineSearch from '../MedicineSearch/MedicineSearch';
 import ContactForm from '../Auth/ContactForm';
-
+import MedicineMap from '../MedicineSearch/MainMedicineSearch';
 
 
 
@@ -55,6 +55,8 @@ function App() {
           <Route path="/contact-us" element={<ContactForm />} />
           <Route path="/orders/new" element={<NewOrderPage />} />
           <Route path="/orders" element={<OrderHistoryPage />} />
+          <Route path="/medicinemap" element={<MedicineMap />} />
+          
 
         </Routes>
         </>

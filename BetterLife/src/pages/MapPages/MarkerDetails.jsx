@@ -12,13 +12,17 @@ function MarkerDetails({ currentPosition, location}) {
     setSelectedLocation(location);
   };
 
-  const { storeName, storeAddress, Pharmacy, distanceInKm, walkTime } = location;
+  const { storeName, storeAddress, Pharmacist, distanceInKm, walkTime } = location;
 
   return (
     <div key={location._id}>
       <h3>{storeName}</h3>
       <p>Address : {storeAddress}</p>
-      <p>Pharmacist: {Pharmacy}</p>
+      <p>Pharmacist:  
+      <span style={{ color: Pharmacist ? 'green' : 'red' }}>
+        {Pharmacist ? ' Available' : ' Not Available'}
+      </span>
+      </p>
       <p>Distance: {distanceInKm.toFixed(2)} km</p>
       <p>Walk Time: {walkTime.toFixed(1)} hours</p>
       <Link to={`/map/${location._id}`}>Get Direction</Link>
