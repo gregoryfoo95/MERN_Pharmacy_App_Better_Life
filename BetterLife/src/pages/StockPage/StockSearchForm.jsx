@@ -4,6 +4,7 @@ const BASE_URL_STOCK = 'http://localhost:3000/api/stock';
 
 
 export default function StockSearchForm({ setMedicines }) {
+    const [stockOptions, setStockOptions] = useState([]);
     const [searchQuery, setSearchQuery] = useState({
         medicineName: '',
         medicineBrand: '',
@@ -19,14 +20,25 @@ export default function StockSearchForm({ setMedicines }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.get(`${BASE_URL_STOCK}`, {
+            const response = await axios.get(`${BASE_URL_STOCK}/search`, {
                 params: searchQuery,
             });
+            console.log(response.data);
             setMedicines(response.data);
         } catch (error) {
             console.log(error.message);
         }
     };
+
+    useEffect(() => {
+      const fetchStockOptions = async () => {
+      const response = await axios.get(`${BASE_URL_STOCK}/search`, {
+          params: { medicineName: searchQuery.medicineName },
+      });
+      setStockOptions(response.data);
+      };
+      fetchStockOptions();
+    }, [searchQuery.medicineName]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -41,30 +53,48 @@ export default function StockSearchForm({ setMedicines }) {
       </label>
       <label>
         Brand:
-        <input
+        <select
           type="text"
           name="medicineBrand"
           value={searchQuery.medicineBrand}
           onChange={handleInputChange}
-        />
+        >
+          {[... new Set(stockOptions.map(stock => stock.medicine.brand))].map((brand) => (
+            <option value={brand}>
+              {brand}
+            </option>
+          ))}
+        </select>
       </label>
       <label>
-        Type:
-        <input
+        Strength:
+        <select
           type="text"
           name="medicineStrength"
           value={searchQuery.medicineStrength}
           onChange={handleInputChange}
-        />
+        >
+          {[... new Set(stockOptions.map(stock => stock.medicine.strength))].map((strength) => (
+            <option value={strength}>
+              {strength}
+            </option>
+          ))}
+        </select>
       </label>
       <label>
         Store Location:
-        <input
+        <select
           type="text"
           name="storeName"
           value={searchQuery.storeName}
           onChange={handleInputChange}
-        />
+        >
+          {[... new Set(stockOptions.map(stock => stock.location.storeName))].map((storeName) => (
+            <option value={storeName}>
+              {storeName}
+            </option>
+          ))}
+        </select>
       </label>
       <button type="submit">Search</button>
     </form>

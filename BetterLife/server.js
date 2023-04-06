@@ -3,7 +3,7 @@ const path = require("path");
 const logger = require("morgan");
 const cors = require ("cors");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
@@ -50,7 +50,12 @@ mongoose
     });
   })
   .catch((err) => console.log(err));
+  
+const db = mongoose.connection;
 
+db.on('connected', function() {
+  console.log(`Connected to MongoDB ${db.name} at ${db.host}:${db.port}`);
+});
 
   // Enable CORS
 app.use((req, res, next) => {
