@@ -51,10 +51,6 @@ function App() {
           <Route path="/medicinesearch" element={<MedicineSearch />} />
           <Route path="/contact-us" element={<ContactForm />} />
           <Route path="/order" element={<OrderCart />} />
-          <Route path="/medicinemap" element={<MedicineMap />} />
-          
-
-
         </Routes>
         </>
       </>
