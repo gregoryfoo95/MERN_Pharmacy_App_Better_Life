@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from "axios";
+import { Form, Button } from "react-bootstrap";
 
 export default function ContactForm() {
   const [state, setState] = useState({
@@ -36,42 +37,58 @@ export default function ContactForm() {
   return (
     <div>
       <div className="form-container">
-        <form autoComplete="off" onSubmit={handleSubmit}>
-          <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            value={state.name}
-            onChange={handleChange}
-            required
-          />
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={state.email}
-            onChange={handleChange}
-            required
-          />
-          <label>Subject</label>
-          <input
-            type="text"
-            name="subject"
-            value={state.subject}
-            onChange={handleChange}
-            required
-          />
-          <label>Message</label>
-          <textarea
-            name="message"
-            value={state.message}
-            onChange={handleChange}
-            required
-          />
-          <button type="submit">
-            SEND
-          </button>
-        </form>
+        <Form autoComplete="off" onSubmit={handleSubmit}>
+          <Form.Group controlId="name">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="name"
+              value={state.name}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group controlId="email">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              value={state.email}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group controlId="subject">
+            <Form.Label>Subject</Form.Label>
+            <Form.Control
+              type="text"
+              name="subject"
+              value={state.subject}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group controlId="message">
+            <Form.Label>Message</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              name="message"
+              value={state.message}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
+
+          <div className="submit-container">
+            <Button variant="primary" type="submit" style={{ backgroundColor: "#00A0A0" }}>
+              SEND
+            </Button>
+          </div>
+        </Form>
       </div>
     </div>
   );
