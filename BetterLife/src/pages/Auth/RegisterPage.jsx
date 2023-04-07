@@ -86,7 +86,7 @@ export default function RegisterPage() {
             <Form.Control
               type="password"
               name="confirm"
-              placeholder="Comfirm Password"
+              placeholder="Confirm Password"
               value={state.confirm}
               onChange={handleChange}
               required

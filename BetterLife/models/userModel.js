@@ -89,7 +89,7 @@ const userSchema = new Schema({
   },
   store: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Store",
+      ref: "Location",
   },
   available: {
       type: "Boolean",
