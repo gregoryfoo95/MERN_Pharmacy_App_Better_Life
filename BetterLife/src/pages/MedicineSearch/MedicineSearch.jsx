@@ -98,12 +98,7 @@ const MedicineSearch = () => {
         location: { latitude: latitude, longitude: longitude },
       } = medicine;
 
-      console.log(medicine);
 
-
-
-
-    
       // Make sure latitude and longitude are defined
       if (latitude && longitude) {
         const markerIconUrl = getMarkerIconUrl(medicine.location.pharmacist, medicine.quantity);
