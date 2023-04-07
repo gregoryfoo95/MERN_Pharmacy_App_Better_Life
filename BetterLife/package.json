@@ -44,10 +44,12 @@
     "react-bootstrap-sidebar-menu": "^2.0.3",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
+    "react-leaflet": "^4.2.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
     "react-toastify": "^9.1.2",
     "sass": "^1.60.0",
+    "stripe": "^11.17.0",
     "yup": "^1.0.2"
   },
   "devDependencies": {

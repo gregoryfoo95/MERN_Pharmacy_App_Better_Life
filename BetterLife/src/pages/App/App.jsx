@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 // import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import MedicinePage from '../MedicinePage/MedicinePage';
+
 import MedicineUpdateForm from '../MedicinePage/MedicineUpdateForm';
 import PharmaPage from '../PharmaPage/PharmaPage';
 // import OrderCart from "../OrderPage/OrderCart";
@@ -9,18 +10,21 @@ import PharmaPage from '../PharmaPage/PharmaPage';
 import AuthPage from '../Auth/Authpage';
 import StockPage from '../StockPage/StockPage';
 import { getUser } from '../../../utils/users-service';
+
 const BASE_URL = '/api/medicine';
 import MainMap from '../MapPages/MainMap';
 import MainSplit from '../UserMain/MainSplit';
 import DirectionMap from '../MapPages/DirectionsMap';
 import MedicineSearch from '../MedicineSearch/MedicineSearch';
 import ContactForm from '../Auth/ContactForm';
+
 // import MedicineMap from '../MedicineSearch/MainMedicineSearch';
 
 // side bar
 import Layout from '../../components/Layout/Layout';
 import CustomSideBar from '../../components/SideBar/CustomSideBar';
 import CustomNavBar from '../../components/NavBar/CustomNavBar';
+
 
 function App() {
   const [isRtl, setIsRtl] = useState(false);

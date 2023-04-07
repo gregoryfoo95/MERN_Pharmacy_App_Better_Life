@@ -34,9 +34,11 @@ export default function StockSearchForm({ setMedicines, BASE_URL }) {
         setMedicineOptions(response.data);
         };
         fetchMedicineOptions();
-        }, [searchQuery.name]); 
+    }, [searchQuery.name]); 
 
   return (
+    <fieldset>
+    <legend>Search Bar for Medicine Database</legend>
     <form onSubmit={handleSubmit}>
     <label>
         Name:
@@ -50,6 +52,7 @@ export default function StockSearchForm({ setMedicines, BASE_URL }) {
     <label>
         Brand: 
         <select name="brand" value={searchQuery.brand} onChange={handleInputChange} >
+            <option value="">Any</option>
             {[...new Set(medicineOptions.map(medicine => medicine.brand))].map((brand) => (
                 <option value={brand}>
                 {brand}
@@ -60,6 +63,7 @@ export default function StockSearchForm({ setMedicines, BASE_URL }) {
     <label>
         Strength:
         <select name="strength" value={searchQuery.strength} onChange={handleInputChange} >
+            <option value="">Any</option>
             {[...new Set(medicineOptions.map(medicine => medicine.strength))].map((strength) => (
                 <option value={strength}>
                 {strength}
@@ -69,5 +73,6 @@ export default function StockSearchForm({ setMedicines, BASE_URL }) {
     </label>
     <button type="submit">Search</button>
     </form>
+    </fieldset>
   );
 }
