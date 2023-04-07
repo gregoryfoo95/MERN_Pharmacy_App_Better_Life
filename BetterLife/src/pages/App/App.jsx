@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import MedicinePage from '../MedicinePage/MedicinePage';
-import SideBar from "../../components/SideBar/SideBar";
+import SideBar from "../../components/SideBar/PharmSideBar";
 import NavBar from "../../components/NavBar/NavBar";
 import MedicineUpdateForm from "../MedicinePage/MedicineUpdateForm";
 import PharmaPage from "../PharmaPage/PharmaPage";

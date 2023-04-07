@@ -31,11 +31,11 @@ const UserSideBar = () => {
         </li>
         <li className="nav-item">
           <NavLink
-            to="/contact-us"
+            to="/order"
             activeclassname="nav-link-active"
             className="nav-link"
           >
-            Contact Us
+            Order
           </NavLink>
         </li>
         <li className="nav-item">
@@ -49,29 +49,11 @@ const UserSideBar = () => {
         </li>
         <li className="nav-item">
           <NavLink
-            to="/reset"
+            to="/contact-us"
             activeclassname="nav-link-active"
             className="nav-link"
           >
-            Reset
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/register"
-            activeclassname="nav-link-active"
-            className="nav-link"
-          >
-            Register
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/login"
-            activeclassname="nav-link-active"
-            className="nav-link"
-          >
-            Login
+            Contact Us
           </NavLink>
         </li>
       </ul>
