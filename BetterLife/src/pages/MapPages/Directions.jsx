@@ -60,7 +60,7 @@ function Directions({ zoom = 17 }) {
     }).addTo(map);
 
 
-    const destinationLatLng = L.latLng(location.Latitude, location.Longitude);
+    const destinationLatLng = L.latLng(location.latitude, location.longitude);
     const destinationMarker = L.marker(destinationLatLng).addTo(map);
     setDestinationMarker(destinationMarker);
     
@@ -77,7 +77,7 @@ function Directions({ zoom = 17 }) {
     }).addTo(map);
     setRoutingControl(control);
 
-    const marker = L.marker([location.Latitude, location.Longitude]);
+    const marker = L.marker([location.latitude, location.longitude]);
     marker.bindPopup(
       `Store Name: ${location.storeName}`
     );
@@ -93,7 +93,7 @@ function Directions({ zoom = 17 }) {
     };
   }, [currentPosition, zoom, location]);
 
-  return <div id="map" ref={mapRef} style={{ width: '100%',height: '50%' }} />;
+  return <div id="map" ref={mapRef} style={{ width: '100%',height: '100%' }} />;
 }
 
 export default Directions;
