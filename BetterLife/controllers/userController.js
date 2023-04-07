@@ -24,7 +24,7 @@ const updateUserById = async (req,res) => {
 const getUserById = async (req, res) => {
   try {
     const user_id = req.params.id;
-    const userInDb = await User.findById(user_id);
+    const userInDb = await User.findById(user_id).populate("store");
     res.status(201).json(userInDb);
   } catch (err) {
     res.status(500).json(err);

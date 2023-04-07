@@ -7,7 +7,7 @@ require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const stripe = require('stripe')('sk_test_51MthsGEnqLsF1BhOXr2UvBvcwOfyK2yYKVoSfPzXSGFFWnBLYU0TbqISoM6YGUVIXMGT6YlFSIoKCaedNi6q4SBP00BtzmEyOx')
-
+//const stripe = require('stripe')(process.env.STRIPE_KEY);
 
 //Routes
 const medicineRoute = require("./routes/medicineRoute");
@@ -16,7 +16,7 @@ const contactRoute = require("./routes/contactRoute");
 const stockRoute = require("./routes/stockRoute");
 const mapRoutes = require("./routes/mapRoutes");
 const medicineSearchRoute = require("./routes/medicineSearchRoute");
-
+const stripeRoute = require("./routes/stripeRoute");
 const app = express();
 
 // Middlewares
@@ -40,6 +40,7 @@ app.post("/checkout", async (req, res) => {
       )
   });
 
+
   const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
       mode: 'payment',
@@ -60,6 +61,7 @@ app.use("/api/contact", contactRoute);
 app.use("/api/map", mapRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "dist", "uploads")));
 app.use('/api/stocks', medicineSearchRoute);
+app.use('/api.stripe.com/', stripeRoute);
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
