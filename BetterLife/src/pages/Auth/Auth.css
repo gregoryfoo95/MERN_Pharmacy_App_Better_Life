@@ -1,0 +1,14 @@
+.Auth {
+  text-align: center;
+  color: '#3A1730';
+  font-family: 'Montserrat';
+  padding-left: '20px';
+  padding-right: '20px';
+}
+
+.form-container {
+   background-Color: '#F5F5F5';
+   padding: '30px';
+   border-Radius: '10px';
+   box-Shadow: '0px 3px 6px rgba(0, 0, 0, 0.16)',
+}
