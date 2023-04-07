@@ -177,12 +177,12 @@ function App() {
           title: 'Order',
           path: '/order',
         },
-        // {
-        //   keyEvent: 'MedicineMap',
-        //   classData: 'bi bi-clipboard menu-icon',
-        //   title: 'Medicine Map',
-        //   path: '/medicinemap',
-        // },
+        {
+          keyEvent: 'MedicineMap',
+          classData: 'bi bi-clipboard menu-icon',
+          title: 'Medicine Map',
+          path: '/medicinemap',
+        },
         {
           keyEvent: 'MedicineSearch',
           classData: 'bi bi-clipboard menu-icon',
