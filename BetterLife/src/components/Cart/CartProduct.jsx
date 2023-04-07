@@ -9,6 +9,12 @@ function CartProduct(props) {
     const quantity = props.quantity;
     const productData = getProductData(id);
 
+    const [products, setProducts] = useState([]);
+/* 
+    useEffect(() => {
+        async function fetchProducts
+    }, []); */
+
     return (
         <>
             <h3>{productData.title}</h3>
