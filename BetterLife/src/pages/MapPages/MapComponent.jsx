@@ -12,6 +12,7 @@ function MapComponent({ zoom = 17 }) {
   const mapRef = useRef();
   const [currentPosition, setCurrentPosition] = useState(null);
   const [locations, setLocations] = useState([]);
+  
 
   useEffect(() => {
     if (navigator.geolocation) {
