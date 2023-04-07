@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import { CartContext } from "../../pages/OrderPage/CartContext";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { getProductData } from "../../../utils/productStore";
 
 function CartProduct(props) {
@@ -8,6 +8,12 @@ function CartProduct(props) {
     const id = props.id;
     const quantity = props.quantity;
     const productData = getProductData(id);
+
+    const [products, setProducts] = useState([]);
+/* 
+    useEffect(() => {
+        async function fetchProducts
+    }, []); */
 
     return (
         <>

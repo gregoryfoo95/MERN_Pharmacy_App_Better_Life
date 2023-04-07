@@ -5,8 +5,7 @@ import MedicinePage from '../MedicinePage/MedicinePage';
 
 import MedicineUpdateForm from '../MedicinePage/MedicineUpdateForm';
 import PharmaPage from '../PharmaPage/PharmaPage';
-// import OrderCart from "../OrderPage/OrderCart";
-// import OrderHistoryPage from '../OrderHistoryPage/OrderHistoryPage';
+import OrderCart from "../OrderPage/OrderCart";
 import AuthPage from '../Auth/Authpage';
 import StockPage from '../StockPage/StockPage';
 import { getUser } from '../../../utils/users-service';
@@ -18,7 +17,7 @@ import DirectionMap from '../MapPages/DirectionsMap';
 import MedicineSearch from '../MedicineSearch/MedicineSearch';
 import ContactForm from '../Auth/ContactForm';
 
-// import MedicineMap from '../MedicineSearch/MainMedicineSearch';
+import MedicineMap from '../MedicineSearch/MainMedicineSearch';
 
 // side bar
 import Layout from '../../components/Layout/Layout';
@@ -139,14 +138,14 @@ function App() {
           path: '/contact-us',
           element: <ContactForm />,
         },
-        // {
-        //   path: '/order',
-        //   element: <OrderCart />,
-        // },
-        // {
-        //   path: '/medicinemap',
-        //   element: <MedicineMap />,
-        // },
+        {
+          path: '/order',
+          element: <OrderCart />,
+        },
+        {
+          path: '/medicinemap',
+          element: <MedicineMap />,
+        },
         {
           path: '/medicinesearch',
           element: <MedicineSearch />,
@@ -178,12 +177,12 @@ function App() {
           title: 'Order',
           path: '/order',
         },
-        // {
-        //   keyEvent: 'MedicineMap',
-        //   classData: 'bi bi-clipboard menu-icon',
-        //   title: 'Medicine Map',
-        //   path: '/medicinemap',
-        // },
+        {
+          keyEvent: 'MedicineMap',
+          classData: 'bi bi-clipboard menu-icon',
+          title: 'Medicine Map',
+          path: '/medicinemap',
+        },
         {
           keyEvent: 'MedicineSearch',
           classData: 'bi bi-clipboard menu-icon',
@@ -219,7 +218,7 @@ function App() {
       <main className="main-container container-fluid">
         <Routes>
           {routeConfig.map((item, i) => {
-            console.log(item);
+            //console.log(item);
             return (
               <Route
                 key={`Route_${i}`}
