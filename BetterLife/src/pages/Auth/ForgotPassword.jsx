@@ -32,13 +32,13 @@ const Forgot = () => {
     <Container
       style={{
         backgroundColor: '#F5F5F5',
-        minHeight: '100vh',
+        minHeight: '50vh',
         alignItems: 'center',
         width: '100%',
       }}>
       <Col
         style={{
-          backgroundColor: '#FFFFFF',
+          backgroundColor: '#F5F5F5F',
           padding: '30px',
           borderRadius: '10px',
           boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.16)',
@@ -83,7 +83,7 @@ const Forgot = () => {
               borderRadius: '5px',
               border: 'none',
               backgroundColor: '#00A0A0',
-              color: '#FFFFFF',
+              color: '#F5F5F5',
               fontWeight: 'bold',
               fontSize: '16px',
               cursor: 'pointer',

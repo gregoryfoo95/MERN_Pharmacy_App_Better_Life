@@ -7,7 +7,11 @@ import ForgotPassword from './ForgotPassword';
 
 export default function AuthPage({ setUser }) {
   return (
-    <Container className="text-center" style={{ fontFamily: 'Montserrat' }}>
+    <div
+      className="text-center"
+      style={{
+        fontFamily: 'Montserrat',
+      }}>
       <h1>Authentication Page</h1>
       <Tabs
         defaultActiveKey="authpage"
@@ -24,6 +28,6 @@ export default function AuthPage({ setUser }) {
           <ForgotPassword />
         </Tab>
       </Tabs>
-    </Container>
+    </div>
   );
 }

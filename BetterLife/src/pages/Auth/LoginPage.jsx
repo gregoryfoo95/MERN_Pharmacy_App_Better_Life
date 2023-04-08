@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../../utils/users-service';
+import { Container } from 'react-bootstrap';
 const BASE_URL = 'http://localhost:3000/api/user';
 
 export default function LoginPage({ setUser }) {
@@ -43,7 +44,7 @@ export default function LoginPage({ setUser }) {
 
   return (
     <div>
-      <form
+      <Container
         className="form-container"
         onSubmit={handleLogin}
         style={{
@@ -80,14 +81,12 @@ export default function LoginPage({ setUser }) {
               onChange={handleChange}
               required
               style={{
-                paddingLeft: '10px', 
+                paddingLeft: '20px',
                 borderRadius: '5px',
                 border: 'none',
                 backgroundColor: '#FFFFFF',
                 boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.16)',
-                marginRight: '20px',
               }}
-              
             />
           </label>
           <label style={{ marginBottom: '20px', textAlign: 'left' }}>
@@ -98,7 +97,7 @@ export default function LoginPage({ setUser }) {
               onChange={handleChange}
               required
               style={{
-                paddingLeft: '10px', 
+                paddingLeft: '10px',
                 borderRadius: '5px',
                 border: 'none',
                 backgroundColor: '#FFFFFF',
@@ -114,16 +113,17 @@ export default function LoginPage({ setUser }) {
               borderRadius: '5px',
               border: 'none',
               backgroundColor: '#00A0A0',
-              color: '#3A1730',
+
               fontWeight: 'bold',
               fontSize: '16px',
               cursor: 'pointer',
               boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.16)',
-            }}>
+            }}
+            onClick={handleLogin}>
             Login
           </button>
         </fieldset>
-      </form>
+      </Container>
     </div>
   );
 }

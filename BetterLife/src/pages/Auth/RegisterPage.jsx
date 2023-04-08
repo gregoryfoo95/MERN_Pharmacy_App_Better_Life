@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Container, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 
 export default function RegisterPage() {
@@ -32,18 +32,25 @@ export default function RegisterPage() {
 
   return (
     <div>
-      <div
+      <Container
         className="form-container"
         style={{
+          minHeight: '40vh',
+          minWidth: '100vh',
           backgroundColor: '#F5F5F5',
-          padding: '30px',
+          padding: '20px',
           borderRadius: '10px',
           boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.16)',
         }}>
-        <h1 style={{ color: '#3A1730',
+        <h1
+          style={{
+            color: '#3A1730',
             fontWeight: 'bold',
             fontSize: '36px',
-            marginBottom: '20px'}}>Registration</h1>
+            marginBottom: '5px',
+          }}>
+          Registration
+        </h1>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="name">
             <Form.Label style={{ color: '#3A1730' }} />
@@ -58,7 +65,7 @@ export default function RegisterPage() {
           </Form.Group>
 
           <Form.Group controlId="email">
-            <Form.Label style={{ color: '#3A1730' }}/>
+            <Form.Label style={{ color: '#3A1730' }} />
             <Form.Control
               type="email"
               name="email"
@@ -70,7 +77,7 @@ export default function RegisterPage() {
           </Form.Group>
 
           <Form.Group controlId="password">
-            <Form.Label style={{ color: '#3A1730' }}/>
+            <Form.Label style={{ color: '#3A1730' }} />
             <Form.Control
               type="password"
               name="password"
@@ -82,7 +89,7 @@ export default function RegisterPage() {
           </Form.Group>
 
           <Form.Group controlId="confirmPassword">
-            < Form.Label style={{ color: '#3A1730' }}/>
+            <Form.Label style={{ color: '#3A1730' }} />
             <Form.Control
               type="password"
               name="confirm"
@@ -93,7 +100,12 @@ export default function RegisterPage() {
             />
           </Form.Group>
 
-          <div style={{ display: 'flex', justifyContent: 'center',marginTop: '20px' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '20px',
+            }}>
             <Button
               type="submit"
               disabled={disable}
@@ -113,7 +125,7 @@ export default function RegisterPage() {
             </Button>
           </div>
         </Form>
-      </div>
+      </Container>
       <p className="error-message" style={{ color: '#3A1730' }}>
         {' '}
         {state.error}

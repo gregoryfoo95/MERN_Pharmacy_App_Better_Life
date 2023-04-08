@@ -1,78 +1,109 @@
 import { useState, useEffect, useRef } from 'react';
-import axios from "axios";
+import axios from 'axios';
+import { Form, FormGroup, Button } from 'react-bootstrap';
 
 export default function StockSearchForm({ setMedicines, BASE_URL }) {
-    const [medicineOptions, setMedicineOptions] = useState([]);
-    const [searchQuery, setSearchQuery] = useState({
-        brand: '',
-        name: '',
-        strength: '',
-    })
+  const [medicineOptions, setMedicineOptions] = useState([]);
+  const [searchQuery, setSearchQuery] = useState({
+    brand: '',
+    name: '',
+    strength: '',
+  });
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setSearchQuery((prevQuery) => ({ ...prevQuery, [name]: value }));
-    };
-    
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            const response = await axios.get(`${BASE_URL}`, {
-                params: searchQuery,
-            });
-            setMedicines(response.data);
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    setSearchQuery(prevQuery => ({ ...prevQuery, [name]: value }));
+  };
 
-     useEffect(() => {
-        const fetchMedicineOptions = async () => {
-        const response = await axios.get('/api/medicine', {
-            params: { name: searchQuery.name },
-        });
-        setMedicineOptions(response.data);
-        };
-        fetchMedicineOptions();
-    }, [searchQuery.name]); 
+  const handleSubmit = async event => {
+    event.preventDefault();
+    try {
+      const response = await axios.get(`${BASE_URL}`, {
+        params: searchQuery,
+      });
+      setMedicines(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    const fetchMedicineOptions = async () => {
+      const response = await axios.get('/api/medicine', {
+        params: { name: searchQuery.name },
+      });
+      setMedicineOptions(response.data);
+    };
+    fetchMedicineOptions();
+  }, [searchQuery.name]);
 
   return (
     <fieldset>
-    <legend>Search Bar for Medicine Database</legend>
-    <form onSubmit={handleSubmit}>
-    <label>
-        Name:
-        <input
-          type="text"
-          name="name"
-          value={searchQuery.name}
-          onChange={handleInputChange}
-        />
-    </label>
-    <label>
-        Brand: 
-        <select name="brand" value={searchQuery.brand} onChange={handleInputChange} >
+      <h1>Search Bar for Medicine Database</h1>
+      <Form onSubmit={handleSubmit}>
+        <FormGroup>
+          <Form.Label>Name:</Form.Label>
+          <Form.Control
+            type="text"
+            name="name"
+            value={searchQuery.name}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
+
+        <FormGroup>
+          <Form.Label>Brand:</Form.Label>
+          <Form.Control
+            as="select"
+            name="brand"
+            value={searchQuery.brand}
+            onChange={handleInputChange}>
             <option value="">Any</option>
-            {[...new Set(medicineOptions.map(medicine => medicine.brand))].map((brand) => (
-                <option value={brand}>
-                {brand}
+            {[...new Set(medicineOptions.map(medicine => medicine.brand))].map(
+              brand => (
+                <option key={brand} value={brand}>
+                  {brand}
                 </option>
-            ))}
-        </select>
-    </label>
-    <label>
-        Strength:
-        <select name="strength" value={searchQuery.strength} onChange={handleInputChange} >
+              )
+            )}
+          </Form.Control>
+        </FormGroup>
+
+        <FormGroup>
+          <Form.Label>Strength:</Form.Label>
+          <Form.Control
+            as="select"
+            name="strength"
+            value={searchQuery.strength}
+            onChange={handleInputChange}>
             <option value="">Any</option>
-            {[...new Set(medicineOptions.map(medicine => medicine.strength))].map((strength) => (
-                <option value={strength}>
+            {[
+              ...new Set(medicineOptions.map(medicine => medicine.strength)),
+            ].map(strength => (
+              <option key={strength} value={strength}>
                 {strength}
-                </option>
+              </option>
             ))}
-        </select>
-    </label>
-    <button type="submit">Search</button>
-    </form>
+          </Form.Control>
+        </FormGroup>
+
+        <Button
+          type="submit"
+          style={{
+            padding: '10px 20px',
+            borderRadius: '5px',
+            border: 'none',
+            backgroundColor: '#00A0A0',
+            width: '120px',
+            fontWeight: 'bold',
+            fontSize: '16px',
+            cursor: 'pointer',
+            boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.16)',
+            marginTop: '20px',
+          }}>
+          Search
+        </Button>
+      </Form>
     </fieldset>
   );
 }

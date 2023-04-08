@@ -197,9 +197,10 @@ const MedicineSearch = () => {
       </h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group>
-          <Form.Label>Medicine Name:</Form.Label>
+          <Form.Label className="form-label">Medicine Name:</Form.Label>
           <Form.Control
             type="text"
+            className="form-control"
             onChange={e => setSearchMedicineName(e.target.value)}
           />
         </Form.Group>

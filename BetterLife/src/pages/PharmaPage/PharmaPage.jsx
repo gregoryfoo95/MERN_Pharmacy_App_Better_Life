@@ -6,12 +6,15 @@ import AvailabilityCard from './AvailabilityCard';
 export default function PharmaPage() {
   return (
     <>
-      <Container className="mt-4">
+      <Container
+        className="text-center"
+        style={{
+          backgroundColor: '#F5F5F5',
+          width: '100%',
+        }}>
         <Row>
           <Col>
-            <h1 className="text-center" style={{ color: '#3A1730' }}>
-              Pharmacist's Homepage
-            </h1>
+            <h1 style={{ color: '#3A1730' }}>Pharmacist's Homepage</h1>
           </Col>
         </Row>
         <Row className="mt-4">
