@@ -6,10 +6,10 @@ import MarkerDetails from './MarkerDetails';
 function sortLocations(locations, currentPosition) {
   return locations.sort((a, b) => {
     const distanceA = L.latLng(currentPosition).distanceTo(
-      L.latLng(a.Latitude, a.Longitude)
+      L.latLng(a.latitude, a.longitude)
     );
     const distanceB = L.latLng(currentPosition).distanceTo(
-      L.latLng(b.Latitude, b.Longitude)
+      L.latLng(b.latitude, b.longitude)
     );
     return distanceA - distanceB;
   });
@@ -45,7 +45,7 @@ function Path() {
         setLocations(
           response.data.data.map((location) => {
             const distanceInMeters = L.latLng(currentPosition).distanceTo(
-              L.latLng(location.Latitude, location.Longitude)
+              L.latLng(location.latitude, location.longitude)
             );
             const distanceInKm = distanceInMeters / 1000;
             const walkingSpeed = 5; // km/hr

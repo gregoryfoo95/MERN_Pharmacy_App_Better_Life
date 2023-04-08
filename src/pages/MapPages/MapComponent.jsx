@@ -12,6 +12,7 @@ function MapComponent({ zoom = 17 }) {
   const mapRef = useRef();
   const [currentPosition, setCurrentPosition] = useState(null);
   const [locations, setLocations] = useState([]);
+  
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -63,9 +64,9 @@ function MapComponent({ zoom = 17 }) {
     }).addTo(map);
 
     const markers = locations.map(location => {
-      const markerIconUrl = location.Pharmacist ? greenMarkerUrl : redMarkerUrl;
+      const markerIconUrl = location.pharmacist ? greenMarkerUrl : redMarkerUrl;
     
-    const marker = L.marker([location.Latitude, location.Longitude], {
+    const marker = L.marker([location.latitude, location.longitude], {
       icon: L.icon({
         iconUrl: markerIconUrl,
         iconSize: [25, 41],
