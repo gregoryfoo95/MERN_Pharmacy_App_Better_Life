@@ -5,7 +5,7 @@ import Directions from './Directions';
 
 function MainMap() {
   return (
-    <div className="Map" style={{ width: '100vw', height: '100vh' }}>
+    <div className="Map" style={{ width: '80vw', height: '80vh' }}>
       <MapComponent zoom={17} />
       <MarkerDetails />
     </div>
