@@ -69,7 +69,6 @@ function Path() {
 
   return (
     <div>
-      <MapComponent currentPosition={currentPosition} locations={locations} />
       {locations.map((location) => (
         <MarkerDetails
           key={location._id}

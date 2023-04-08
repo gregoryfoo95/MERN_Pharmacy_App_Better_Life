@@ -11,8 +11,8 @@ const protect = require('../utils/middleware/authMiddleware')
 const router = express.Router();
 
 // router.post('/', createLocation);
-router.get('/',protect, getLocations);
-router.get('/:id',protect, getLocationById);
+router.get('/', getLocations);
+router.get('/:id', getLocationById);
 // router.put('/:id',protect, updateLocation);
 // router.delete('/:id',protect, deleteLocation);
 
