@@ -114,7 +114,7 @@ const medicineSchema = new Schema({
         required: true,
         validate: {
             validator: function(value) {
-            const schema = Joi.date().required();
+            const schema = Joi.date().min(Date.now()).required();
             const { error } = schema.validate(value);
             return error ? false : true;
             },

@@ -66,29 +66,42 @@ const stockController = {
     },
 
     updateStockById: async (req, res) => {
-    try {
-      const stock = await Stock.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        { new: true }
-      );
-      if (!stock) {
-        return res.status(404).json({ message: 'Medicines not found' });
-      }
-      res.status(200).json(stock);
-    } catch (err) {
-      res.status(400).json({ message: "Unable to update stock for medicines." });
-    }
-  },
+        try {
+        const stock = await Stock.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        );
+        if (!stock) {
+            return res.status(404).json({ message: 'Medicines not found' });
+        }
+        res.status(200).json(stock);
+        } catch (err) {
+        res.status(400).json({ message: "Unable to update stock for medicines." });
+        }
+    },
 
-  createStock: async (req, res) => {
-    try {
-        const stock = await Stock.create(req.body);
-        res.status(201).json(stock);
-    } catch (err) {
-        res.status(400).json({message: err.message});
+    createStock: async (req, res) => {
+        try {
+            const stock = await Stock.create(req.body);
+            res.status(201).json(stock);
+        } catch (err) {
+            res.status(400).json({message: err.message});
+        }
+    },
+
+    deleteStockById: async (req, res) => {
+        try {
+            const deletedMedicine = await Medicine.findById(req.params.id);
+            const stocks = await Stock.find({medicine: deletedMedicine._id});
+            for (const stock of stocks) {
+                await Stock.findByIdAndDelete(stock._id);
+            }
+            res.status(201).json(stocks); 
+        } catch (err) {
+            res.status(400).json({message: err.message});
+        }
     }
-  }
 }
 
 module.exports = stockController;
