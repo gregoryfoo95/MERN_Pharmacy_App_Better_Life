@@ -12,6 +12,7 @@ function MapComponent({ zoom = 17 }) {
   const mapRef = useRef();
   const [currentPosition, setCurrentPosition] = useState(null);
   const [locations, setLocations] = useState([]);
+  const [refreshLocation, setRefreshLocation] = useState(false);
   
 
   useEffect(() => {
@@ -29,7 +30,7 @@ function MapComponent({ zoom = 17 }) {
     } else {
       console.error('Geolocation is not supported by this browser.');
     }
-  }, []);
+  }, [refreshLocation]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +43,10 @@ function MapComponent({ zoom = 17 }) {
     };
     fetchData();
   }, []);
+
+  const handleRefreshLocation = () => {
+    setRefreshLocation(!refreshLocation);
+  };
   
 
   useEffect(() => {
@@ -88,7 +93,13 @@ function MapComponent({ zoom = 17 }) {
     };
   }, [currentPosition, zoom, locations]);
 
-  return <div id="map" ref={mapRef} style={{ width: '100%', height: '50%' }} />;
+  return (
+    <div style={{ width: '100%', height: '100%' }}>
+      <button onClick={handleRefreshLocation}>Refresh Location</button>
+      <div id="map" ref={mapRef} style={{ width: '    100%', height: 'calc(100% - 40px)', marginBottom: '10px' }} />
+      
+  
+</div>)
 }
 
 export default MapComponent;
