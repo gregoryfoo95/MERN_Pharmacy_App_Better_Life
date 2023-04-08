@@ -38,6 +38,7 @@ const MedicineSearch = () => {
   const [searchStrength, setSearchStrength] = useState('');
   const [filteredMedicines, setFilteredMedicines] = useState([]);
   const [searchResults, setSearchResults] = useState(null);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
     axios.get('/api/stocks').then((response) => {
@@ -60,9 +61,13 @@ const MedicineSearch = () => {
   const uniqueTypes = Array.from(new Set(filteredMedicines.map((medicine) => medicine.medicine.type)));
   const uniqueStrengths = Array.from(new Set(filteredMedicines.map((medicine) => medicine.medicine.strength)));
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+  
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+    setFormSubmitted(true);
 
     // Create the Leaflet map
     const map = L.map('mapid').setView([0, 0], 13);
@@ -104,7 +109,7 @@ const MedicineSearch = () => {
         const markerIconUrl = getMarkerIconUrl(medicine.location.pharmacist, medicine.quantity);
         const markerIcon = L.icon({ iconUrl: markerIconUrl, iconSize: [38, 95], iconAnchor: [22, 94], popupAnchor: [-3, -76] });
         L.marker([latitude, longitude], { icon: markerIcon }).addTo(map);
-          // .addTo(map)
+
 
       }
       const results = (
@@ -191,7 +196,10 @@ const MedicineSearch = () => {
         </label>
         <br />
         <button type="submit">Check Stocks</button>
-      </form>
+        </form>
+        {formSubmitted && (<button type="button" onClick={handleRefresh}>Check another medicine</button>)}
+
+
       <div id="mapid" style={{ height: "400px", width: "100%" }}></div>
       {searchResults}
     </div>

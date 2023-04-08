@@ -34,6 +34,7 @@ const locationSchema = new Schema({
         ref: "User",
         required: true,
     }
+    
 
 },
 {
