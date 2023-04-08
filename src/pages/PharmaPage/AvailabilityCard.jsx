@@ -87,6 +87,7 @@ export default function AvailabilityCard() {
             <h5>Current Store Location: {user?.store?.storeName} </h5>
             {locations.length > 0 ? (
                 <select name="location" onChange={handleLocationChange}>
+                    <option value=""></option>
                     {locations.map((location) => (
                         <option key={location._id} value={location._id}>
                         {location.storeName}
