@@ -2,21 +2,18 @@ import { useState, useEffect } from 'react';
 // import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import MedicinePage from '../MedicinePage/MedicinePage';
-
 import MedicineUpdateForm from '../MedicinePage/MedicineUpdateForm';
 import PharmaPage from '../PharmaPage/PharmaPage';
 import OrderCart from "../OrderPage/OrderCart";
 import AuthPage from '../Auth/Authpage';
 import StockPage from '../StockPage/StockPage';
 import { getUser } from '../../../utils/users-service';
-
 const BASE_URL = '/api/medicine';
 import MainMap from '../MapPages/MainMap';
 import MainSplit from '../UserMain/MainSplit';
 import DirectionMap from '../MapPages/DirectionsMap';
 import MedicineSearch from '../MedicineSearch/MedicineSearch';
 import ContactForm from '../Auth/ContactForm';
-
 import MedicineMap from '../MedicineSearch/MainMedicineSearch';
 
 // side bar
@@ -55,13 +52,61 @@ function App() {
           path: '/',
           element: <AuthPage setUser={setUser} />,
         },
+        {
+          path: '/welcome',
+          element: <MainSplit />,
+        },
+        {
+          path: '/map',
+          element: <MainMap />,
+        },
+        {
+          path: '/map/:id',
+          element: <DirectionMap />,
+        },
+        {
+          path: '/medicinemap',
+          element: <MedicineMap />,
+        },
+        {
+          path: '/medicinesearch',
+          element: <MedicineSearch />,
+        },
+        {
+          path: '/contact-us',
+          element: <ContactForm />,
+        },
       ]);
       setSideBarConfig([
         {
           keyEvent: 'Home',
           classData: 'bi bi-house-door menu-icon',
           title: 'Home',
+          path: '/welcome',
+        },
+        {
+          keyEvent: 'Map',
+          classData: 'bi bi-hospital menu-icon',
+          title: 'Pharmacist Availability',
+          path: '/map',
+        },
+        {
+          keyEvent: 'MedicineSearch',
+          classData: 'bi bi-capsule menu-icon',
+          title: 'Medicine Availability',
+          path: '/medicinesearch',
+        },
+        {
+          keyEvent: 'Home',
+          classData: 'bi bi-person-fill menu-icon',
+          title: 'Account',
           path: '/',
+        },
+        {
+          keyEvent: 'Contact Us',
+          classData: 'bi bi-envelope-fill menu-icon',
+          title: 'Contact Us',
+          path: '/contact-us',
         },
       ]);
     } else if (user.role == 'Pharmacist') {
