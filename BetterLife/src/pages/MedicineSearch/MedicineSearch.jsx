@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Form, Button } from 'react-bootstrap';
 import greenGreenMarkerUrl from '../../../images/MarkersImg/Pharmacist_MedicineAvailable.png';
 import greenYellowMarkerUrl from '../../../images/MarkersImg/PharmacistAvailable__MedicineLow.png';
 import greenRedMarkerUrl from '../../../images/MarkersImg/PharmacistAvailable__NoMedicine.png';
@@ -29,7 +31,6 @@ const getMarkerIconUrl = (pharmacistAvailable, quantity) => {
   }
 };
 
-
 const MedicineSearch = () => {
   const [medicines, setMedicines] = useState([]);
   const [searchMedicineName, setSearchMedicineName] = useState('');
@@ -40,162 +41,215 @@ const MedicineSearch = () => {
   const [searchResults, setSearchResults] = useState(null);
 
   useEffect(() => {
-    axios.get('/api/stocks').then((response) => {
+    axios.get('/api/stocks').then(response => {
       setMedicines(response.data);
     });
   }, []);
 
   useEffect(() => {
-    const filtered = medicines.filter((medicine) => {
-      const nameMatch = medicine.medicine.name.toLowerCase().includes(searchMedicineName.toLowerCase());
-      const brandMatch = searchBrand ? medicine.medicine.brand === searchBrand : true;
-      const typeMatch = searchType ? medicine.medicine.type === searchType : true;
-      const strengthMatch = searchStrength ? medicine.medicine.strength === searchStrength : true;
+    const filtered = medicines.filter(medicine => {
+      const nameMatch = medicine.medicine.name
+        .toLowerCase()
+        .includes(searchMedicineName.toLowerCase());
+      const brandMatch = searchBrand
+        ? medicine.medicine.brand === searchBrand
+        : true;
+      const typeMatch = searchType
+        ? medicine.medicine.type === searchType
+        : true;
+      const strengthMatch = searchStrength
+        ? medicine.medicine.strength === searchStrength
+        : true;
       return nameMatch && brandMatch && typeMatch && strengthMatch;
     });
     setFilteredMedicines(filtered);
   }, [medicines, searchMedicineName, searchBrand, searchType, searchStrength]);
 
-  const uniqueBrands = Array.from(new Set(filteredMedicines.map((medicine) => medicine.medicine.brand)));
-  const uniqueTypes = Array.from(new Set(filteredMedicines.map((medicine) => medicine.medicine.type)));
-  const uniqueStrengths = Array.from(new Set(filteredMedicines.map((medicine) => medicine.medicine.strength)));
+  const uniqueBrands = Array.from(
+    new Set(filteredMedicines.map(medicine => medicine.medicine.brand))
+  );
+  const uniqueTypes = Array.from(
+    new Set(filteredMedicines.map(medicine => medicine.medicine.type))
+  );
+  const uniqueStrengths = Array.from(
+    new Set(filteredMedicines.map(medicine => medicine.medicine.strength))
+  );
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
-    
 
     // Create the Leaflet map
     const map = L.map('mapid').setView([0, 0], 13);
 
     // Add a tile layer to the map
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      attribution:
+        'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       maxZoom: 18,
     }).addTo(map);
 
     // Get the user's current position
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      const { latitude, longitude } = position.coords;
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const { latitude, longitude } = position.coords;
 
-      // Center the map at the user's current location
-      map.setView([latitude, longitude], 13);
+        // Center the map at the user's current location
+        map.setView([latitude, longitude], 13);
 
-      // Add a marker at the user's current location
-      L.marker([latitude, longitude], {       icon: L.icon({
-        iconUrl: here,
-        iconSize: [38, 95],
-        iconAnchor: [22, 94],
-        popupAnchor: [-3, -76],
-      }),})
-      .addTo(map)
-      .bindPopup('You are here');
+        // Add a marker at the user's current location
+        L.marker([latitude, longitude], {
+          icon: L.icon({
+            iconUrl: here,
+            iconSize: [38, 95],
+            iconAnchor: [22, 94],
+            popupAnchor: [-3, -76],
+          }),
+        })
+          .addTo(map)
+          .bindPopup('You are here');
 
+        // Add markers to the map for each filtered medicine
+        filteredMedicines.forEach(medicine => {
+          const {
+            location: { Latitude: latitude, Longitude: longitude },
+          } = medicine;
 
-    // Add markers to the map for each filtered medicine
-    filteredMedicines.forEach((medicine) => {
-      const {
-        location: { latitude: latitude, longitude: longitude },
-      } = medicine;
+          console.log(medicine);
 
-
-      // Make sure latitude and longitude are defined
-      if (latitude && longitude) {
-        const markerIconUrl = getMarkerIconUrl(medicine.location.pharmacist, medicine.quantity);
-        const markerIcon = L.icon({ iconUrl: markerIconUrl, iconSize: [38, 95], iconAnchor: [22, 94], popupAnchor: [-3, -76] });
-        L.marker([latitude, longitude], { icon: markerIcon }).addTo(map);
-          // .addTo(map)
-
+          // Make sure latitude and longitude are defined
+          if (latitude && longitude) {
+            const markerIconUrl = getMarkerIconUrl(
+              medicine.location.Pharmacist,
+              medicine.quantity
+            );
+            const markerIcon = L.icon({
+              iconUrl: markerIconUrl,
+              iconSize: [38, 95],
+              iconAnchor: [22, 94],
+              popupAnchor: [-3, -76],
+            });
+            L.marker([latitude, longitude], { icon: markerIcon }).addTo(map);
+            // .addTo(map)
+          }
+          const results = (
+            <ul>
+              {filteredMedicines.map(medicine => (
+                <li key={medicine._id}>
+                  <p>Store Name: {medicine.location.storeName}</p>
+                  <p>Store Address: {medicine.location.storeAddress}</p>
+                  <p>
+                    Pharmacy Dispensing Hours:{' '}
+                    {medicine.location.PharmacyDispensingHours}
+                  </p>
+                  <p>Medicine Name: {medicine.medicine.name}</p>
+                  <p>Brand: {medicine.medicine.brand}</p>
+                  <p>Type: {medicine.medicine.type}</p>
+                  <p>Strength: {medicine.medicine.strength}</p>
+                  <p>
+                    Pharmacist: {medicine.location.Pharmacist}
+                    <span
+                      style={{
+                        color: medicine.location.Pharmacist ? 'green' : 'red',
+                      }}>
+                      {medicine.location.Pharmacist
+                        ? ' Available'
+                        : ' Not Available'}
+                    </span>
+                  </p>
+                  <p>
+                    Medicine: {medicine.location.name}
+                    <span
+                      style={{
+                        color:
+                          medicine.quantity === 0
+                            ? 'red'
+                            : medicine.quantity < 4
+                            ? 'yellow'
+                            : 'green',
+                      }}>
+                      {medicine.quantity === 0
+                        ? 'No Stocks'
+                        : medicine.quantity < 4
+                        ? 'Low Stocks'
+                        : 'Available'}
+                    </span>
+                  </p>
+                  <Link to={`/map/${medicine.location._id}`}>
+                    Get Direction
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          );
+          setSearchResults(results);
+        });
+      },
+      error => {
+        console.error(error);
       }
-      const results = (
-        <ul>
-          {filteredMedicines.map((medicine) => (
-            <li key={medicine._id}>
-              <p>Store Name: {medicine.location.storeName}</p>
-              <p>Store Address: {medicine.location.storeAddress}</p>
-              <p>Pharmacy Dispensing Hours: {medicine.location.dispensingHours}</p>
-              <p>Medicine Name: {medicine.medicine.name}</p>
-              <p>Brand: {medicine.medicine.brand}</p>
-              <p>Type: {medicine.medicine.type}</p>
-              <p>Strength: {medicine.medicine.strength}</p>
-              <p>Pharmacist: {medicine.location.pharmacist}
-              <span style={{ color: medicine.location.pharmacist ? 'green' : 'red' }}>
-              {medicine.location.pharmacist ? ' Available' : ' Not Available'}
-              </span>
-              </p>
-              <p>Medicine: {medicine.location.name}
-              <span style={{ color: medicine.quantity === 0 ? 'red' : medicine.quantity < 4 ? 'yellow' : 'green' }}>
-                {medicine.quantity === 0 ? 'No Stocks' : medicine.quantity < 4 ? 'Low Stocks' : 'Available'}
-              </span>
-              </p>
-              <Link to={`/map/${medicine.location._id}`}>Get Direction</Link>
-            </li>
-          ))}
-        </ul>
-      );
-      setSearchResults(results);
-    });
-  },
-  (error) => {
-    console.error(error);
-  }
-);
-
-};
+    );
+  };
 
   return (
     <div>
-      <h2>Medicine List</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Medicine Name:
-          <input type="text" onChange={(e) => setSearchMedicineName(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Brand:
-          <select value={searchBrand} onChange={(e) => setSearchBrand(e.target.value)}>
+      <h2 className="text-center" style={{ color: '#3a1730' }}>
+        Medicine List
+      </h2>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group>
+          <Form.Label>Medicine Name:</Form.Label>
+          <Form.Control
+            type="text"
+            onChange={e => setSearchMedicineName(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Brand:</Form.Label>
+          <Form.Select
+            value={searchBrand}
+            onChange={e => setSearchBrand(e.target.value)}>
             <option value="">Any</option>
-            {uniqueBrands.map((brand) => (
+            {uniqueBrands.map(brand => (
               <option key={brand} value={brand}>
                 {brand}
               </option>
             ))}
-          </select>
-        </label>
-        <br />
-        <label>
-          Type:
-          <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
+          </Form.Select>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Type:</Form.Label>
+          <Form.Select
+            value={searchType}
+            onChange={e => setSearchType(e.target.value)}>
             <option value="">Any</option>
-            {uniqueTypes.map((type) => (
+            {uniqueTypes.map(type => (
               <option key={type} value={type}>
                 {type}
               </option>
             ))}
-          </select>
-        </label>
-        <br />
-        <label>
-          Strength:
-          <select value={searchStrength} onChange={(e) => setSearchStrength(e.target.value)}>
+          </Form.Select>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Strength:</Form.Label>
+          <Form.Select
+            value={searchStrength}
+            onChange={e => setSearchStrength(e.target.value)}>
             <option value="">Any</option>
-            {uniqueStrengths.map((strength) => (
+            {uniqueStrengths.map(strength => (
               <option key={strength} value={strength}>
                 {strength}
               </option>
             ))}
-          </select>
-        </label>
-        <br />
-        <button type="submit">Check Stocks</button>
-      </form>
-      <div id="mapid" style={{ height: "400px", width: "100%" }}></div>
+          </Form.Select>
+        </Form.Group>
+        <Button type="submit" style={{ backgroundColor: '#00A0A0' }}>
+          Check Stocks
+        </Button>
+      </Form>
+      <div id="mapid" style={{ height: '400px', width: '100%' }}></div>
       {searchResults}
     </div>
-    
   );
-  
 };
 
 export default MedicineSearch;

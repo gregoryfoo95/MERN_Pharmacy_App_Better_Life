@@ -161,7 +161,7 @@ function App() {
         },
         {
           keyEvent: 'Map',
-          classData: 'bi bi-compass menu-icon',
+          classData: 'bi bi-pin-map menu-icon',
           title: 'Map',
           path: '/map',
         },
@@ -173,19 +173,19 @@ function App() {
         },
         {
           keyEvent: 'Order',
-          classData: 'bi bi-clipboard menu-icon',
+          classData: 'bi bi-bag menu-icon',
           title: 'Order',
           path: '/order',
         },
         {
           keyEvent: 'MedicineMap',
-          classData: 'bi bi-clipboard menu-icon',
+          classData: 'bi bi-compass menu-icon',
           title: 'Medicine Map',
           path: '/medicinemap',
         },
         {
           keyEvent: 'MedicineSearch',
-          classData: 'bi bi-clipboard menu-icon',
+          classData: 'bi bi-search menu-icon',
           title: 'Medicine Search',
           path: '/medicinesearch',
         },

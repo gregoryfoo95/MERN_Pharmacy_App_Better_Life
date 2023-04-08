@@ -55,7 +55,7 @@ export default function CustomNavBar({
                 text={themeName}
               />
             </NavDropdown.ItemText>
-            <NavDropdown.ItemText>
+            {/* <NavDropdown.ItemText>
               <CheckBox
                 id="rtlSwitcher"
                 checked={isRtl}
@@ -78,7 +78,7 @@ export default function CustomNavBar({
                 onChange={() => setExclusiveExpand(!exclusiveExpand)}
                 text="exclusive expand"
               />
-            </NavDropdown.ItemText>
+            </NavDropdown.ItemText> */}
           </NavDropdown>
         </Nav>
         <span></span>

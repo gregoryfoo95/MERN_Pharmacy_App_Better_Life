@@ -17,12 +17,12 @@ function MapComponent({ zoom = 17 }) {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        position => {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
           setCurrentPosition([lat, lng]);
         },
-        (error) => {
+        error => {
           console.error(error);
         }
       );
@@ -42,7 +42,6 @@ function MapComponent({ zoom = 17 }) {
     };
     fetchData();
   }, []);
-  
 
   useEffect(() => {
     if (!currentPosition) return;
@@ -75,9 +74,7 @@ function MapComponent({ zoom = 17 }) {
       })
     });
 
-      marker.bindPopup(
-        `Store Name: ${location.storeName}`
-      );
+      marker.bindPopup(`Store Name: ${location.storeName}`);
       return marker;
     });
 
