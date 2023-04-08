@@ -15,11 +15,13 @@ import DirectionMap from '../MapPages/DirectionsMap';
 import MedicineSearch from '../MedicineSearch/MedicineSearch';
 import ContactForm from '../Auth/ContactForm';
 import MedicineMap from '../MedicineSearch/MainMedicineSearch';
+import AppointmentBooking from '../AppointmentPage/AppointmentBooking';
 
 // side bar
 import Layout from '../../components/Layout/Layout';
 import CustomSideBar from '../../components/SideBar/CustomSideBar';
 import CustomNavBar from '../../components/NavBar/CustomNavBar';
+
 
 
 function App() {
@@ -195,6 +197,10 @@ function App() {
           path: '/medicinesearch',
           element: <MedicineSearch />,
         },
+        {
+          path: '/appointment',
+          element: <AppointmentBooking />,
+        },
       ]);
 
       setSideBarConfig([
@@ -221,6 +227,12 @@ function App() {
           classData: 'bi bi-cart menu-icon',
           title: 'Place Order',
           path: '/order',
+        },
+        {
+          keyEvent: 'Appointment',
+          classData: 'bi bi-calendar-week menu-icon',
+          title: 'Book Appointment',
+          path: '/appointment',
         },
         {
           keyEvent: 'Contact Us',

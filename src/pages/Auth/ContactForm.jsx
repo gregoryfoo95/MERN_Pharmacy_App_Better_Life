@@ -37,6 +37,7 @@ export default function ContactForm() {
   return (
     <div>
       <div className="form-container">
+        <p style={{ textAlign: "center", fontSize: "1.5rem", marginBottom: "1rem" }}>Have an enquiry? Reach out to us!</p>
         <Form autoComplete="off" onSubmit={handleSubmit}>
           <Form.Group controlId="name">
             <Form.Label>Name</Form.Label>

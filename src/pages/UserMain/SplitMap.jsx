@@ -20,7 +20,7 @@ export default function SplitMap () {
                     fontFamily: 'Montserrat, sans-serif',
                     borderRadius: "15px",
                 }}
-            >Nearest Watson Pharmacy</div>
+            >Nearest Pharmacy</div>
         </Link>
     )
 }
