@@ -12,6 +12,8 @@ function MapComponent({ zoom = 17 }) {
   const mapRef = useRef();
   const [currentPosition, setCurrentPosition] = useState(null);
   const [locations, setLocations] = useState([]);
+  const [refreshLocation, setRefreshLocation] = useState(false);
+  
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -28,12 +30,12 @@ function MapComponent({ zoom = 17 }) {
     } else {
       console.error('Geolocation is not supported by this browser.');
     }
-  }, []);
+  }, [refreshLocation]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/map');
+        const response = await axios.get('/api/map');
         setLocations(response.data.data);
       } catch (error) {
         console.error(error);
@@ -41,6 +43,10 @@ function MapComponent({ zoom = 17 }) {
     };
     fetchData();
   }, []);
+
+  const handleRefreshLocation = () => {
+    setRefreshLocation(!refreshLocation);
+  };
   
 
   useEffect(() => {
@@ -63,9 +69,9 @@ function MapComponent({ zoom = 17 }) {
     }).addTo(map);
 
     const markers = locations.map(location => {
-      const markerIconUrl = location.Pharmacist ? greenMarkerUrl : redMarkerUrl;
+      const markerIconUrl = location.pharmacist ? greenMarkerUrl : redMarkerUrl;
     
-    const marker = L.marker([location.Latitude, location.Longitude], {
+    const marker = L.marker([location.latitude, location.longitude], {
       icon: L.icon({
         iconUrl: markerIconUrl,
         iconSize: [25, 41],
@@ -87,7 +93,13 @@ function MapComponent({ zoom = 17 }) {
     };
   }, [currentPosition, zoom, locations]);
 
-  return <div id="map" ref={mapRef} style={{ width: '100%', height: '50%' }} />;
+  return (
+    <div style={{ width: '100%', height: '100%' }}>
+      <button onClick={handleRefreshLocation}>Refresh Location</button>
+      <div id="map" ref={mapRef} style={{ width: '    100%', height: 'calc(100% - 40px)', marginBottom: '10px' }} />
+      
+  
+</div>)
 }
 
 export default MapComponent;

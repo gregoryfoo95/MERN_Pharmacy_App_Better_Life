@@ -1,18 +1,17 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
 import axios from 'axios';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 
 function Directions({ zoom = 17 }) {
   const mapRef = useRef();
   const [currentPosition, setCurrentPosition] = useState(null);
-  const [location, setLocation] = useState(null); 
+  const [location, setLocation] = useState(null);
   const [destinationMarker, setDestinationMarker] = useState(null);
-  const [routingControl, setRoutingControl] = useState(null); 
+  const [routingControl, setRoutingControl] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -36,36 +35,33 @@ function Directions({ zoom = 17 }) {
     const fetchData = async () => {
       try {
         const response = await axios.get(`/api/map/${id}`);
-        setLocation(response.data?.data); 
-        console.log(location);
+        setLocation(response.data?.data);
       } catch (error) {
         console.error(error);
-        
       }
     };
-    
+
     fetchData();
-  },[]);
+  }, []);
 
   useEffect(() => {
     if (!currentPosition || !location) return;
 
     const map = L.map(mapRef.current).setView(currentPosition, zoom);
 
-    if (!map) return; 
+    if (!map) return;
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-
-    const destinationLatLng = L.latLng(location.Latitude, location.Longitude);
+    const destinationLatLng = L.latLng(location.latitude, location.longitude);
     const destinationMarker = L.marker(destinationLatLng).addTo(map);
     setDestinationMarker(destinationMarker);
-    
 
-    const waypoints = [L.latLng(currentPosition[0], currentPosition[1]),
+    const waypoints = [
+      L.latLng(currentPosition[0], currentPosition[1]),
       destinationLatLng,
     ];
 
@@ -73,28 +69,73 @@ function Directions({ zoom = 17 }) {
       waypoints: waypoints,
       router: L.Routing.mapbox(import.meta.env.VITE_REACT_APP_MAPBOX_API_KEY),
       routeWhileDragging: true,
-      containerClassName: 'custom-lrm-instructions'
+      containerClassName: 'custom-lrm-instructions',
     }).addTo(map);
     setRoutingControl(control);
 
-    const marker = L.marker([location.Latitude, location.Longitude]);
-    marker.bindPopup(
-      `Store Name: ${location.storeName}`
-    );
+    const marker = L.marker([location.latitude, location.longitude]);
+    marker.bindPopup(`Store Name: ${location.storeName}`);
 
     const markerGroup = L.layerGroup([marker]).addTo(map);
 
     return () => {
-      map.remove();
-      if (routingControl) {
-        routingControl.removeFrom(map);
-        setRoutingControl(null);
-      }
-    };
+  map.remove();
+  if (routingControl) {
+    if (routingControl.removeFrom) {
+      routingControl.removeFrom(map);
+    }
+    setRoutingControl(null);
+  }
+  if (destinationMarker) {
+    if (destinationMarker.removeFrom) {
+      destinationMarker.removeFrom(map);
+    }
+    setDestinationMarker(null);
+  }
+};
+
   }, [currentPosition, zoom, location]);
 
-  return <div id="map" ref={mapRef} style={{ width: '100%',height: '50%' }} />;
+  const handleRefreshLocation = async () => {
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      setCurrentPosition([lat, lng]);
+  
+      const response = await axios.get(`/api/map/${id}`);
+      const newLocation = response.data?.data;
+  
+      setLocation(newLocation);
+  
+      if (routingControl) {
+        const destinationLatLng = L.latLng(newLocation.latitude, newLocation.longitude);
+        destinationMarker.setLatLng(destinationLatLng);
+  
+        const waypoints = [
+          L.latLng(lat, lng),
+          destinationLatLng,
+        ];
+  
+        routingControl.setWaypoints(waypoints);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+
+  return (
+    <div style={{ width: '100%', height: '100%' }}>
+      <button onClick={handleRefreshLocation}>Refresh Location</button>
+      <div id="map" ref={mapRef} style={{ width: '    100%', height: 'calc(100% - 40px)', marginBottom: '10px' }} />
+  
+</div>
+);
 }
 
 export default Directions;
+
 

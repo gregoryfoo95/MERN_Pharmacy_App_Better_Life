@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import MapComponent from './MapComponent';
+
 
 function MarkerDetails({ currentPosition, location}) {
   const [showDirection, setShowDirection] = useState(false);
@@ -12,27 +12,20 @@ function MarkerDetails({ currentPosition, location}) {
     setSelectedLocation(location);
   };
 
-  const { storeName, storeAddress, Pharmacist, distanceInKm, walkTime } = location;
+  const { storeName, storeAddress, pharmacist, distanceInKm, walkTime } = location;
 
   return (
     <div key={location._id}>
       <h3>{storeName}</h3>
       <p>Address : {storeAddress}</p>
       <p>Pharmacist:  
-      <span style={{ color: Pharmacist ? 'green' : 'red' }}>
-        {Pharmacist ? ' Available' : ' Not Available'}
+      <span style={{ color: pharmacist ? 'green' : 'red' }}>
+        {pharmacist ? ' Available' : ' Not Available'}
       </span>
       </p>
       <p>Distance: {distanceInKm.toFixed(2)} km</p>
       <p>Walk Time: {walkTime.toFixed(1)} hours</p>
       <Link to={`/map/${location._id}`}>Get Direction</Link>
-      {showDirection && (
-        <MapComponent
-          currentPosition={currentPosition}
-          locations={[currentPosition, selectedLocation]}
-          zoom={15}
-        />
-      )}
     </div>
   );
 }

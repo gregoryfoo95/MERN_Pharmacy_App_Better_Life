@@ -95,21 +95,15 @@ const MedicineSearch = () => {
     // Add markers to the map for each filtered medicine
     filteredMedicines.forEach((medicine) => {
       const {
-        location: { Latitude: latitude, Longitude: longitude },
+        location: { latitude: latitude, longitude: longitude },
       } = medicine;
 
-      console.log(medicine);
 
-
-
-
-    
       // Make sure latitude and longitude are defined
       if (latitude && longitude) {
-        const markerIconUrl = getMarkerIconUrl(medicine.location.Pharmacist, medicine.quantity);
+        const markerIconUrl = getMarkerIconUrl(medicine.location.pharmacist, medicine.quantity);
         const markerIcon = L.icon({ iconUrl: markerIconUrl, iconSize: [38, 95], iconAnchor: [22, 94], popupAnchor: [-3, -76] });
         L.marker([latitude, longitude], { icon: markerIcon }).addTo(map);
-          // .addTo(map)
 
       }
       const results = (
@@ -118,14 +112,14 @@ const MedicineSearch = () => {
             <li key={medicine._id}>
               <p>Store Name: {medicine.location.storeName}</p>
               <p>Store Address: {medicine.location.storeAddress}</p>
-              <p>Pharmacy Dispensing Hours: {medicine.location.PharmacyDispensingHours}</p>
+              <p>Pharmacy Dispensing Hours: {medicine.location.dispensingHours}</p>
               <p>Medicine Name: {medicine.medicine.name}</p>
               <p>Brand: {medicine.medicine.brand}</p>
               <p>Type: {medicine.medicine.type}</p>
               <p>Strength: {medicine.medicine.strength}</p>
-              <p>Pharmacist: {medicine.location.Pharmacist}
-              <span style={{ color: medicine.location.Pharmacist ? 'green' : 'red' }}>
-              {medicine.location.Pharmacist ? ' Available' : ' Not Available'}
+              <p>Pharmacist: {medicine.location.pharmacist}
+              <span style={{ color: medicine.location.pharmacist ? 'green' : 'red' }}>
+              {medicine.location.pharmacist ? ' Available' : ' Not Available'}
               </span>
               </p>
               <p>Medicine: {medicine.location.name}
@@ -144,13 +138,15 @@ const MedicineSearch = () => {
   (error) => {
     console.error(error);
   }
+
+  
 );
 
 };
 
   return (
     <div>
-      <h2>Medicine List</h2>
+      <h2>Medicine Availability Search</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Medicine Name:
