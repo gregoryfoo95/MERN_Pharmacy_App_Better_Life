@@ -32,7 +32,7 @@ export default function MedicineUpdateForm({BASE_URL}) {
         .typeError("Price must be a number")
         .positive("Price must be a positive number")
         .required("Price is required"),
-        expiry_date: Yup.date().default(medicine.expiry_date).required("Expiry Date is required"),
+        expiry_date: Yup.date().default(new Date(medicine.expiry_date)).min(new Date(), "Expiry Date must be in the future").required("Expiry Date is required"),
     });
     
     const handleInputChange = (e) => {
@@ -41,25 +41,24 @@ export default function MedicineUpdateForm({BASE_URL}) {
         setMedicine({...medicine, [key]:value})
     }
 
-    const handleFormSubmit = async (values, {setSubmitting}) => {
-
+    const handleFormSubmit = async (e, values) => {
+        e.preventDefault();
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.put(`${BASE_URL}/${id}`, values, {
+            const response = await axios.put(`${BASE_URL}/${id}`, medicine, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 Authorization: `Bearer ${token}`,
             });
             if (response.status === 200) {
+                console.log(response.data);
                 setMedicine(response.data);
                 navigate('/medicine');
             }
             
         } catch (err) {
             console.error(err);     
-        } finally {
-            setSubmitting(false);
         }
     }
 
@@ -73,55 +72,55 @@ export default function MedicineUpdateForm({BASE_URL}) {
                 onSubmit={handleFormSubmit}
             >
             {({ isSubmitting, isValidating, isValid }) => (
-                <Form>
+            <Form>
             <div>
                 <label htmlFor="name">Name:</label>
                 <Field
                     type="text"
                     id="name"
                     name="name"
-                    value={medicine.name}
+                    value={medicine.name || ""}
                     onChange={handleInputChange}
                 />
                 <ErrorMessage name="name" />
             </div>
             <div>
                 <label htmlFor="brand">Brand:</label>
-                <Field type="text" id="brand" name="brand" value ={medicine.brand} onChange={handleInputChange}/>
+                <Field type="text" id="brand" name="brand" value ={medicine.brand || ""} onChange={handleInputChange}/>
                 <ErrorMessage name="brand" />
             </div>
            
             <div>
                 <label htmlFor="type">Type:</label>
-                <Field type="text" id="type" name="type" value={medicine.type} onChange={handleInputChange}/>
+                <Field type="text" id="type" name="type" value={medicine.type || ""} onChange={handleInputChange}/>
                 <ErrorMessage name= "type" />
-            </div>
+            </div> 
             <div>
                 <label htmlFor="strength">Strength:</label>
-                <Field type="text" id="strength" name="strength" value={medicine.strength} onChange={handleInputChange}/>
+                <Field type="text" id="strength" name="strength" value={medicine.strength || ""} onChange={handleInputChange}/>
                 <ErrorMessage name="strength"/>
             </div>
             <div>
                 <label htmlFor="country">Country:</label>
-                <Field type="text" id="country" name="country" value={medicine.country} onChange={handleInputChange}/>
+                <Field type="text" id="country" name="country" value={medicine.country || ""} onChange={handleInputChange}/>
                 <ErrorMessage name="country"/>
             </div>
             <div>
                 <label htmlFor="routeOfAdmin">Route of Administration:</label>
-                <Field type="text" id="routeOfAdmin" name="routeOfAdmin" value={medicine.routeOfAdmin} onChange={handleInputChange} />
+                <Field type="text" id="routeOfAdmin" name="routeOfAdmin" value={medicine.routeOfAdmin || ""} onChange={handleInputChange} />
                 <ErrorMessage name="routeOfAdmin"/>
             </div>
             <div>
                 <label htmlFor="price">Price:</label>
-                <Field type="number" id="price" name="price" value={medicine.price} onChange={handleInputChange}/>
+                <Field type="number" id="price" name="price" value={medicine.price || ""} onChange={handleInputChange}/>
                 <ErrorMessage name="price"/>
             </div>
             <div>
                 <label htmlFor="expiry_date">Expiry Date:</label>
-                <Field type="date" id="expiry_date" name="expiry_date" value={medicine.expiry_date ? medicine.expiry_date.slice(0, 10) : ''} onChange={handleInputChange}/>
+                <Field type="date" min={new Date().toISOString().slice(0,10)} id="expiry_date" name="expiry_date" value={medicine.expiry_date ? medicine.expiry_date.slice(0, 10) : ''} onChange={handleInputChange}/>
                 <ErrorMessage name="expiry_date"/>
             </div>
-            <button onClick={handleFormSubmit} type="submit" disabled={isSubmitting || isValidating || !isValid} >Update Medicine</button>
+            <button onClick={handleFormSubmit} disabled = {isSubmitting || isValidating || !isValid} type="submit"  >Update Medicine</button>
             </Form>
             )}
             </Formik>
