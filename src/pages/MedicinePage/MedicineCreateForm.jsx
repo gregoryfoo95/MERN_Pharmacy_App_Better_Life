@@ -32,13 +32,35 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
   const handleSubmit = async (values, { resetForm }) => {
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.post(`${BASE_URL}`, values, {
+      const responseMedicine = await axios.post(`${BASE_URL}`, values, {
         headers: {
           "Content-Type": "application/json",
         },
         Authorization: `Bearer ${token}`,
       });
-      setMedicines((prevMedicines) => [...prevMedicines, response.data]);
+
+      const responseLocation = await axios.get(`/api/map`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        Authorization: `Bearer ${token}`,
+      });
+
+      const stockItems = responseLocation.data.data.map((location) => ({
+            medicine: responseMedicine.data._id,
+            location: location._id,
+            quantity: 0,
+          }));
+
+      const responseStock = await axios.post(`/api/stock`, stockItems, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          Authorization: `Bearer ${token}`,
+        });
+    
+      console.log(responseStock);
+      setMedicines((prevMedicines) => [...prevMedicines, responseMedicine.data]);
       resetForm();
     } catch (err) {
       console.error(err);

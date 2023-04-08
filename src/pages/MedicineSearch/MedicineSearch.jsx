@@ -139,13 +139,15 @@ const MedicineSearch = () => {
   (error) => {
     console.error(error);
   }
+
+  
 );
 
 };
 
   return (
     <div>
-      <h2>Medicine List</h2>
+      <h2>Medicine Availability Search</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Medicine Name:
