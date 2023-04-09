@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PharmacyImg from '../../../images/UserMainImg/imgPharmacist.png';
 
 export default function SplitMap() {
   return (
@@ -7,7 +8,7 @@ export default function SplitMap() {
       <div className="">
         <Link to="/map" style={{ textDecoration: 'none' }}>
           <img
-            src="../../../images/UserMainImg/imgPharmacist.png"
+            src={PharmacyImg}
             alt="Watson Pharmacy"
             style={{ width: '300px', height: '250px' }}
           />
