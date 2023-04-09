@@ -12,15 +12,17 @@ function MarkerDetails({ currentPosition, location}) {
     setSelectedLocation(location);
   };
 
-  const { storeName, storeAddress, pharmacist, distanceInKm, walkTime } = location;
+  const { storeName, storeAddress, distanceInKm, walkTime } = location;
+  const isPharmacistAvailable = location.user[0].available;
+  console.log(isPharmacistAvailable);
 
   return (
     <div key={location._id}>
       <h3>{storeName}</h3>
       <p>Address : {storeAddress}</p>
       <p>Pharmacist:  
-      <span style={{ color: pharmacist ? 'green' : 'red' }}>
-        {pharmacist ? ' Available' : ' Not Available'}
+      <span style={{ color: isPharmacistAvailable ? 'green' : 'red' }}>
+        {isPharmacistAvailable ? ' Available' : ' Not Available'}
       </span>
       </p>
       <p>Distance: {distanceInKm.toFixed(2)} km</p>

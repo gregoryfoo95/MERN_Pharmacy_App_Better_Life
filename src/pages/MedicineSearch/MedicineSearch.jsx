@@ -60,12 +60,30 @@ const MedicineSearch = () => {
   const uniqueTypes = Array.from(new Set(filteredMedicines.map((medicine) => medicine.medicine.type)));
   const uniqueStrengths = Array.from(new Set(filteredMedicines.map((medicine) => medicine.medicine.strength)));
 
+  const handleClearAll = () => {
+    setSearchMedicineName('');
+    setSearchBrand('');
+    setSearchType('');
+    setSearchStrength('');
+    setSearchResults(null);
+  
+    if (window.map) {
+      window.map.remove();
+      const mapContainer = document.getElementById('map-container');
+      if (mapContainer) {
+        mapContainer.innerHTML = '<div id="mapid" style={{ height: "400px", width: "100%" }}></div>';
+      }
+    }
+  };
+  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     
 
     // Create the Leaflet map
     const map = L.map('mapid').setView([0, 0], 13);
+    window.map = map;
 
     // Add a tile layer to the map
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -101,9 +119,10 @@ const MedicineSearch = () => {
 
       // Make sure latitude and longitude are defined
       if (latitude && longitude) {
-        const markerIconUrl = getMarkerIconUrl(medicine.location.pharmacist, medicine.quantity);
+        const markerIconUrl = getMarkerIconUrl(medicine.location.user[0].available, medicine.quantity);
         const markerIcon = L.icon({ iconUrl: markerIconUrl, iconSize: [38, 95], iconAnchor: [22, 94], popupAnchor: [-3, -76] });
         L.marker([latitude, longitude], { icon: markerIcon }).addTo(map);
+          // .addTo(map)
 
       }
       const results = (
@@ -117,9 +136,9 @@ const MedicineSearch = () => {
               <p>Brand: {medicine.medicine.brand}</p>
               <p>Type: {medicine.medicine.type}</p>
               <p>Strength: {medicine.medicine.strength}</p>
-              <p>Pharmacist: {medicine.location.pharmacist}
-              <span style={{ color: medicine.location.pharmacist ? 'green' : 'red' }}>
-              {medicine.location.pharmacist ? ' Available' : ' Not Available'}
+              <p>Pharmacist: {medicine.location.user[0].available}
+              <span style={{ color: medicine.location.user[0].available ? 'green' : 'red' }}>
+              {medicine.location.user[0].available ? ' Available' : ' Not Available'}
               </span>
               </p>
               <p>Medicine: {medicine.location.name}
@@ -190,13 +209,14 @@ const MedicineSearch = () => {
         </label>
         <br />
         <button type="submit">Check Stocks</button>
+        <button type="button" onClick={handleClearAll}>Clear All</button>
       </form>
-      <div id="mapid" style={{ height: "400px", width: "100%" }}></div>
+      <div id="map-container">
+        <div id="mapid" style={{ height: "400px", width: "100%" }}></div>
+      </div>
       {searchResults}
     </div>
-    
   );
-  
 };
 
 export default MedicineSearch;
