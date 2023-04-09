@@ -28,7 +28,7 @@ export default function CustomSideBar({
               className="text-decoration-none"
               style={{ color: 'inherit' }}>
               <img
-                src="./images/UI/3.png"
+                src="../../../images/UI/3.png"
                 alt="BetterLife"
                 className="bl-logo"
               />

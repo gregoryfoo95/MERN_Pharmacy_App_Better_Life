@@ -7,7 +7,7 @@ export default function SplitMap() {
       <div className="">
         <Link to="/map" style={{ textDecoration: 'none' }}>
           <img
-            src="./images/UserMainImg/imgPharmacist.png"
+            src="../../../images/UserMainImg/imgPharmacist.png"
             alt="Watson Pharmacy"
             style={{ width: '300px', height: '250px' }}
           />
