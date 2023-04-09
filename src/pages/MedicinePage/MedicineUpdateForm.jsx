@@ -43,14 +43,19 @@ export default function MedicineUpdateForm({ BASE_URL }) {
       .positive('Price must be a positive number')
       .required('Price is required'),
     expiry_date: Yup.date()
-      .default(medicine.expiry_date)
+      .default(new Date(medicine.expiry_date))
+      .min(new Date(), 'Expiry Date must be in the future')
       .required('Expiry Date is required'),
   });
 
   const handleInputChange = e => {
     const key = e.target.name;
     const value = e.target.value;
-    setMedicine({ ...medicine, [key]: value });
+
+    setMedicine({
+      ...medicine,
+      [key]: e.target.type == 'number' ? +value : value,
+    });
   };
 
   const handleFormSubmit = async (e, values) => {
@@ -70,7 +75,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
       }
     } catch (err) {
       console.error(err);
-    } 
+    }
   };
 
   return (
@@ -83,13 +88,14 @@ export default function MedicineUpdateForm({ BASE_URL }) {
           onSubmit={handleFormSubmit}>
           {({ isSubmitting, isValidating, isValid }) => (
             <Form>
+              {/* {isSubmitting && <div>isSubmitting</div>} */}
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <label htmlFor="name">Name:</label>
                 <Field
                   type="text"
                   id="name"
                   name="name"
-                  value={medicine.name || ""}
+                  value={medicine.name || ''}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="name" />
@@ -100,7 +106,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="text"
                   id="brand"
                   name="brand"
-                  value={medicine.brand || ""}
+                  value={medicine.brand || ''}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="brand" />
@@ -112,7 +118,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="text"
                   id="type"
                   name="type"
-                  value={medicine.type || ""}
+                  value={medicine.type || ''}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="type" />
@@ -123,7 +129,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="text"
                   id="strength"
                   name="strength"
-                  value={medicine.strength || ""}
+                  value={medicine.strength || ''}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="strength" />
@@ -134,7 +140,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="text"
                   id="country"
                   name="country"
-                  value={medicine.country || ""}
+                  value={medicine.country || ''}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="country" />
@@ -145,7 +151,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="text"
                   id="routeOfAdmin"
                   name="routeOfAdmin"
-                  value={medicine.routeOfAdmin || ""}
+                  value={medicine.routeOfAdmin || ''}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="routeOfAdmin" />
@@ -156,7 +162,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="number"
                   id="price"
                   name="price"
-                  value={medicine.price || ""}
+                  value={medicine.price || ''}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="price" />
@@ -165,9 +171,9 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                 <label htmlFor="expiry_date">Expiry Date:</label>
                 <Field
                   type="date"
+                  min={new Date().toISOString().slice(0, 10)}
                   id="expiry_date"
                   name="expiry_date"
-                  min={new Date().toISOString().slice(0, 10)}
                   value={
                     medicine.expiry_date
                       ? medicine.expiry_date.slice(0, 10)
