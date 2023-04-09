@@ -1,4 +1,5 @@
 const Location = require('../models/locationModel');
+const User = require('../models/userModel');
 
 const createLocation = async(req,res) => {
     try {

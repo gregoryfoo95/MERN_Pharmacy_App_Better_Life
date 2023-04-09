@@ -12,6 +12,7 @@ function Directions({ zoom = 17 }) {
   const [location, setLocation] = useState(null);
   const [destinationMarker, setDestinationMarker] = useState(null);
   const [routingControl, setRoutingControl] = useState(null);
+  const [refreshLocation, setRefreshLocation] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -42,7 +43,11 @@ function Directions({ zoom = 17 }) {
     };
 
     fetchData();
-  }, []);
+  }, [refreshLocation]);
+
+  const handleRefreshLocation = () => {
+    setRefreshLocation(!refreshLocation);
+  };
 
   useEffect(() => {
     if (!currentPosition || !location) return;
@@ -96,36 +101,6 @@ function Directions({ zoom = 17 }) {
 
   }, [currentPosition, zoom, location]);
 
-  const handleRefreshLocation = async () => {
-    try {
-      const position = await new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
-      });
-      const lat = position.coords.latitude;
-      const lng = position.coords.longitude;
-      setCurrentPosition([lat, lng]);
-  
-      const response = await axios.get(`/api/map/${id}`);
-      const newLocation = response.data?.data;
-  
-      setLocation(newLocation);
-  
-      if (routingControl) {
-        const destinationLatLng = L.latLng(newLocation.latitude, newLocation.longitude);
-        destinationMarker.setLatLng(destinationLatLng);
-  
-        const waypoints = [
-          L.latLng(lat, lng),
-          destinationLatLng,
-        ];
-  
-        routingControl.setWaypoints(waypoints);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
