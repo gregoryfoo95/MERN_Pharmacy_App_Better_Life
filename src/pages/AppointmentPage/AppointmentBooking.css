@@ -1,0 +1,7 @@
+
+  
+  .appointment-form {
+    display: left-flex;
+    flex-direction: column;
+    align-items: center;
+  }

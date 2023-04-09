@@ -53,24 +53,24 @@ export default function MedicineUpdateForm({ BASE_URL }) {
     setMedicine({ ...medicine, [key]: value });
   };
 
-  const handleFormSubmit = async (values, { setSubmitting }) => {
+  const handleFormSubmit = async (e, values) => {
+    e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.put(`${BASE_URL}/${id}`, values, {
+      const response = await axios.put(`${BASE_URL}/${id}`, medicine, {
         headers: {
           'Content-Type': 'application/json',
         },
         Authorization: `Bearer ${token}`,
       });
       if (response.status === 200) {
+        console.log(response.data);
         setMedicine(response.data);
         navigate('/medicine');
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      setSubmitting(false);
-    }
+    } 
   };
 
   return (
@@ -89,7 +89,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="text"
                   id="name"
                   name="name"
-                  value={medicine.name}
+                  value={medicine.name || ""}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="name" />
@@ -100,7 +100,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="text"
                   id="brand"
                   name="brand"
-                  value={medicine.brand}
+                  value={medicine.brand || ""}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="brand" />
@@ -112,7 +112,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="text"
                   id="type"
                   name="type"
-                  value={medicine.type}
+                  value={medicine.type || ""}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="type" />
@@ -123,7 +123,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="text"
                   id="strength"
                   name="strength"
-                  value={medicine.strength}
+                  value={medicine.strength || ""}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="strength" />
@@ -134,7 +134,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="text"
                   id="country"
                   name="country"
-                  value={medicine.country}
+                  value={medicine.country || ""}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="country" />
@@ -145,7 +145,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="text"
                   id="routeOfAdmin"
                   name="routeOfAdmin"
-                  value={medicine.routeOfAdmin}
+                  value={medicine.routeOfAdmin || ""}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="routeOfAdmin" />
@@ -156,7 +156,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="number"
                   id="price"
                   name="price"
-                  value={medicine.price}
+                  value={medicine.price || ""}
                   onChange={handleInputChange}
                 />
                 <ErrorMessage name="price" />
@@ -167,6 +167,7 @@ export default function MedicineUpdateForm({ BASE_URL }) {
                   type="date"
                   id="expiry_date"
                   name="expiry_date"
+                  min={new Date().toISOString().slice(0, 10)}
                   value={
                     medicine.expiry_date
                       ? medicine.expiry_date.slice(0, 10)
