@@ -34,6 +34,7 @@ A development Trello-styled whiteboasrd for the planning phase can be found <a h
 - React.js (Frontend)
 - Express (Backend)
 - Bcrypt for Hashing
+- JSON Web Token (JWT) for Authentication (Token)
 - Mongoose Validation & Joi for Back-end Validation
 - Formik and Yup for Form Validation
 - Leaflet and Mapbox for Map Interface
