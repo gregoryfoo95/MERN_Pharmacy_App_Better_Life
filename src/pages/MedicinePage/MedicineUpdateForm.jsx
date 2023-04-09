@@ -15,6 +15,7 @@ export default function MedicineUpdateForm({BASE_URL}) {
                 const response = await axios.get(`${BASE_URL}/${id}`);
                 const medicine = await response.data;
                 setMedicine(medicine);
+                console.log(medicine.price);
             } catch (err) {
                 console.log(err);
         }}
@@ -28,11 +29,19 @@ export default function MedicineUpdateForm({BASE_URL}) {
         strength: Yup.string().default(medicine.strength).required("Strength is required"),
         country: Yup.string().default(medicine.country).required("Country is required"),
         routeOfAdmin: Yup.string().default(medicine.routeOfAdmin).required("Route of Administration is required"),
-        price: Yup.number().default(medicine.price)
-        .typeError("Price must be a number")
-        .positive("Price must be a positive number")
-        .required("Price is required"),
-        expiry_date: Yup.date().default(new Date(medicine.expiry_date)).min(new Date(), "Expiry Date must be in the future").required("Expiry Date is required"),
+        price: Yup.number().default(Number(medicine.price))
+            .typeError("Price must be a number")
+            .positive("Price must be a positive number")
+            .required("Price is required")
+            .test('is-decimal', 'Price cannot have more than 2 decimal places', (value) => {
+                if(value){
+                    const decimalCount = value.toString().split('.')[1]?.length;
+                    return decimalCount ? decimalCount <= 2 : true;
+                }
+                return true;
+            }),
+        expiry_date: Yup.date().default(new Date(medicine.expiry_date))
+            .required("Expiry Date is required")
     });
     
     const handleInputChange = (e) => {
@@ -112,7 +121,20 @@ export default function MedicineUpdateForm({BASE_URL}) {
             </div>
             <div>
                 <label htmlFor="price">Price:</label>
-                <Field type="number" id="price" name="price" value={medicine.price || ""} onChange={handleInputChange}/>
+                <Field 
+                    type="number" 
+                    id="price" 
+                    name="price" 
+                    step="0.01"
+                    min="0"
+                    value={medicine.price || ""} 
+                    onChange={handleInputChange} 
+/*                     onBlur={(e) => {
+                        const { value } = e.target;
+                        const formattedValue = parseFloat(value).toFixed(2);
+                        e.target.value = isNaN(formattedValue) ? "" : formattedValue;
+                    }} */
+                />
                 <ErrorMessage name="price"/>
             </div>
             <div>
