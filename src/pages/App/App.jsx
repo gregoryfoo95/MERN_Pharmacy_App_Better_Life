@@ -16,6 +16,7 @@ import MedicineSearch from '../MedicineSearch/MedicineSearch';
 import ContactForm from '../Auth/ContactForm';
 import MedicineMap from '../MedicineSearch/MainMedicineSearch';
 import AppointmentBooking from '../AppointmentPage/AppointmentBooking';
+import DashboardPage from '../DashboardPage/DashboardPage';
 
 // side bar
 import Layout from '../../components/Layout/Layout';
@@ -129,6 +130,10 @@ function App() {
           path: '/medicine/:id/edit',
           element: <MedicineUpdateForm BASE_URL={BASE_URL} />,
         },
+        {
+          path: '/dashboard',
+          element: <DashboardPage />,
+        },
       ]);
       setSideBarConfig([
         {
@@ -141,7 +146,7 @@ function App() {
           keyEvent: 'Dashboard',
           classData: 'bi bi-speedometer menu-icon',
           title: 'Dashboard',
-          path: '/home',
+          path: '/dashboard',
         },
         {
           keyEvent: 'Medicine',
