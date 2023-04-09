@@ -15,7 +15,7 @@ export default function CustomSideBar({
       collapseOnSelect={collapseOnSelect}
       onSelect={onSelect}
       className={themeName}
-      variant={"dark"}
+      variant={'dark'}
       // bg={themeName}
       rtl={isRtl}
       expand="lg"
@@ -27,7 +27,11 @@ export default function CustomSideBar({
               href="/"
               className="text-decoration-none"
               style={{ color: 'inherit' }}>
-              <img src="./images/UI/3.png" alt="BetterLife" className="logo" />
+              <img
+                src="./images/UI/3.png"
+                alt="BetterLife"
+                className="bl-logo"
+              />
             </a>
           </SidebarMenu.Brand>
           <SidebarMenu.Toggle />

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../../utils/users-service';
+import { Col, Container, Row } from 'react-bootstrap';
+// import './Auth.css';
 const BASE_URL = 'http://localhost:3000/api/user';
 
 export default function LoginPage({ setUser }) {
@@ -72,55 +74,34 @@ export default function LoginPage({ setUser }) {
             }}>
             Login
           </legend>
-          <label style={{ marginBottom: '20px', textAlign: 'left' }}>
-            Email:{' '}
-            <input
-              type="email"
-              name="email"
-              onChange={handleChange}
-              required
-              style={{
-                padding: '10px',
-                borderRadius: '5px',
-                border: 'none',
-                backgroundColor: '#FFFFFF',
-                boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.16)',
-                marginRight: '20px',
-              }}
-            />
-          </label>
-          <label style={{ marginBottom: '20px', textAlign: 'left' }}>
-            Password:{' '}
-            <input
-              type="password"
-              name="password"
-              onChange={handleChange}
-              required
-              style={{
-                padding: '10px',
-                borderRadius: '5px',
-                border: 'none',
-                backgroundColor: '#FFFFFF',
-                boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.16)',
-                marginRight: '20px',
-              }}
-            />
-          </label>
-
-          <button
-            style={{
-              padding: '10px',
-              borderRadius: '5px',
-              border: 'none',
-              backgroundColor: '#00A0A0',
-              color: '#FFFFFF',
-              fontWeight: 'bold',
-              fontSize: '16px',
-              cursor: 'pointer',
-              boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.16)',
-            }}>
-            Login
-          </button>
+          {/* <label style={{ marginBottom: '20px', textAlign: 'left' }}> */}
+          <Container>
+            <Row className="bl-form-row">
+              <Col className="bl-form-left-label"> Email: </Col>
+              <Col>
+                <input
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  required
+                  className="bl-input"
+                />
+              </Col>
+            </Row>
+            <Row className="bl-form-row">
+              <Col className="bl-form-left-label"> Password: </Col>
+              <Col>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                  required
+                  className="bl-input"
+                />
+              </Col>
+            </Row>
+          </Container>
+          <button className="bl-button">Login</button>
         </fieldset>
       </form>
     </div>

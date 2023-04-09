@@ -1,36 +1,38 @@
 import { useState } from 'react';
-import axios from "axios";
-import { Form, Button } from "react-bootstrap";
+import axios from 'axios';
+import { Form, Button } from 'react-bootstrap';
 
 export default function ContactForm() {
   const [state, setState] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post("/api/contact", state);
+      await axios.post('/api/contact', state);
       setState({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
       });
-      alert("Thank you for your message!");
+      alert('Thank you for your message!');
     } catch (error) {
       console.log(error);
-      alert("Sorry, there was an error sending your message. Please try again later.");
+      alert(
+        'Sorry, there was an error sending your message. Please try again later.'
+      );
     }
   };
 
@@ -85,7 +87,14 @@ export default function ContactForm() {
           </Form.Group>
 
           <div className="submit-container">
-            <Button variant="primary" type="submit" style={{ backgroundColor: "#00A0A0" }}>
+            <Button
+              variant="primary"
+              type="submit"
+              style={{
+                backgroundColor: '#00A0A0',
+                marginTop: '10px',
+                width: '150px',
+              }}>
               SEND
             </Button>
           </div>
