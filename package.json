@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "commonjs",
   "scripts": {
-    "start": "node server.js",
+    "start": "concurrently -c auto npm:dev:*", 
     "dev": "concurrently -c auto npm:dev:*",
     "dev-win": "vite",
     "lint": "eslint --ext .jsx --ext .js  --ignore-path .gitignore .",

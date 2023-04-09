@@ -95,7 +95,7 @@ const medicineSchema = new Schema({
 
     price: {
         type: Number,
-        default: 0,
+        default: 1.99,
         required: true,
         validate: {
         validator: function (value) {
@@ -110,17 +110,16 @@ const medicineSchema = new Schema({
 
     expiry_date: {
         type: Date,
-        default: Date.now(),
+        default: new Date().toISOString().slice(0,10),
         required: true,
         validate: {
             validator: function(value) {
-            const schema = Joi.date().min(Date.now()).required();
+            const schema = Joi.date().min(new Date().toISOString().slice(0,10)).required();
             const { error } = schema.validate(value);
             return error ? false : true;
             },
             message: props => `${props.value} is not a valid date format!`
-        },
-        
+        }, 
     }
 },
 
