@@ -68,8 +68,10 @@ function MapComponent({ zoom = 17 }) {
       }),
     }).addTo(map);
 
+
+    
     const markers = locations.map(location => {
-      const markerIconUrl = location.pharmacist ? greenMarkerUrl : redMarkerUrl;
+      const markerIconUrl = location.user[0].available ? greenMarkerUrl : redMarkerUrl;
     
     const marker = L.marker([location.latitude, location.longitude], {
       icon: L.icon({

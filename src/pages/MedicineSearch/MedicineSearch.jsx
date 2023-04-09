@@ -75,11 +75,26 @@ const MedicineSearch = () => {
     new Set(filteredMedicines.map(medicine => medicine.medicine.strength))
   );
 
-  const handleSubmit = event => {
+
+  const handleClearAll = () => {
+    setSearchMedicineName('');
+    setSearchBrand('');
+    setSearchType('');
+    setSearchStrength('');
+    setSearchResults(null);
+  
+    if (window.map) {
+      window.map.remove();
+    }
+  };
+  
+
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     // Create the Leaflet map
     const map = L.map('mapid').setView([0, 0], 13);
+    window.map = map;
 
     // Add a tile layer to the map
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -114,7 +129,14 @@ const MedicineSearch = () => {
             location: { Latitude: latitude, Longitude: longitude },
           } = medicine;
 
-          console.log(medicine);
+
+      // Make sure latitude and longitude are defined
+      if (latitude && longitude) {
+        const markerIconUrl = getMarkerIconUrl(medicine.location.user[0].available, medicine.quantity);
+        const markerIcon = L.icon({ iconUrl: markerIconUrl, iconSize: [38, 95], iconAnchor: [22, 94], popupAnchor: [-3, -76] });
+        L.marker([latitude, longitude], { icon: markerIcon }).addTo(map);
+          // .addTo(map)
+
 
           // Make sure latitude and longitude are defined
           if (latitude && longitude) {
@@ -187,8 +209,44 @@ const MedicineSearch = () => {
       error => {
         console.error(error);
       }
-    );
-  };
+
+      const results = (
+        <ul>
+          {filteredMedicines.map((medicine) => (
+            <li key={medicine._id}>
+              <p>Store Name: {medicine.location.storeName}</p>
+              <p>Store Address: {medicine.location.storeAddress}</p>
+              <p>Pharmacy Dispensing Hours: {medicine.location.dispensingHours}</p>
+              <p>Medicine Name: {medicine.medicine.name}</p>
+              <p>Brand: {medicine.medicine.brand}</p>
+              <p>Type: {medicine.medicine.type}</p>
+              <p>Strength: {medicine.medicine.strength}</p>
+              <p>Pharmacist: {medicine.location.user[0].available}
+              <span style={{ color: medicine.location.user[0].available ? 'green' : 'red' }}>
+              {medicine.location.user[0].available ? ' Available' : ' Not Available'}
+              </span>
+              </p>
+              <p>Medicine: {medicine.location.name}
+              <span style={{ color: medicine.quantity === 0 ? 'red' : medicine.quantity < 4 ? 'yellow' : 'green' }}>
+                {medicine.quantity === 0 ? 'No Stocks' : medicine.quantity < 4 ? 'Low Stocks' : 'Available'}
+              </span>
+              </p>
+              <Link to={`/map/${medicine.location._id}`}>Get Direction</Link>
+            </li>
+          ))}
+        </ul>
+      );
+      setSearchResults(results);
+    });
+  },
+  (error) => {
+    console.error(error);
+  }
+
+  
+);
+
+};
 
   return (
     <div>
@@ -241,6 +299,7 @@ const MedicineSearch = () => {
                 {strength}
               </option>
             ))}
+
           </Form.Select>
         </Form.Group>
         <Button
@@ -248,6 +307,11 @@ const MedicineSearch = () => {
           style={{ backgroundColor: '#00A0A0', marginTop: '20px' }}>
           Check Stocks
         </Button>
+        <Button 
+          type="button" onClick={handleClearAll}
+          tyle={{ backgroundColor: '#00A0A0', marginTop: '20px' }>
+          Search another medicine
+          </Button>
       </Form>
       <div id="mapid" style={{ height: '400px', width: '100%' }}></div>
       {searchResults}
