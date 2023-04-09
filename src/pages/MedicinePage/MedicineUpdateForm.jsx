@@ -194,4 +194,4 @@ export default function MedicineUpdateForm({BASE_URL}) {
       </div>
     </fieldset>
   );
-}
+
