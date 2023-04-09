@@ -17,7 +17,7 @@ import ContactForm from '../Auth/ContactForm';
 import MedicineMap from '../MedicineSearch/MainMedicineSearch';
 import AppointmentBooking from '../AppointmentPage/AppointmentBooking';
 import DashboardPage from '../DashboardPage/DashboardPage';
-
+import StockIllustrationPage from '../DashboardPage/StockIllustrationPage';
 // side bar
 import Layout from '../../components/Layout/Layout';
 import CustomSideBar from '../../components/SideBar/CustomSideBar';
@@ -134,6 +134,10 @@ function App() {
           path: '/dashboard',
           element: <DashboardPage />,
         },
+        {
+          path: '/analytics',
+          element: <StockIllustrationPage />,
+        },
       ]);
       setSideBarConfig([
         {
@@ -147,6 +151,12 @@ function App() {
           classData: 'bi bi-speedometer menu-icon',
           title: 'Dashboard',
           path: '/dashboard',
+        },
+        {
+          keyEvent: 'Analytics',
+          classData: 'bi bi-graph-up menu-icon',
+          title: 'Analytics',
+          path: '/analytics',
         },
         {
           keyEvent: 'Medicine',

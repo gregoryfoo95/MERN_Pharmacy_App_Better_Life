@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "commonjs",
   "scripts": {
-    "start": "concurrently -c auto npm:dev:*", 
+    "start": "concurrently -c auto npm:dev:*",
     "dev": "concurrently -c auto npm:dev:*",
     "dev-win": "vite",
     "lint": "eslint --ext .jsx --ext .js  --ignore-path .gitignore .",
@@ -47,6 +47,7 @@
     "react-big-calendar": "^1.6.9",
     "react-bootstrap": "^2.7.2",
     "react-bootstrap-sidebar-menu": "^2.0.3",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-leaflet": "^4.2.1",
