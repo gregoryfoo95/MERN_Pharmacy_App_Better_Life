@@ -45,7 +45,7 @@ export default function MedicineUpdateForm({BASE_URL}) {
         expiry_date: Yup.date().default(new Date(medicine.expiry_date))
             .required("Expiry Date is required")
     });
-  };
+  
 
   const handleFormSubmit = async (e, values) => {
     e.preventDefault();
@@ -194,4 +194,4 @@ export default function MedicineUpdateForm({BASE_URL}) {
       </div>
     </fieldset>
   );
-
+}
