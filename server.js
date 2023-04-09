@@ -45,8 +45,8 @@ app.post("/checkout", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
       mode: 'payment',
-      success_url: "http://localhost:5173/order",
-      cancel_url: "http://localhost:5173/order"
+      success_url: "https://pharmacy-app.onrender.comorder",
+      cancel_url: "https://pharmacy-app.onrender.comorder"
   });
 
   res.send(JSON.stringify({
@@ -88,7 +88,7 @@ db.on('connected', function() {
 
   // Enable CORS
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+  res.header('Access-Control-Allow-Origin', 'https://pharmacy-app.onrender.com');
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();

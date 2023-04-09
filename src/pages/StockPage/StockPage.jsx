@@ -45,7 +45,7 @@ export default function StockPage() {
   useEffect(function () {
     async function getAllStocks() {
       try {
-        const response = await axios.get(`${BASE_URL_STOCK}`);
+        const response = await axios.get(`https://pharmacy-app.onrender.com/api/stock`);
         setMedicines(response.data);
       } catch (error) {
         console.log(error.message);

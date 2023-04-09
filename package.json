@@ -3,6 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "commonjs",
+  "engines": {
+  "npm": "9.5.0",
+  "node": "19.4.0"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "concurrently -c auto npm:dev:*",

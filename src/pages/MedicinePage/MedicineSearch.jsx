@@ -18,7 +18,7 @@ export default function StockSearchForm({ setMedicines, BASE_URL }) {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const response = await axios.get(`${BASE_URL}`, {
+      const response = await axios.get(`https://pharmacy-app.onrender.com`, {
         params: searchQuery,
       });
       setMedicines(response.data);
@@ -29,7 +29,7 @@ export default function StockSearchForm({ setMedicines, BASE_URL }) {
 
   useEffect(() => {
     const fetchMedicineOptions = async () => {
-      const response = await axios.get('/api/medicine', {
+      const response = await axios.get('https://pharmacy-app.onrender.com/api/medicine', {
         params: { name: searchQuery.name },
       });
       setMedicineOptions(response.data);

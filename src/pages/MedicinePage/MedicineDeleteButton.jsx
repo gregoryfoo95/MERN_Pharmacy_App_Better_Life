@@ -7,14 +7,14 @@ export default function MedicineDeleteButton({ setMedicines, medicine, BASE_URL 
         const token = localStorage.getItem("token");
         try {
 
-        await axios.delete(`/api/stock/${id}`, {
+        await axios.delete(`https://pharmacy-app.onrender.com/api/stock/${id}`, {
             headers: {
             "Content-Type": "application/json",
             },
             Authorization: `Bearer ${token}`,
         });
 
-        await axios.delete(`${BASE_URL}/${id}`, {
+        await axios.delete(`https://pharmacy-app.onrender.com/${id}`, {
             headers: {
             "Content-Type": "application/json",
             },
