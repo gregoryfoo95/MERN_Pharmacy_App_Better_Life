@@ -6,55 +6,44 @@ import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import './MedicineUpdateForm.css';
 
-export default function MedicineUpdateForm({ BASE_URL }) {
-  const { id } = useParams();
-  const [medicine, setMedicine] = useState({});
-  const navigate = useNavigate();
+export default function MedicineUpdateForm({BASE_URL}) {
+    const { id } = useParams();
+    const [medicine, setMedicine] = useState({});
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        const fetchMedicine = async () => {
+            try {
+                const response = await axios.get(`${BASE_URL}/${id}`);
+                const medicine = await response.data;
+                setMedicine(medicine);
+                console.log(medicine.price);
+            } catch (err) {
+                console.log(err);
+        }}
+        fetchMedicine();
+    }, [id]);
 
-  useEffect(() => {
-    const fetchMedicine = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/${id}`);
-        const medicine = await response.data;
-        setMedicine(medicine);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchMedicine();
-  }, [id]);
-
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().default(medicine.name).required('Name is required'),
-    brand: Yup.string().default(medicine.brand).required('Brand is required'),
-    type: Yup.string().default(medicine.type).required('Type is required'),
-    strength: Yup.string()
-      .default(medicine.strength)
-      .required('Strength is required'),
-    country: Yup.string()
-      .default(medicine.country)
-      .required('Country is required'),
-    routeOfAdmin: Yup.string()
-      .default(medicine.routeOfAdmin)
-      .required('Route of Administration is required'),
-    price: Yup.number()
-      .default(medicine.price)
-      .typeError('Price must be a number')
-      .positive('Price must be a positive number')
-      .required('Price is required'),
-    expiry_date: Yup.date()
-      .default(new Date(medicine.expiry_date))
-      .min(new Date(), 'Expiry Date must be in the future')
-      .required('Expiry Date is required'),
-  });
-
-  const handleInputChange = e => {
-    const key = e.target.name;
-    const value = e.target.value;
-
-    setMedicine({
-      ...medicine,
-      [key]: e.target.type == 'number' ? +value : value,
+    const validationSchema = Yup.object().shape({
+        name: Yup.string().default(medicine.name).required("Name is required"),
+        brand: Yup.string().default(medicine.brand).required("Brand is required"),
+        type: Yup.string().default(medicine.type).required("Type is required"),
+        strength: Yup.string().default(medicine.strength).required("Strength is required"),
+        country: Yup.string().default(medicine.country).required("Country is required"),
+        routeOfAdmin: Yup.string().default(medicine.routeOfAdmin).required("Route of Administration is required"),
+        price: Yup.number().default(Number(medicine.price))
+            .typeError("Price must be a number")
+            .positive("Price must be a positive number")
+            .required("Price is required")
+            .test('is-decimal', 'Price cannot have more than 2 decimal places', (value) => {
+                if(value){
+                    const decimalCount = value.toString().split('.')[1]?.length;
+                    return decimalCount ? decimalCount <= 2 : true;
+                }
+                return true;
+            }),
+        expiry_date: Yup.date().default(new Date(medicine.expiry_date))
+            .required("Expiry Date is required")
     });
   };
 
@@ -158,16 +147,23 @@ export default function MedicineUpdateForm({ BASE_URL }) {
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <label htmlFor="price">Price:</label>
-                <Field
-                  type="number"
-                  id="price"
-                  name="price"
-                  value={medicine.price || ''}
-                  onChange={handleInputChange}
+                <Field 
+                    type="number" 
+                    id="price" 
+                    name="price" 
+                    step="0.01"
+                    min="0"
+                    value={medicine.price || ""} 
+                    onChange={handleInputChange} 
+/*                     onBlur={(e) => {
+                        const { value } = e.target;
+                        const formattedValue = parseFloat(value).toFixed(2);
+                        e.target.value = isNaN(formattedValue) ? "" : formattedValue;
+                    }} */
                 />
-                <ErrorMessage name="price" />
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <ErrorMessage name="price"/>
+            </div>
+            <div>
                 <label htmlFor="expiry_date">Expiry Date:</label>
                 <Field
                   type="date"
