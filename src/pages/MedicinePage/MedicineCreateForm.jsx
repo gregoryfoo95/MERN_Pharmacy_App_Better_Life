@@ -24,10 +24,17 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
     country: Yup.string().required('Country is required'),
     routeOfAdmin: Yup.string().required('Route of Administration is required'),
     price: Yup.number()
-      .typeError('Price must be a number')
-      .positive('Price must be a positive number')
-      .required('Price is required'),
-    expiry_date: Yup.date().required('Expiry Date is required'),
+            .typeError("Price must be a number")
+            .positive("Price must be a positive number")
+            .required("Price is required")
+            .test('is-decimal', 'Price cannot have more than 2 decimal places', (value) => {
+                if(value){
+                    const decimalCount = value.toString().split('.')[1]?.length;
+                    return decimalCount ? decimalCount <= 2 : true;
+                }
+                return true;
+            }),
+    expiry_date: Yup.date().required("Expiry Date is required"),
   });
 
   const handleSubmit = async (values, { resetForm }) => {

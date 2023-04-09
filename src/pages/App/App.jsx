@@ -16,6 +16,7 @@ import MedicineSearch from '../MedicineSearch/MedicineSearch';
 import ContactForm from '../Auth/ContactForm';
 import MedicineMap from '../MedicineSearch/MainMedicineSearch';
 import AppointmentBooking from '../AppointmentPage/AppointmentBooking';
+import DashboardPage from '../DashboardPage/DashboardPage';
 
 // side bar
 import Layout from '../../components/Layout/Layout';
@@ -129,19 +130,23 @@ function App() {
           path: '/medicine/:id/edit',
           element: <MedicineUpdateForm BASE_URL={BASE_URL} />,
         },
+        {
+          path: '/dashboard',
+          element: <DashboardPage />,
+        },
       ]);
       setSideBarConfig([
         {
           keyEvent: 'Home',
-          classData: 'bi bi-house-door menu-icon',
-          title: 'Home',
+          classData: 'bi bi-person-square menu-icon',
+          title: 'Profile',
           path: '/home',
         },
         {
           keyEvent: 'Dashboard',
           classData: 'bi bi-speedometer menu-icon',
           title: 'Dashboard',
-          path: '/home',
+          path: '/dashboard',
         },
         {
           keyEvent: 'Medicine',
@@ -154,12 +159,6 @@ function App() {
           classData: 'bi bi-archive menu-icon',
           title: 'Stock',
           path: '/stock',
-        },
-        {
-          keyEvent: 'Profile',
-          classData: 'bi bi-person-square menu-icon',
-          title: 'Profile',
-          path: '/home',
         },
       ]);
     } else if (user.role == 'Consumer') {

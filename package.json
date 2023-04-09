@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "commonjs",
   "scripts": {
-    "start": "node server.js",
+    "start": "concurrently -c auto npm:dev:*", 
     "dev": "concurrently -c auto npm:dev:*",
     "dev-win": "vite",
     "lint": "eslint --ext .jsx --ext .js  --ignore-path .gitignore .",
@@ -21,6 +21,9 @@
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.4",
+    "chart.js": "^4.2.1",
+    "chartjs": "^0.3.24",
+    "chartjs-adapter-date-fns": "^3.0.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dist": "^0.1.2",
