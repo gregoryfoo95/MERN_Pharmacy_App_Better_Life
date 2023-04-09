@@ -1,0 +1,18 @@
+h1 {
+  color: #3a1730;
+  text-align: center;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+input[type='text'],
+input[type='number'],
+input[type='date'] {
+  width: 100%;
+}

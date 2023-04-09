@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 
 export default function MedicineDeleteButton({ setMedicines, medicine, BASE_URL }) {
     // Handle click event for deleting a medicine
@@ -26,9 +27,13 @@ export default function MedicineDeleteButton({ setMedicines, medicine, BASE_URL 
         }
     };
 
-    return (
-        <td>
-            <button onClick={() => handleDeleteClick(medicine._id)}>Delete</button>
-        </td>
-    )
+  return (
+    <td>
+      <Button
+        onClick={() => handleDeleteClick(medicine._id)}
+        style={{ backgroundColor: '#E42313' }}>
+        Delete
+      </Button>
+    </td>
+  );
 }

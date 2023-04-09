@@ -1,0 +1,44 @@
+.legend-center {
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+.search-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  background-color: #3a1730;
+  border: 1px solid #3a1730;
+  color: #ffffff;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(58, 23, 48, 0.25);
+}
+
+.search-button {
+  background-color: #00a0a0;
+  border: 1px solid #00a0a0;
+  color: #ffffff;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #009999;
+  border-color: #009999;
+}
