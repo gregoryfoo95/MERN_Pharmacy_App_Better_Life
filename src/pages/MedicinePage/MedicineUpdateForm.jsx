@@ -85,7 +85,6 @@ export default function MedicineUpdateForm({BASE_URL}) {
                   id="name"
                   name="name"
                   value={medicine.name || ''}
-                  onChange={handleInputChange}
                 />
                 <ErrorMessage name="name" />
               </div>
@@ -96,7 +95,6 @@ export default function MedicineUpdateForm({BASE_URL}) {
                   id="brand"
                   name="brand"
                   value={medicine.brand || ''}
-                  onChange={handleInputChange}
                 />
                 <ErrorMessage name="brand" />
               </div>
@@ -108,7 +106,6 @@ export default function MedicineUpdateForm({BASE_URL}) {
                   id="type"
                   name="type"
                   value={medicine.type || ''}
-                  onChange={handleInputChange}
                 />
                 <ErrorMessage name="type" />
               </div>
@@ -119,7 +116,6 @@ export default function MedicineUpdateForm({BASE_URL}) {
                   id="strength"
                   name="strength"
                   value={medicine.strength || ''}
-                  onChange={handleInputChange}
                 />
                 <ErrorMessage name="strength" />
               </div>
@@ -130,7 +126,7 @@ export default function MedicineUpdateForm({BASE_URL}) {
                   id="country"
                   name="country"
                   value={medicine.country || ''}
-                  onChange={handleInputChange}
+
                 />
                 <ErrorMessage name="country" />
               </div>
@@ -141,7 +137,6 @@ export default function MedicineUpdateForm({BASE_URL}) {
                   id="routeOfAdmin"
                   name="routeOfAdmin"
                   value={medicine.routeOfAdmin || ''}
-                  onChange={handleInputChange}
                 />
                 <ErrorMessage name="routeOfAdmin" />
               </div>
@@ -154,7 +149,6 @@ export default function MedicineUpdateForm({BASE_URL}) {
                     step="0.01"
                     min="0"
                     value={medicine.price || ""} 
-                    onChange={handleInputChange} 
 /*                     onBlur={(e) => {
                         const { value } = e.target;
                         const formattedValue = parseFloat(value).toFixed(2);
@@ -175,7 +169,6 @@ export default function MedicineUpdateForm({BASE_URL}) {
                       ? medicine.expiry_date.slice(0, 10)
                       : ''
                   }
-                  onChange={handleInputChange}
                 />
                 <ErrorMessage name="expiry_date" />
               </div>
