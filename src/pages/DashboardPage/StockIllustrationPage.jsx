@@ -22,7 +22,7 @@ export default function StockIllustrationPage() {
 
   return (
     <>
-        <h1>Overview of Stocks across Singapore</h1>
+        <h1 style={{ fontFamily: 'Montserrat' }}>Overview of Stocks across Singapore</h1>
         <BarChart data = { stock }/>
     </>
   );

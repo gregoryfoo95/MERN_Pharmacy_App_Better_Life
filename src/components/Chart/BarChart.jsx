@@ -75,7 +75,7 @@ const BarChart = ({ data }) => {
   };
 
   return (
-    <div style={{ height: '800px', width: '800px', padding: '20px' }}>
+    <div style={{ height: '900px', width: '900px', padding: '20px', margin: '0 auto'}}>
       <Bar data={chartData} options={chartOptions} />
     </div>
   );
