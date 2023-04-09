@@ -138,8 +138,8 @@ function App() {
       setSideBarConfig([
         {
           keyEvent: 'Home',
-          classData: 'bi bi-house-door menu-icon',
-          title: 'Home',
+          classData: 'bi bi-person-square menu-icon',
+          title: 'Profile',
           path: '/home',
         },
         {
@@ -159,12 +159,6 @@ function App() {
           classData: 'bi bi-archive menu-icon',
           title: 'Stock',
           path: '/stock',
-        },
-        {
-          keyEvent: 'Profile',
-          classData: 'bi bi-person-square menu-icon',
-          title: 'Profile',
-          path: '/home',
         },
       ]);
     } else if (user.role == 'Consumer') {
