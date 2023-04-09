@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MedicineImg from '/../../images/UserMainImg/imgMedicine.png';
+import MedicineImg from '../../../images/UserMainImg/imgMedicine.png';
 
 export default function SplitMedicine() {
   return (
