@@ -7,7 +7,7 @@ export default function SplitMedicine() {
       <div className="">
         <Link to="/map" style={{ textDecoration: 'none' }}>
           <img
-            src="../../../images/UserMainImg/imgMedicine.png"
+            src= "../../../images/UserMainImg/imgMedicine.png"
             alt="Watson Pharmacy"
             style={{ width: '300px', height: '250px' }}
           />
