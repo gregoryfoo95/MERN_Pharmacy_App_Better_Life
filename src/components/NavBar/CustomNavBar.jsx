@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as userService from '../../../utils/users-service';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import classNames from 'classnames';
-import CheckBox from './CheckBox';
+import CheckBox from './Checkbox';
 
 export default function CustomNavBar({
   user,
