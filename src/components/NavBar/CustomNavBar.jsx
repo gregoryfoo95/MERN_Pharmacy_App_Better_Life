@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as userService from '../../../utils/users-service';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import classNames from 'classnames';
-import CheckBox from './CheckBox';
+import CheckBox from './Checkbox';
 
 export default function CustomNavBar({
   user,
@@ -35,7 +35,7 @@ export default function CustomNavBar({
       // bg={themeName}
       variant={'dark'}>
       <Navbar.Brand title="Better Life" className="d-block d-lg-none">
-        <img src="./images/UI/3.png" alt="BetterLife" className="logo" />
+        <img src="./images/UI/3.png" alt="BetterLife" className="bl-logo" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="navbarScroll" />
       {user && <Navbar.Brand>{welcomeMessage}</Navbar.Brand>}
@@ -55,7 +55,7 @@ export default function CustomNavBar({
                 text={themeName}
               />
             </NavDropdown.ItemText>
-            <NavDropdown.ItemText>
+            {/* <NavDropdown.ItemText>
               <CheckBox
                 id="rtlSwitcher"
                 checked={isRtl}
@@ -78,7 +78,7 @@ export default function CustomNavBar({
                 onChange={() => setExclusiveExpand(!exclusiveExpand)}
                 text="exclusive expand"
               />
-            </NavDropdown.ItemText>
+            </NavDropdown.ItemText> */}
           </NavDropdown>
         </Nav>
         <span></span>

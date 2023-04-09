@@ -1,26 +1,19 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-export default function SplitMap () {
-
-    return (
-        <Link to={`/map`} style={{textDecoration: "none"}}>
-            <div 
-                style={{
-
-                    backgroundColor: "#00A0A0",
-                    backgroundPosition: "center",
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundSize: "cover",
-                    height: "30vh",
-                    color: "#E5F5F5",
-                    fontSize: "40px",
-                    fontFamily: 'Montserrat, sans-serif',
-                    borderRadius: "15px",
-                }}
-            >Nearest Watson Pharmacy</div>
+export default function SplitMap() {
+  return (
+    <Link to={`/map`} style={{ textDecoration: 'none' }}>
+      <div className="">
+        <Link to="/map" style={{ textDecoration: 'none' }}>
+          <img
+            src="./images/UserMainImg/imgPharmacist.png"
+            alt="Watson Pharmacy"
+            style={{ width: '300px', height: '250px' }}
+          />
+          <p style={{ marginBottom: 0 }} />
         </Link>
-    )
+      </div>
+    </Link>
+  );
 }

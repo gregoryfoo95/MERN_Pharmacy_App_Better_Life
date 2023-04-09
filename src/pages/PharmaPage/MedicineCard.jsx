@@ -1,24 +1,28 @@
-import { Link } from "react-router-dom";
+import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-export default function MedicineCard () {
-
-    return (
-        <Link to={`/medicine`} style={{textDecoration: "none"}}>
-            <div 
-                style={{
-                    backgroundColor: "#E42313",
-                    backgroundPosition: "center",
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundSize: "cover",
-                    height: "30vh",
-                    color: "#E5F5F5",
-                    fontSize: "40px",
-                    fontFamily: 'Montserrat, sans-serif',
-                    borderRadius: "15px",
-                }}
-            >Medicine Database</div>
-        </Link>
-    )
+export default function MedicineCard() {
+  return (
+    <Link to="/medicine" style={{ textDecoration: 'none' }}>
+      <Card
+        style={{
+          backgroundColor: '#E42313',
+          height: '30vh',
+          borderRadius: '15px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Card.Text
+          className="text-center"
+          style={{
+            color: '#E5F5F5',
+            fontSize: '25px',
+            fontFamily: 'Montserrat, sans-serif',
+          }}>
+          Medicine Database
+        </Card.Text>
+      </Card>
+    </Link>
+  );
 }
