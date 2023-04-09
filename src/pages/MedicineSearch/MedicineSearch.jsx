@@ -31,6 +31,7 @@ const getMarkerIconUrl = (pharmacistAvailable, quantity) => {
   }
 };
 
+
 const MedicineSearch = () => {
   const [medicines, setMedicines] = useState([]);
   const [searchMedicineName, setSearchMedicineName] = useState('');
@@ -39,42 +40,28 @@ const MedicineSearch = () => {
   const [searchStrength, setSearchStrength] = useState('');
   const [filteredMedicines, setFilteredMedicines] = useState([]);
   const [searchResults, setSearchResults] = useState(null);
+  const [showClearButton, setShowClearButton] = useState(false);
 
   useEffect(() => {
-    axios.get('/api/stocks').then(response => {
+    axios.get('/api/stocks').then((response) => {
       setMedicines(response.data);
     });
   }, []);
 
   useEffect(() => {
-    const filtered = medicines.filter(medicine => {
-      const nameMatch = medicine.medicine.name
-        .toLowerCase()
-        .includes(searchMedicineName.toLowerCase());
-      const brandMatch = searchBrand
-        ? medicine.medicine.brand === searchBrand
-        : true;
-      const typeMatch = searchType
-        ? medicine.medicine.type === searchType
-        : true;
-      const strengthMatch = searchStrength
-        ? medicine.medicine.strength === searchStrength
-        : true;
+    const filtered = medicines.filter((medicine) => {
+      const nameMatch = medicine.medicine.name.toLowerCase().includes(searchMedicineName.toLowerCase());
+      const brandMatch = searchBrand ? medicine.medicine.brand === searchBrand : true;
+      const typeMatch = searchType ? medicine.medicine.type === searchType : true;
+      const strengthMatch = searchStrength ? medicine.medicine.strength === searchStrength : true;
       return nameMatch && brandMatch && typeMatch && strengthMatch;
     });
     setFilteredMedicines(filtered);
   }, [medicines, searchMedicineName, searchBrand, searchType, searchStrength]);
 
-  const uniqueBrands = Array.from(
-    new Set(filteredMedicines.map(medicine => medicine.medicine.brand))
-  );
-  const uniqueTypes = Array.from(
-    new Set(filteredMedicines.map(medicine => medicine.medicine.type))
-  );
-  const uniqueStrengths = Array.from(
-    new Set(filteredMedicines.map(medicine => medicine.medicine.strength))
-  );
-
+  const uniqueBrands = Array.from(new Set(filteredMedicines.map((medicine) => medicine.medicine.brand)));
+  const uniqueTypes = Array.from(new Set(filteredMedicines.map((medicine) => medicine.medicine.type)));
+  const uniqueStrengths = Array.from(new Set(filteredMedicines.map((medicine) => medicine.medicine.strength)));
 
   const handleClearAll = () => {
     setSearchMedicineName('');
@@ -86,10 +73,18 @@ const MedicineSearch = () => {
     if (window.map) {
       window.map.remove();
     }
+    setShowClearButton(false);
   };
+  
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+    setShowClearButton(true);
+
+    // Check if the map container element is available
+  if (!document.getElementById('mapid')) {
+    return;
+  }
 
     // Create the Leaflet map
     const map = L.map('mapid').setView([0, 0], 13);
@@ -100,6 +95,7 @@ const MedicineSearch = () => {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       maxZoom: 18,
     }).addTo(map);
+    
 
     // Get the user's current position
   navigator.geolocation.getCurrentPosition(
@@ -107,7 +103,9 @@ const MedicineSearch = () => {
       const { latitude, longitude } = position.coords;
 
       // Center the map at the user's current location
-      map.setView([latitude, longitude], 13);
+      map.whenReady(() => {
+        map.setView([latitude, longitude], 13);
+      });
 
       // Add a marker at the user's current location
       L.marker([latitude, longitude], {       icon: L.icon({
@@ -183,6 +181,7 @@ const MedicineSearch = () => {
           <Form.Control
             type="text"
             className="form-control"
+            value={searchMedicineName}
             onChange={e => setSearchMedicineName(e.target.value)}
           />
         </Form.Group>
@@ -231,11 +230,12 @@ const MedicineSearch = () => {
           style={{ backgroundColor: '#00A0A0', marginTop: '20px' }}>
           Check Stocks
         </Button>
+        {showClearButton && (
         <Button 
           type="button" onClick={handleClearAll}
           style={{ backgroundColor: '#00A0A0', marginTop: '20px' }}>
           Search another medicine
-          </Button>
+          </Button>)}
       </Form>
       <div id="mapid" style={{ height: '400px', width: '100%' }}></div>
       {searchResults}
