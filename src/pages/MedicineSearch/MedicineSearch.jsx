@@ -69,10 +69,6 @@ const MedicineSearch = () => {
   
     if (window.map) {
       window.map.remove();
-      const mapContainer = document.getElementById('map-container');
-      if (mapContainer) {
-        mapContainer.innerHTML = '<div id="mapid" style={{ height: "400px", width: "100%" }}></div>';
-      }
     }
   };
   
@@ -209,11 +205,9 @@ const MedicineSearch = () => {
         </label>
         <br />
         <button type="submit">Check Stocks</button>
-        <button type="button" onClick={handleClearAll}>Clear All</button>
+        <button type="button" onClick={handleClearAll}>Search another medicine</button>
       </form>
-      <div id="map-container">
         <div id="mapid" style={{ height: "400px", width: "100%" }}></div>
-      </div>
       {searchResults}
     </div>
   );
