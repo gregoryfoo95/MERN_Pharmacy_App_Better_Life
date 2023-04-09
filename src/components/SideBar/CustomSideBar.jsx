@@ -1,4 +1,5 @@
 import SidebarMenu from 'react-bootstrap-sidebar-menu';
+import TeamLogo from "../../../images/UI/3.png";
 
 export default function CustomSideBar({
   exclusiveExpand,
@@ -28,7 +29,7 @@ export default function CustomSideBar({
               className="text-decoration-none"
               style={{ color: 'inherit' }}>
               <img
-                src="../../../images/UI/3.png"
+                src= {TeamLogo}
                 alt="BetterLife"
                 className="bl-logo"
               />
