@@ -48,9 +48,9 @@ function AppointmentBooking() {
     const subject = "Appointment Booked";
     const message = `Hi ${name}, Thank you for booking an appointment with us. Your appointment is scheduled for ${moment(selectedDate).format('MMMM Do YYYY, h:mm a')} To join the video call, click on this link: https://meet.google.com/oob-iztp-ray \n\nBest regards,\nYour Pharmacy Team`;
     const send_to = email;
-    const sent_from = process.env.EMAIL_USER;
+    const sent_from = process.env.REACT_APP_EMAIL_USER;
     try {
-      const response = await fetch(`${process.env.BACK_END_URL}/api/appointment`, {
+      const response = await fetch(`${process.env.REACT_APP_BACK_END_URL}/api/appointment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -20,13 +20,13 @@ export default function LoginPage({ setUser }) {
       [e.target.name]: e.target.value,
     });
   };
-
+axios
   const handleLogin = async event => {
     event.preventDefault();
 
     try {
-      console.log(process.env.BACK_END_URL);
-      const response = await axios.post(`${process.env.BACK_END_URL}/api/user/login`, state);
+      console.log(process.env.REACT_APP_BACK_END_URL);
+      const response = await axios.post(`${process.env.REACT_APP_BACK_END_URL}/api/user/login`, state);
       const role = response.data.role;
       const token = response.data.token;
       localStorage.setItem('token', token);

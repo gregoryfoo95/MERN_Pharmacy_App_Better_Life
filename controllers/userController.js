@@ -8,7 +8,7 @@ const sendEmail = require("../utils/sendEmail");
 
 // Generate Token
 /* const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+  return jwt.sign({ id }, process.env.REACT_APP_JWT_SECRET, { expiresIn: "1d" });
 }; */
 
 const updateUserById = async (req,res) => {
@@ -40,7 +40,7 @@ const create = async (req, res) => {
   try {
     const user = await User.create(req.body);
     const payload = { user };
-    const token = jwt.sign(payload, process.env.JWT_SECRET,{ expiresIn: 3600});
+    const token = jwt.sign(payload, process.env.REACT_APP_JWT_SECRET,{ expiresIn: 3600});
     res.status(201).json(token);
   } catch (error) {
     res.status(500).json(error);
@@ -71,7 +71,7 @@ const login = async (req, res) => {
       }
 
       if (result) {
-        const token = jwt.sign(payload, process.env.JWT_SECRET,{ expiresIn: 3600});
+        const token = jwt.sign(payload, process.env.REACT_APP_JWT_SECRET,{ expiresIn: 3600});
         res.status(201).json({token, role});
       } else {
         res.status(401).json({message: "Invalid password"});
@@ -190,7 +190,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
     `;
   const subject = "Password Reset Request";
   const send_to = user.email;
-  const sent_from = process.env.EMAIL_USER;
+  const sent_from = process.env.REACT_APP_EMAIL_USER;
 
   try {
     await sendEmail(subject, message, send_to, sent_from);

@@ -18,7 +18,7 @@ export default function MedicineSearch({ setMedicines, BASE_URL }) {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const response = await axios.get(`${process.env.BACK_END_URL}/api/medicine`, {
+      const response = await axios.get(`${process.env.REACT_APP_BACK_END_URL}/api/medicine`, {
         params: searchQuery,
       });
       setMedicines(response.data);
@@ -29,7 +29,7 @@ export default function MedicineSearch({ setMedicines, BASE_URL }) {
 
   useEffect(() => {
     const fetchMedicineOptions = async () => {
-      const response = await axios.get(`${process.env.BACK_END_URL}/api/medicine`, {
+      const response = await axios.get(`${process.env.REACT_APP_BACK_END_URL}/api/medicine`, {
         params: { name: searchQuery.name },
       });
       setMedicineOptions(response.data);

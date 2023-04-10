@@ -7,7 +7,7 @@ require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const stripe = require('stripe')('sk_test_51MthsGEnqLsF1BhOXr2UvBvcwOfyK2yYKVoSfPzXSGFFWnBLYU0TbqISoM6YGUVIXMGT6YlFSIoKCaedNi6q4SBP00BtzmEyOx')
-//const stripe = require('stripe')(process.env.STRIPE_KEY);
+//const stripe = require('stripe')(process.env.REACT_APP_STRIPE_KEY);
 
 //Routes
 const medicineRoute = require("./routes/medicineRoute");
@@ -72,7 +72,7 @@ app.get("/*", function (req, res) {
 // Connect to DB and start server
 const PORT = process.env.PORT || 3000;
 mongoose
-  .connect(process.env.DATABASE_URL)
+  .connect(process.env.REACT_APP_DATABASE_URL)
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server Running on port ${PORT}`);
@@ -95,7 +95,7 @@ app.use((req, res, next) => {
 });
 
 const allowedOrigins = ['http://localhost:3000',
-                      `${process.env.BACK_END_URL}`];
+                      `${process.env.REACT_APP_BACK_END_URL}`];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin 
