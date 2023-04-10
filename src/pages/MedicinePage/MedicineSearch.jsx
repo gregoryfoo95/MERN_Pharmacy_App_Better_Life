@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Form, FormGroup, Button } from 'react-bootstrap';
 
-export default function StockSearchForm({ setMedicines, BASE_URL }) {
+export default function MedicineSearch({ setMedicines, BASE_URL }) {
   const [medicineOptions, setMedicineOptions] = useState([]);
   const [searchQuery, setSearchQuery] = useState({
     brand: '',
