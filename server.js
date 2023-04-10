@@ -45,8 +45,8 @@ app.post("/checkout", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
       mode: 'payment',
-      success_url: "https://pharmacy-app.onrender.comorder",
-      cancel_url: "https://pharmacy-app.onrender.comorder"
+      success_url: "https://pharmacy-app.onrender.com/order",
+      cancel_url: "https://pharmacy-app.onrender.com/order"
   });
 
   res.send(JSON.stringify({
