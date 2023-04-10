@@ -35,7 +35,7 @@ function Directions({ zoom = 17 }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://pharmacy-app.onrender.com:10000/api/map/${id}`);
+        const response = await axios.get(`${process.env.BACK_END_URL}/api/map/${id}`);
         setLocation(response.data?.data);
       } catch (error) {
         console.error(error);

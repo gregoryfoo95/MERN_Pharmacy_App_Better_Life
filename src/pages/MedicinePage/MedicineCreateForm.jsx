@@ -41,14 +41,14 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
     // values.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const responseMedicine = await axios.post(`https://pharmacy-app.onrender.com:10000/api/medicine`, values, {
+      const responseMedicine = await axios.post(`${process.env.BACK_END_URL}/api/medicine`, values, {
         headers: {
           'Content-Type': 'application/json',
         },
         Authorization: `Bearer ${token}`,
       });
 
-      const responseLocation = await axios.get(`https://pharmacy-app.onrender.com:10000/api/map`, {
+      const responseLocation = await axios.get(`${process.env.BACK_END_URL}/api/map`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -61,7 +61,7 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
         quantity: 0,
       }));
 
-      const responseStock = await axios.post(`https://pharmacy-app.onrender.com:10000/api/stock`, stockItems, {
+      const responseStock = await axios.post(`${process.env.BACK_END_URL}/api/stock`, stockItems, {
         headers: {
           'Content-Type': 'application/json',
         },

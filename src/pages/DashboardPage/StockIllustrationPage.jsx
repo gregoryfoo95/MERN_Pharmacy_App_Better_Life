@@ -9,7 +9,7 @@ export default function StockIllustrationPage() {
   useEffect(() => {
     async function getAllStocks() {
     try {
-        const response = await axios.get(`https://pharmacy-app.onrender.com:10000/api/stock`);
+        const response = await axios.get(`${process.env.BACK_END_URL}/api/stock`);
         console.log(response.data);
         setStocks(response.data);
       } catch (error) {

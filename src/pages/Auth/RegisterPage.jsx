@@ -22,7 +22,7 @@ export default function RegisterPage() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://pharmacy-app.onrender.com:10000/api/user', state);
+      const response = await axios.post(`${process.env.BACK_END_URL}/api/user`, state);
       const token = response.data;
       localStorage.setItem('token', token);
     } catch (error) {

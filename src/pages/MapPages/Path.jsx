@@ -40,7 +40,7 @@ function Path() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://pharmacy-app.onrender.com:10000/api/map');
+        const response = await axios.get(`${process.env.BACK_END_URL}/api/map`);
         const sortedLocations = sortLocations(response.data.data, currentPosition);
         setLocations(
           response.data.data.map((location) => {

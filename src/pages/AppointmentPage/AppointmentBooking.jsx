@@ -50,7 +50,7 @@ function AppointmentBooking() {
     const send_to = email;
     const sent_from = process.env.EMAIL_USER;
     try {
-      const response = await fetch("https://pharmacy-app.onrender.com:10000/api/appointment", {
+      const response = await fetch(`${process.env.BACK_END_URL}/api/appointment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

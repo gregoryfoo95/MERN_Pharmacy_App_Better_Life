@@ -95,7 +95,7 @@ app.use((req, res, next) => {
 });
 
 const allowedOrigins = ['http://localhost:3000',
-                      'https://pharmacy-app.onrender.com'];
+                      `${process.env.BACK_END_URL}`];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin 

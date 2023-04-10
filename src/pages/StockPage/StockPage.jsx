@@ -32,7 +32,7 @@ export default function StockPage() {
         const originalQty = medicine.quantity;
         const newQty = stock[medicine._id]?.quantity;
         if (newQty !== undefined && newQty !== originalQty) {
-          await axios.put(`https://pharmacy-app.onrender.com:10000/api/stock/${medicine._id}/updatestock`, {
+          await axios.put(`${process.env.BACK_END_URL}/api/stock/${medicine._id}/updatestock`, {
             quantity: newQty,
           });
         }
@@ -45,7 +45,7 @@ export default function StockPage() {
   useEffect(function () {
     async function getAllStocks() {
       try {
-        const response = await axios.get(`https://pharmacy-app.onrender.com:10000/api/stock`);
+        const response = await axios.get(`${process.env.BACK_END_URL}/api/stock`);
         setMedicines(response.data);
       } catch (error) {
         console.log(error.message);
