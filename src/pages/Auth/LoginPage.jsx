@@ -26,7 +26,6 @@ export default function LoginPage({ setUser }) {
 
     try {
       const response = await axios.post(`${process.env.BACK_END_URL}/api/user/login`, state);
-      console.log(response);
       const role = response.data.role;
       const token = response.data.token;
       localStorage.setItem('token', token);

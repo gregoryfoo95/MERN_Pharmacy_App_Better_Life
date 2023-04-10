@@ -19,7 +19,7 @@ export function getUser() {
   const token = getToken();
   console.log("greg", token);
   // If there's a token, return the user in the payload, otherwise return null
-  return token ? JSON.parse(window.atob(token.split(".")[1])).user : null;
+  return (token === null || token === undefined) ? null : JSON.parse(window.atob(token.split(".")[1])).user;
 }
 
 export function logOut() {
