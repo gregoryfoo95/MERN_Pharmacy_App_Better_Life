@@ -50,6 +50,7 @@ const create = async (req, res) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body;
+  console.log("Greg debug: btn clicked");
   if (password.length < 3) {
     return res.status(400).json({message: 'Password must be at least 3 characters'});
   }
@@ -72,6 +73,7 @@ const login = async (req, res) => {
 
       if (result) {
         const token = jwt.sign(payload, process.env.REACT_APP_JWT_SECRET,{ expiresIn: 3600});
+        console.log("Backend Token: ", token )
         res.status(201).json({token, role});
       } else {
         res.status(401).json({message: "Invalid password"});
