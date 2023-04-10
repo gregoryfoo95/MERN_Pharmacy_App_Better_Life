@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     port: 10000,
     proxy: {
-      "/api": "0.0.0.0",
+      "/api": `${process.env.BACK_END_URL}`,
     }
   },
   build: {

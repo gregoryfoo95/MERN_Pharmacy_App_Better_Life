@@ -22,6 +22,9 @@ export function getUser() {
 }
 
 export function logOut() {
-  localStorage.removeItem('token');
+  const token = getToken();
+  if (token !== null) {
+    localStorage.removeItem('token');
+  }
 }
 
