@@ -43,7 +43,7 @@ const MedicineSearch = () => {
   const [showClearButton, setShowClearButton] = useState(false);
 
   useEffect(() => {
-    axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/stocks`).then((response) => {
+    axios.get(`/api/stocks`).then((response) => {
       setMedicines(response.data);
     });
   }, []);

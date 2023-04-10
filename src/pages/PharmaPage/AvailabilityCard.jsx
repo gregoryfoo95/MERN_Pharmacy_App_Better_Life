@@ -13,7 +13,7 @@ export default function AvailabilityCard() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/user/${user._id}`);
+        const response = await axios.get(`/api/user/${user._id}`);
         setUser(response.data);
       } catch (err) {
         console.error(err);
@@ -21,7 +21,7 @@ export default function AvailabilityCard() {
     }
     async function fetchLocations() {
       try {
-        const response = await axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/map`);
+        const response = await axios.get(`/api/map`);
         setLocations(response.data.data);
       } catch (err) {
         console.error(err);
@@ -38,7 +38,7 @@ export default function AvailabilityCard() {
         ...user,
         available: !user.available,
       };
-      const response = await axios.put(`${process.env.VITE_APP_BACK_END_URL}/api/user/${user._id}`, newUser, {
+      const response = await axios.put(`/api/user/${user._id}`, newUser, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -61,7 +61,7 @@ export default function AvailabilityCard() {
         store: selectedLocation,
       };
 
-      const response = await axios.put(`${process.env.VITE_APP_BACK_END_URL}/api/user/${user._id}`, newUser, {
+      const response = await axios.put(`/api/user/${user._id}`, newUser, {
         headers: {
           'Content-Type': 'application/json',
         },

@@ -26,7 +26,7 @@ axios
 
     try {
       console.log("GREG DEBUG: BACK_END_URL:", process.env.VITE_APP_BACK_END_URL);
-      const response = await axios.post(`${process.env.VITE_APP_BACK_END_URL}/api/user/login`, state);
+      const response = await axios.post(`/api/user/login`, state);
       const role = response.data.role;
       const token = response.data.token;
       localStorage.setItem('token', token);
