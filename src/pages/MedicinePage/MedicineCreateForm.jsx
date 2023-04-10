@@ -41,7 +41,7 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
     // values.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const responseMedicine = await axios.post(`https://pharmacy-app.onrender.com`, values, {
+      const responseMedicine = await axios.post(`https://pharmacy-app.onrender.com/api/medicine`, values, {
         headers: {
           'Content-Type': 'application/json',
         },

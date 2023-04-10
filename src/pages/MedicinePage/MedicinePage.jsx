@@ -14,7 +14,7 @@ const MedicinePage = () => {
   useEffect(() => {
     async function fetchMedicines() {
       try {
-        const response = await axios.get(`https://pharmacy-app.onrender.com`);
+        const response = await axios.get(`https://pharmacy-app.onrender.com/api/medicine`);
         setMedicines(response.data);
       } catch (err) {
         console.error(err);

@@ -32,7 +32,7 @@ export default function StockPage() {
         const originalQty = medicine.quantity;
         const newQty = stock[medicine._id]?.quantity;
         if (newQty !== undefined && newQty !== originalQty) {
-          await axios.put(`${BASE_URL_STOCK}/${medicine._id}/updatestock`, {
+          await axios.put(`https://pharmacy-app.onrender.com/api/stock/${medicine._id}/updatestock`, {
             quantity: newQty,
           });
         }

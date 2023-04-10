@@ -14,7 +14,7 @@ export default function MedicineDeleteButton({ setMedicines, medicine, BASE_URL 
             Authorization: `Bearer ${token}`,
         });
 
-        await axios.delete(`https://pharmacy-app.onrender.com/${id}`, {
+        await axios.delete(`https://pharmacy-app.onrender.com/api/medicine/${id}`, {
             headers: {
             "Content-Type": "application/json",
             },

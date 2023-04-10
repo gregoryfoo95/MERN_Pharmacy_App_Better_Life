@@ -20,7 +20,7 @@ export default function MedicineUpdateForm({BASE_URL}) {
     useEffect(() => {
         const fetchMedicine = async () => {
             try {
-                const response = await axios.get(`https://pharmacy-app.onrender.com/${id}`);
+                const response = await axios.get(`https://pharmacy-app.onrender.com/api/medicine/${id}`);
                 const medicine = await response.data;
                 setMedicine(medicine);
                 console.log(medicine.price);
@@ -57,7 +57,7 @@ export default function MedicineUpdateForm({BASE_URL}) {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.put(`https://pharmacy-app.onrender.com/${id}`, medicine, {
+      const response = await axios.put(`https://pharmacy-app.onrender.com/api/medicine/${id}`, medicine, {
         headers: {
           'Content-Type': 'application/json',
         },

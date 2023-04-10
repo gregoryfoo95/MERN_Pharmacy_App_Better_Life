@@ -18,7 +18,7 @@ export default function MedicineSearch({ setMedicines, BASE_URL }) {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const response = await axios.get(`https://pharmacy-app.onrender.com`, {
+      const response = await axios.get(`https://pharmacy-app.onrender.com/api/medicine`, {
         params: searchQuery,
       });
       setMedicines(response.data);

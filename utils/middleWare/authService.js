@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const BACKEND_URL = 'http://localhost:3000/api/users';;
+export const BACKEND_URL = 'http://localhost:3000/api/user';;
 
 export const validateEmail = (email) => {
     return email.match(
@@ -13,7 +13,7 @@ export const validateEmail = (email) => {
 export const forgotPassword = async (userData) => {
     try {
       const response = await axios.post(
-        `${BACKEND_URL}/api/users/forgotpassword`,
+        `https://pharmacy-app.onrender.com/api/user/forgotpassword`,
         userData
       );
       toast.success(response.data.message);
@@ -30,7 +30,7 @@ export const forgotPassword = async (userData) => {
   export const resetPassword = async (userData, resetToken) => {
     try {
       const response = await axios.put(
-        `${BACKEND_URL}/api/users/resetpassword/${resetToken}`,
+        `https://pharmacy-app.onrender.com/api/user/resetpassword/${resetToken}`,
         userData
       );
       return response.data;

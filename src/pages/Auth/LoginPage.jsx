@@ -25,7 +25,7 @@ export default function LoginPage({ setUser }) {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`https://pharmacy-app.onrender.com/login`, state);
+      const response = await axios.post(`https://pharmacy-app.onrender.com/api/user/login`, state);
       console.log(response);
       const role = response.data.role;
       const token = response.data.token;
