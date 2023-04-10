@@ -25,7 +25,7 @@ axios
     event.preventDefault();
 
     try {
-      console.log(process.env.REACT_APP_BACK_END_URL);
+      console.log("GREG DEBUG: BACK_END_URL:", process.env.REACT_APP_BACK_END_URL);
       const response = await axios.post(`${process.env.REACT_APP_BACK_END_URL}/api/user/login`, state);
       const role = response.data.role;
       const token = response.data.token;
