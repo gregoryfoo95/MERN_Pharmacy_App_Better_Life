@@ -43,7 +43,7 @@ const MedicineSearch = () => {
   const [showClearButton, setShowClearButton] = useState(false);
 
   useEffect(() => {
-    axios.get('https://pharmacy-app.onrender.com/api/stocks').then((response) => {
+    axios.get('https://pharmacy-app.onrender.com:10000/api/stocks').then((response) => {
       setMedicines(response.data);
     });
   }, []);

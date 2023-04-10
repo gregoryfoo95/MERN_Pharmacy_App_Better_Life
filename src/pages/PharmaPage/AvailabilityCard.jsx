@@ -13,7 +13,7 @@ export default function AvailabilityCard() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await axios.get(`https://pharmacy-app.onrender.com/api/user/${user._id}`);
+        const response = await axios.get(`https://pharmacy-app.onrender.com:10000/api/user/${user._id}`);
         setUser(response.data);
       } catch (err) {
         console.error(err);
@@ -21,7 +21,7 @@ export default function AvailabilityCard() {
     }
     async function fetchLocations() {
       try {
-        const response = await axios.get(`https://pharmacy-app.onrender.com/api/map`);
+        const response = await axios.get(`https://pharmacy-app.onrender.com:10000/api/map`);
         setLocations(response.data.data);
       } catch (err) {
         console.error(err);
@@ -38,7 +38,7 @@ export default function AvailabilityCard() {
         ...user,
         available: !user.available,
       };
-      const response = await axios.put(`https://pharmacy-app.onrender.com/api/user/${user._id}`, newUser, {
+      const response = await axios.put(`https://pharmacy-app.onrender.com:10000/api/user/${user._id}`, newUser, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -61,7 +61,7 @@ export default function AvailabilityCard() {
         store: selectedLocation,
       };
 
-      const response = await axios.put(`https://pharmacy-app.onrender.com/api/user/${user._id}`, newUser, {
+      const response = await axios.put(`https://pharmacy-app.onrender.com:10000/api/user/${user._id}`, newUser, {
         headers: {
           'Content-Type': 'application/json',
         },

@@ -20,7 +20,7 @@ export default function MedicineUpdateForm({BASE_URL}) {
     useEffect(() => {
         const fetchMedicine = async () => {
             try {
-                const response = await axios.get(`https://pharmacy-app.onrender.com/api/medicine/${id}`);
+                const response = await axios.get(`https://pharmacy-app.onrender.com:10000/api/medicine/${id}`);
                 const medicine = await response.data;
                 setMedicine(medicine);
                 console.log(medicine.price);

@@ -11,7 +11,7 @@ function NavbarComponent() {
     const handleShow = () => setShow(true);
 
     const checkout = async () => {
-        await fetch('https://pharmacy-app.onrender.com/checkout', {
+        await fetch('https://pharmacy-app.onrender.com:10000/checkout', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
