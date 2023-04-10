@@ -21,7 +21,7 @@ export default function StockSearchForm({ setMedicines }) {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const response = await axios.get(`${process.env.REACT_APP_BACK_END_URL}/api/stock`, {
+      const response = await axios.get(`${import.meta.env.VITE_APP_BACK_END_URL}/api/stock`, {
         params: searchQuery,
       });
       console.log(response.data);
@@ -33,7 +33,7 @@ export default function StockSearchForm({ setMedicines }) {
 
   useEffect(() => {
     const fetchStockOptions = async () => {
-      const response = await axios.get(`${process.env.REACT_APP_BACK_END_URL}/api/stock`, {
+      const response = await axios.get(`${import.meta.env.VITE_APP_BACK_END_URL}/api/stock`, {
         params: { medicineName: searchQuery.medicineName },
       });
       setStockOptions(response.data);

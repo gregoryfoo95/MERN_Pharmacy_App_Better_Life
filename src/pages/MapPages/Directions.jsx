@@ -35,7 +35,7 @@ function Directions({ zoom = 17 }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BACK_END_URL}/api/map/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_APP_BACK_END_URL}/api/map/${id}`);
         setLocation(response.data?.data);
       } catch (error) {
         console.error(error);
@@ -72,7 +72,7 @@ function Directions({ zoom = 17 }) {
 
     const control = L.Routing.control({
       waypoints: waypoints,
-      router: L.Routing.mapbox(import.meta.env.REACT_APP_VITE_REACT_APP_MAPBOX_API_KEY),
+      router: L.Routing.mapbox(import.meta.env.VITE_APP_VITE_VITE_APP_MAPBOX_API_KEY),
       routeWhileDragging: true,
       containerClassName: 'custom-lrm-instructions',
     }).addTo(map);
