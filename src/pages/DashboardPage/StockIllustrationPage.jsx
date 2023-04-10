@@ -9,7 +9,7 @@ export default function StockIllustrationPage() {
   useEffect(() => {
     async function getAllStocks() {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_APP_BACK_END_URL}/api/stock`);
+        const response = await axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/stock`);
         console.log(response.data);
         setStocks(response.data);
       } catch (error) {

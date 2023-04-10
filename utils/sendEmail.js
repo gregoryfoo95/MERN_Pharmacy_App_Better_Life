@@ -3,11 +3,11 @@ const nodemailer = require("nodemailer");
 const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
   // Create Email Transporter
   const transporter = nodemailer.createTransport({
-    host: import.meta.env.VITE_APP_EMAIL_HOST,
+    host: process.env.VITE_APP_EMAIL_HOST,
     port: 587,
     auth: {
-      user: import.meta.env.VITE_APP_EMAIL_USER,
-      pass: import.meta.env.VITE_APP_EMAIL_PASS,
+      user: process.env.VITE_APP_EMAIL_USER,
+      pass: process.env.VITE_APP_EMAIL_PASS,
     },
     tls: {
       rejectUnauthorized: false,

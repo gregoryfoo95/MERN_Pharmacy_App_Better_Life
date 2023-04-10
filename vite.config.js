@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     port: 10000,
     proxy: {
-      "/api": `${import.meta.env.VITE_APP_BACK_END_URL}`,
+      "/api": `${process.env.VITE_APP_BACK_END_URL}`,
     }
   },
   build: {

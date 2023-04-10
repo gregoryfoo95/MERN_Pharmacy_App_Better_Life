@@ -17,8 +17,8 @@ const contactUs = asyncHandler(async (req, res) => {
     throw new Error("Please add subject and message");
   }
 
-  const send_to = import.meta.env.VITE_APP_EMAIL_USER;
-  const sent_from = import.meta.env.VITE_APP_EMAIL_USER;
+  const send_to = process.env.VITE_APP_EMAIL_USER;
+  const sent_from = process.env.VITE_APP_EMAIL_USER;
   const reply_to = user.email;
   try {
     await sendEmail(subject, message, send_to, sent_from, reply_to);

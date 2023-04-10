@@ -14,7 +14,7 @@ const MedicinePage = () => {
   useEffect(() => {
     async function fetchMedicines() {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_APP_BACK_END_URL}/api/medicine`);
+        const response = await axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/medicine`);
         setMedicines(response.data);
       } catch (err) {
         console.error(err);
