@@ -4,8 +4,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
+    port: 10000,
     proxy: {
-      "/api": "https://pharmacy-app.onrender.com:10000",
+      "/api": "0.0.0.0",
     }
   },
   build: {
