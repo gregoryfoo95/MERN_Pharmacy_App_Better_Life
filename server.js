@@ -59,7 +59,7 @@ app.use('/api/user', userRoute);
 app.use("/api/stock", stockRoute);
 app.use("/api/contact", contactRoute);
 app.use("/api/map", mapRoutes);
-app.use(express.static(path.join(__dirname, "dist")));
+app.use("/uploads", express.static(path.join(__dirname, "dist", "uploads")));
 app.use('/api/stocks', medicineSearchRoute);
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
