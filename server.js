@@ -60,7 +60,7 @@ app.use('/api/user', userRoute);
 app.use("/api/stock", stockRoute);
 app.use("/api/contact", contactRoute);
 app.use("/api/map", mapRoutes);
-app.use("/uploads", express.static(path.join(__dirname, "dist", "uploads")));
+app.use(express.static(path.join(__dirname, "dist")));
 app.use('/api/stocks', medicineSearchRoute);
 app.use('/api.stripe.com/', stripeRoute);
 app.get("/*", function (req, res) {
