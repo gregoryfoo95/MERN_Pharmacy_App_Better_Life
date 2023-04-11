@@ -25,7 +25,12 @@ export default function LoginPage({ setUser }) {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`/api/user/login`, state);
+      const response = await axios.post(`${process.env.VITE_APP_BACK_END_URL}/api/user/login`, state, {
+        headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
+      }
+      });
       console.log("Greg Debug: post request for login sent", response);
       const role = response.data.role;
       const token = response.data.token;
