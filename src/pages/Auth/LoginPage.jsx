@@ -25,7 +25,7 @@ export default function LoginPage({ setUser }) {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`${process.env.CYCLIC_APP_BACK_END_URL}/api/user/login`, state, {
+      const response = await axios.post(`/api/user/login`, state, {
         headers: {
         "Content-Type": "application/json",
       }

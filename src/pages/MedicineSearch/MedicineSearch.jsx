@@ -43,7 +43,7 @@ const MedicineSearch = () => {
   const [showClearButton, setShowClearButton] = useState(false);
 
   useEffect(() => {
-    axios.get(`${process.env.CYCLIC_APP_BACK_END_URL}/api/stocks`, {
+    axios.get(`/api/stocks`, {
       headers: {
         "Content-Type": "application/json",
       },

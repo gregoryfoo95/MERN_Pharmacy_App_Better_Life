@@ -35,7 +35,7 @@ function Directions({ zoom = 17 }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.CYCLIC_APP_BACK_END_URL}/api/map/${id}`, {
+        const response = await axios.get(`/api/map/${id}`, {
           headers: {
             "Content-Type": "application/json",
           }

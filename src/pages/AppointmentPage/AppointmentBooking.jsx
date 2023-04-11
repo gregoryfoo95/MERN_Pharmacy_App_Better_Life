@@ -50,7 +50,7 @@ function AppointmentBooking() {
     const send_to = email;
     const sent_from = process.env.CYCLIC_APP_EMAIL_USER;
     try {
-      const response = await fetch(`${process.env.CYCLIC_APP_BACK_END_URL}/api/appointment`, {
+      const response = await fetch(`/api/appointment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

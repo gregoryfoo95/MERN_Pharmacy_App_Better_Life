@@ -40,7 +40,7 @@ function Path() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.CYCLIC_APP_BACK_END_URL}/api/map`, {
+        const response = await axios.get(`/api/map`, {
           headers: {
             "Content-Type": "application/json",
           }

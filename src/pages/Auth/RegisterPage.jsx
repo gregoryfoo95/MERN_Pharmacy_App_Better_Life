@@ -22,7 +22,7 @@ export default function RegisterPage() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.CYCLIC_APP_BACK_END_URL}/api/user`, state, {
+      const response = await axios.post(`/api/user`, state, {
         headers: {
         "Content-Type": "application/json",
       }

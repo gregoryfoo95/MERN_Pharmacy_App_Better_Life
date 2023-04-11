@@ -9,7 +9,7 @@ export default function StockIllustrationPage() {
   useEffect(() => {
     async function getAllStocks() {
     try {
-        const response = await axios.get(`${process.env.CYCLIC_APP_BACK_END_URL}/api/stock`, {
+        const response = await axios.get(`/api/stock`, {
             headers: {
         "Content-Type": "application/json",
       }

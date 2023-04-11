@@ -18,7 +18,7 @@ export default function MedicineSearch({ setMedicines, BASE_URL }) {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const response = await axios.get(`${process.env.CYCLIC_APP_BACK_END_URL}/api/medicine`, {
+      const response = await axios.get(`/api/medicine`, {
         params: searchQuery,
         headers: {
             "Content-Type": "application/json",
@@ -32,7 +32,7 @@ export default function MedicineSearch({ setMedicines, BASE_URL }) {
 
   useEffect(() => {
     const fetchMedicineOptions = async () => {
-      const response = await axios.get(`${process.env.CYCLIC_APP_BACK_END_URL}/api/medicine`, {
+      const response = await axios.get(`/api/medicine`, {
         params: { name: searchQuery.name },
         headers: {
           "Content-Type": "application/json",
