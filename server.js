@@ -87,13 +87,13 @@ db.on('connected', function() {
 });
 
   // Enable CORS
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'https://pharmacy-app.onrender.com');
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
-
+ */
 const allowedOrigins = ['http://localhost:3000',
                       `${process.env.VITE_APP_BACK_END_URL}`];
 app.use(cors({
