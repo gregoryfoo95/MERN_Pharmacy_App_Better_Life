@@ -26,11 +26,11 @@ export default function LoginPage({ setUser }) {
 
     try {
       const response = await axios.post(`/api/user/login`, state);
-      console.log("Greg Debug: post request for login sent");
+      console.log("Greg Debug: post request for login sent", response);
       const role = response.data.role;
       const token = response.data.token;
       localStorage.setItem('token', token);
-      setUser(response.data);
+      setUser(getUser());
       if (role === 'Pharmacist') {
         navigate('/home');
       } else if (role === 'Consumer') {
