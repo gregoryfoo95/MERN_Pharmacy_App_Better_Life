@@ -20,6 +20,10 @@ export default function MedicineSearch({ setMedicines, BASE_URL }) {
     try {
       const response = await axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/medicine`, {
         params: searchQuery,
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
+        },
       });
       setMedicines(response.data);
     } catch (error) {
@@ -31,6 +35,10 @@ export default function MedicineSearch({ setMedicines, BASE_URL }) {
     const fetchMedicineOptions = async () => {
       const response = await axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/medicine`, {
         params: { name: searchQuery.name },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
+        },
       });
       setMedicineOptions(response.data);
     };

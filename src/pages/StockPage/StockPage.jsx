@@ -34,6 +34,10 @@ export default function StockPage() {
         if (newQty !== undefined && newQty !== originalQty) {
           await axios.put(`${process.env.VITE_APP_BACK_END_URL}/api/stock/${medicine._id}/updatestock`, {
             quantity: newQty,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
+            },
           });
         }
       });

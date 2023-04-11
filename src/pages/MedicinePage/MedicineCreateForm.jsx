@@ -44,6 +44,7 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
       const responseMedicine = await axios.post(`${process.env.VITE_APP_BACK_END_URL}/api/medicine`, values, {
         headers: {
           'Content-Type': 'application/json',
+          "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
         },
         Authorization: `Bearer ${token}`,
       });
@@ -51,6 +52,7 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
       const responseLocation = await axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/map`, {
         headers: {
           'Content-Type': 'application/json',
+          "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
         },
         Authorization: `Bearer ${token}`,
       });
@@ -64,6 +66,7 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
       const responseStock = await axios.post(`${process.env.VITE_APP_BACK_END_URL}/api/stock`, stockItems, {
         headers: {
           'Content-Type': 'application/json',
+          "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
         },
         Authorization: `Bearer ${token}`,
       });

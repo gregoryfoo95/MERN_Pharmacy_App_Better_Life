@@ -55,6 +55,10 @@ function AppointmentBooking() {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
+          }
         },
         body: JSON.stringify({ subject, message, send_to, sent_from }),
       });

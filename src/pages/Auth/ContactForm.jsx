@@ -20,7 +20,12 @@ export default function ContactForm() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post(`${process.env.VITE_APP_BACK_END_URL}/api/contact`, state);
+      await axios.post(`${process.env.VITE_APP_BACK_END_URL}/api/contact`, state, {
+        headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
+      }
+      });
       setState({
         name: '',
         email: '',

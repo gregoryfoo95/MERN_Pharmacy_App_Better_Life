@@ -23,6 +23,10 @@ export default function StockSearchForm({ setMedicines }) {
     try {
       const response = await axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/stock`, {
         params: searchQuery,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
+        },
       });
       console.log(response.data);
       setMedicines(response.data);
@@ -35,6 +39,10 @@ export default function StockSearchForm({ setMedicines }) {
     const fetchStockOptions = async () => {
       const response = await axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/stock`, {
         params: { medicineName: searchQuery.medicineName },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
+        },
       });
       setStockOptions(response.data);
     };

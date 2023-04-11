@@ -14,7 +14,12 @@ const MedicinePage = () => {
   useEffect(() => {
     async function fetchMedicines() {
       try {
-        const response = await axios.get(`api/medicine`);
+        const response = await axios.get(`api/medicine`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
+            },
+        });
         setMedicines(response.data);
       } catch (err) {
         console.error(err);
