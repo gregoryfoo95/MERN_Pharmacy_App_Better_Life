@@ -3,10 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "commonjs",
-  "engines": {
-  "npm": "9.5.0",
-  "node": "<=14"
-  },
+
   "scripts": {
     "start": "node server.js",
     "dev": "concurrently -c auto npm:dev:*",
@@ -59,7 +56,6 @@
     "react-router-dom": "^6.10.0",
     "react-toastify": "^9.1.2",
     "sass": "^1.60.0",
-    "stripe": "^11.17.0",
     "yup": "^1.0.2"
   },
   "devDependencies": {
