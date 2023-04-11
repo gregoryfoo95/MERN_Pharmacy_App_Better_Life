@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const stripe = require('stripe')('sk_test_51MthsGEnqLsF1BhOXr2UvBvcwOfyK2yYKVoSfPzXSGFFWnBLYU0TbqISoM6YGUVIXMGT6YlFSIoKCaedNi6q4SBP00BtzmEyOx')
+//const stripe = require('stripe')('sk_test_51MthsGEnqLsF1BhOXr2UvBvcwOfyK2yYKVoSfPzXSGFFWnBLYU0TbqISoM6YGUVIXMGT6YlFSIoKCaedNi6q4SBP00BtzmEyOx')
 //const stripe = require('stripe')(process.env.VITE_APP_STRIPE_KEY);
 
 //Routes
@@ -27,7 +27,7 @@ app.use(express.static("public"));
 app.use(cors());
 app.use(cookieParser());
 
-//Stripe
+/* //Stripe
 app.post("/checkout", async (req, res) => {
   console.log(req.body);
   const items = req.body.items;
@@ -52,7 +52,7 @@ app.post("/checkout", async (req, res) => {
   res.send(JSON.stringify({
       url: session.url
   }));
-});
+}); */
 
 //Routes
 app.use("/api/medicine", medicineRoute);
