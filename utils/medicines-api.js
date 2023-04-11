@@ -5,7 +5,7 @@ const BASE_URL = '/api/medicine';
 export const medicinesAPI = {
     getAll: async function() {
         try {
-            const response = await sendRequest(`api/medicine`);
+            const response = await sendRequest(`${process.env.VITE_APP_BACK_END_URL}/api/medicine`);
             return response;
         } catch (error) {
             throw new Error('Could not get medicines.');

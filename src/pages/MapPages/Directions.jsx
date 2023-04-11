@@ -35,7 +35,7 @@ function Directions({ zoom = 17 }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`api/map/${id}`);
+        const response = await axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/map/${id}`);
         setLocation(response.data?.data);
       } catch (error) {
         console.error(error);
