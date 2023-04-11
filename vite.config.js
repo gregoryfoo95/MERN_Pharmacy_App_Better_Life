@@ -8,11 +8,11 @@ export default defineConfig({
       "/api": "http://localhost:3000/",
     }
   },
-  build: {
+/*   build: {
     minify: true,
     // enable tree shaking
     rollupOptions: {
       treeshake: true,
     },
-  },
+  }, */
 })

@@ -92,7 +92,7 @@ db.on('connected', function() {
   next();
 });
  */
-const allowedOrigins = ['http://localhost:3000',
+/* const allowedOrigins = ['http://localhost:3000',
                       `${process.env.CYCLIC_APP_BACK_END_URL}`];
 app.use(cors({
   origin: function(origin, callback){
@@ -106,4 +106,4 @@ app.use(cors({
     }
     return callback(null, true);
   }
-}));
+})); */
