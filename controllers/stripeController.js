@@ -1,4 +1,4 @@
-const stripe = require('stripe')(process.env.VITE_APP_STRIPE_KEY);
+/* const stripe = require('stripe')(process.env.VITE_APP_STRIPE_KEY);
 const Medicine = require('../models/medicineModel');
 
 const stripeController = {
@@ -38,4 +38,4 @@ const stripeController = {
     }
 }
 
-module.exports = stripeController;
+module.exports = stripeController; */

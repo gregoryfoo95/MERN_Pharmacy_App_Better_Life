@@ -13,7 +13,7 @@ export const validateEmail = (email) => {
 export const forgotPassword = async (userData) => {
     try {
       const response = await axios.post(
-        `${process.env.VITE_APP_BACK_END_URL}/api/user/forgotpassword`,
+        `${process.env.CYCLIC_APP_BACK_END_URL}/api/user/forgotpassword`,
         userData
       );
       toast.success(response.data.message);
@@ -30,7 +30,7 @@ export const forgotPassword = async (userData) => {
   export const resetPassword = async (userData, resetToken) => {
     try {
       const response = await axios.put(
-        `${process.env.VITE_APP_BACK_END_URL}/api/user/resetpassword/${resetToken}`,
+        `${process.env.CYCLIC_APP_BACK_END_URL}/api/user/resetpassword/${resetToken}`,
         userData
       );
       return response.data;

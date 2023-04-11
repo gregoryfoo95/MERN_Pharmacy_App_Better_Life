@@ -35,10 +35,9 @@ function Directions({ zoom = 17 }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/map/${id}`, {
+        const response = await axios.get(`${process.env.CYCLIC_APP_BACK_END_URL}/api/map/${id}`, {
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
           }
         });
         setLocation(response.data?.data);
@@ -77,7 +76,7 @@ function Directions({ zoom = 17 }) {
 
     const control = L.Routing.control({
       waypoints: waypoints,
-      router: L.Routing.mapbox(process.env.VITE_APP_VITE_VITE_APP_MAPBOX_API_KEY),
+      router: L.Routing.mapbox(process.env.CYCLIC_APP_VITE_VITE_APP_MAPBOX_API_KEY),
       routeWhileDragging: true,
       containerClassName: 'custom-lrm-instructions',
     }).addTo(map);

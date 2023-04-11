@@ -48,16 +48,15 @@ function AppointmentBooking() {
     const subject = "Appointment Booked";
     const message = `Hi ${name}, Thank you for booking an appointment with us. Your appointment is scheduled for ${moment(selectedDate).format('MMMM Do YYYY, h:mm a')} To join the video call, click on this link: https://meet.google.com/oob-iztp-ray \n\nBest regards,\nYour Pharmacy Team`;
     const send_to = email;
-    const sent_from = process.env.VITE_APP_EMAIL_USER;
+    const sent_from = process.env.CYCLIC_APP_EMAIL_USER;
     try {
-      const response = await fetch(`${process.env.VITE_APP_BACK_END_URL}/api/appointment`, {
+      const response = await fetch(`${process.env.CYCLIC_APP_BACK_END_URL}/api/appointment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
           }
         },
         body: JSON.stringify({ subject, message, send_to, sent_from }),

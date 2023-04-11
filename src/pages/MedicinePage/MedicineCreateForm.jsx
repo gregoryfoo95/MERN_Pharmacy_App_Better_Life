@@ -41,18 +41,16 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
     // values.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const responseMedicine = await axios.post(`${process.env.VITE_APP_BACK_END_URL}/api/medicine`, values, {
+      const responseMedicine = await axios.post(`${process.env.CYCLIC_APP_BACK_END_URL}/api/medicine`, values, {
         headers: {
           'Content-Type': 'application/json',
-          "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
         },
         Authorization: `Bearer ${token}`,
       });
 
-      const responseLocation = await axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/map`, {
+      const responseLocation = await axios.get(`${process.env.CYCLIC_APP_BACK_END_URL}/api/map`, {
         headers: {
           'Content-Type': 'application/json',
-          "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
         },
         Authorization: `Bearer ${token}`,
       });
@@ -63,10 +61,9 @@ export default function MedicineCreateForm({ setMedicines, BASE_URL }) {
         quantity: 0,
       }));
 
-      const responseStock = await axios.post(`${process.env.VITE_APP_BACK_END_URL}/api/stock`, stockItems, {
+      const responseStock = await axios.post(`${process.env.CYCLIC_APP_BACK_END_URL}/api/stock`, stockItems, {
         headers: {
           'Content-Type': 'application/json',
-          "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
         },
         Authorization: `Bearer ${token}`,
       });

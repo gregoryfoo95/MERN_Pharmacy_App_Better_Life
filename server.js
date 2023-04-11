@@ -72,7 +72,7 @@ app.get("/*", function (req, res) {
 // Connect to DB and start server
 const PORT = process.env.PORT || 3000;
 mongoose
-  .connect(process.env.VITE_APP_DATABASE_URL)
+  .connect(process.env.CYCLIC_APP_DATABASE_URL)
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server Running on port ${PORT}`);
@@ -95,8 +95,7 @@ db.on('connected', function() {
 });
  */
 const allowedOrigins = ['http://localhost:3000',
-                      `${process.env.VITE_APP_BACK_END_URL}`,
-                      `${process.env.VITE_APP_FRONT_END_URL}`];
+                      `${process.env.CYCLIC_APP_BACK_END_URL}`];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin 

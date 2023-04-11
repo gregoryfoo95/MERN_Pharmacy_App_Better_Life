@@ -40,10 +40,9 @@ function Path() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.VITE_APP_BACK_END_URL}/api/map`, {
+        const response = await axios.get(`${process.env.CYCLIC_APP_BACK_END_URL}/api/map`, {
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
           }
         });
         const sortedLocations = sortLocations(response.data.data, currentPosition);

@@ -17,7 +17,6 @@ const MedicinePage = () => {
         const response = await axios.get(`api/medicine`, {
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": `${process.env.VITE_APP_FRONT_END_URL}`
             },
         });
         setMedicines(response.data);
