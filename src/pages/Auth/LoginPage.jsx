@@ -25,7 +25,7 @@ export default function LoginPage({ setUser }) {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`/api/user/login`, state);
+      const response = await axios.post(`api/user/login`, state);
       console.log("Greg Debug: post request for login sent", response);
       const role = response.data.role;
       const token = response.data.token;

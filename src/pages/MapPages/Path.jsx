@@ -40,7 +40,7 @@ function Path() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/map`);
+        const response = await axios.get(`api/map`);
         const sortedLocations = sortLocations(response.data.data, currentPosition);
         setLocations(
           response.data.data.map((location) => {
