@@ -30,7 +30,7 @@ export default function LoginPage({ setUser }) {
       const role = response.data.role;
       const token = response.data.token;
       localStorage.setItem('token', token);
-      setUser(getUser());
+      setUser(response.data);
       if (role === 'Pharmacist') {
         navigate('/home');
       } else if (role === 'Consumer') {
