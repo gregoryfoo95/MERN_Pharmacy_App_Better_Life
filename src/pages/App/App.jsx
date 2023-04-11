@@ -48,7 +48,7 @@ function App() {
   };
 
   useEffect(() => {
-    console.log(user);
+    console.log("Greg Debug, shows User:", user);
     if (user == null) {
       setRouteConfig([
         {

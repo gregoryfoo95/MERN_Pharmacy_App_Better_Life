@@ -20,7 +20,7 @@ export default function LoginPage({ setUser }) {
       [e.target.name]: e.target.value,
     });
   };
-axios
+  
   const handleLogin = async event => {
     event.preventDefault();
 
