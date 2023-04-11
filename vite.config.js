@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": "https://pharmacy-app-front.onrender.com",
+      "/api": "https://pharmacy-app-front.onrender.com:10000",
     }
   },
   build: {
