@@ -24,6 +24,9 @@ This project involves elements of Create-Read-Update-Delete (CRUD) to store medi
 # **Deployment** 
 This app is deployed on <a href="https://better-life.cyclic.app">Cyclic</a>
 
+Consumer Login - { email: greg@gmail.com, password:123 }
+Pharmacist Login - { email: greg@hotmail.com, password: 123 }
+
 A development Trello-styled whiteboasrd for the planning phase can be found <a href="https://github.com/users/gregoryfoo95/projects/2">here</a>.
 
 # **Technologies Utilized**
