@@ -42,6 +42,7 @@ export default function CustomNavBar({
       <Navbar.Collapse className={classNames(!isRtl && 'justify-content-end')}>
         <Nav>
           {user && <Nav.Link onClick={handleLogOut}>Logout</Nav.Link>}
+          
 
           <NavDropdown
             className={classNames(!isRtl && 'dropdown-left')}
