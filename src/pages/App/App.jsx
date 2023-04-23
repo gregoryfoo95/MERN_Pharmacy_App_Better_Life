@@ -148,12 +148,6 @@ function App() {
         },
         {
           keyEvent: 'Dashboard',
-          classData: 'bi bi-speedometer menu-icon',
-          title: 'Dashboard',
-          path: '/dashboard',
-        },
-        {
-          keyEvent: 'Analytics',
           classData: 'bi bi-graph-up menu-icon',
           title: 'Analytics',
           path: '/analytics',

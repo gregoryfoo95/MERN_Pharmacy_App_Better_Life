@@ -22,9 +22,13 @@ This project involves elements of Create-Read-Update-Delete (CRUD) to store medi
 
 
 # **Deployment** 
-This app is deployed on ....
+This app is deployed on <a href="https://better-life.cyclic.app">Cyclic</a>
 
-A development Trello-styled whiteboasrd for the planning phase can be found <a href="https://github.com/users/gregoryfoo95/projects/2">here</a>.
+Consumer Login - { email: greg@gmail.com, password:123 }
+
+Pharmacist Login - { email: greg@hotmail.com, password: 123 }
+
+A development Trello-styled whiteboard for the planning phase can be found <a href="https://github.com/users/gregoryfoo95/projects/2">here</a>.
 
 # **Technologies Utilized**
 
@@ -44,8 +48,9 @@ A development Trello-styled whiteboasrd for the planning phase can be found <a h
 
 
 # **Wireframe Sketch & User Story**
-## Wireframe Sketches
+## Wireframe Sketch
 
+<img src = "https://github.com/gregoryfoo95/MERN_Pharmacy_App_Better_Life/blob/main/images/README/Wireframe.jpg?raw=true" width="600" height="600">
 
 ## Users' Stories
 
@@ -473,6 +478,10 @@ The server is validated for user requests through the usage of _Mongoose Validat
 | stockController | _seedStockShell_, _getAllStock_, _updateStockById_, _createStock_, _deleteStockById_
 
 # **Key Takeaways**
+
+- Working in a team with git version control
+- Planning of react components is fundamental to prevent scrambles to extract components out of codes midway
+- Always do deployment first at the start to make sure it works! A single line of code that was untraceable led to a wild goose chase for deployment!
 
 # **Future Works**
 - Order Cart to extract information from Medicine Database
