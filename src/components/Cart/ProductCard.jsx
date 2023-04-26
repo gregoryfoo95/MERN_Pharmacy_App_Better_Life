@@ -22,15 +22,15 @@ function ProductCard(props) {
               <Col sm="6">
                 <Button
                   sm="6"
-                  onClick={() => cart.addOneToCart(product.id)}
-                  className="mx-2">
-                  +
-                </Button>
-                <Button
-                  sm="6"
                   onClick={() => cart.removeOneFromCart(product.id)}
                   className="mx-2">
                   -
+                </Button>
+                <Button
+                  sm="6"
+                  onClick={() => cart.addOneToCart(product.id)}
+                  className="mx-2">
+                  +
                 </Button>
               </Col>
             </Form>
